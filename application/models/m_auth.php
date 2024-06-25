@@ -47,11 +47,6 @@
                     'rules' => 'required',
                 ],
                 [
-                    'field' => 'notelp',
-                    'label' => 'Notelp',
-                    'rules' => 'required',
-                ],
-                [
                     'field' => 'password',
                     'label' => 'password',
                     'rules' => 'required|min_length[3]',
@@ -94,10 +89,8 @@
                 'username' => $this->input->post('username'),
                 'password' => password_hash($this->input->post('password'), PASSWORD_DEFAULT),
                 'nama_lengkap' => $this->input->post('nama_lengkap'),
-                'tempat_lahir' => $this->input->post('tempat_lahir'),
                 'tanggal_lahir' => $this->input->post('tanggal_lahir'),
                 'alamat' => $this->input->post('alamat'),
-                'notelp' => $this->input->post('notelp'),
                 'role' => $role,
                 'kode_verif' => $kode,
                 'email' => $this->input->post('email'),
@@ -170,8 +163,8 @@
              $config['protocol'] = "smtp";
              $config['smtp_host'] = "smtp.gmail.com";
              $config['smtp_port'] = "465";
-             $config['smtp_user'] = "igowisnuchannel@gmail.com";
-             $config['smtp_pass'] = "envz xfke agmy mnqa";
+             $config['smtp_user'] = "Rachelriyanto2@gmail.com";
+             $config['smtp_pass'] = "fyuv sknz dpyh pgla";
              $config['smtp_crypto'] = "ssl";
              $config['charset'] = "utf-8";
              $config['mailtype'] = "html";
@@ -181,7 +174,7 @@
  
              //set
              $this->email->initialize($config);
-             $this->email->from('no-replay@igowisnuchannel@gmail.com','BANK SAMPAH');
+             $this->email->from('no-replay@Rachelriyanto2@gmail.com','Venture');
              $this->email->to($email);
              $this->email->subject("verifikasi email");
              $this->email->message($message);
@@ -195,18 +188,6 @@
 
         }
                 
-        public function registerTabungan($id){
-            date_default_timezone_set('Asia/Manila');
-            $data = array(
-                'id_user_nasabah' => $id,
-                'saldo' => '0',
-                'tgl_buka_rekening' => date('y-m-d')
-            );
-
-            $result = $this->db->insert('tabungan', $data);
-            return $result;
-        }
-
         public function getUser($token){
             $query = $this->db->get_where('user', array('kode_verif' => $token));
             if ($query->num_rows() > 0) {

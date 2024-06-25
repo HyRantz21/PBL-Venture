@@ -14,16 +14,16 @@
 
         public function index()
         {
-            $this->load->view('banksampah/login');
+            $this->load->view('logreg/LoginPage');
             
         }
 
         public function login(){
-            $this->load->view('banksampah/login');
+            $this->load->view('logreg/LoginPage');
         }
 
         public function regisGuest(){
-            $this->load->view('banksampah/regisGuest');
+            $this->load->view('logreg/Register');
         }
 
         public function mail(){
@@ -31,14 +31,14 @@
             $this->form_validation->set_rules($rules);
             
             if($this->form_validation->run() == FALSE){
-                $this->load->view('banksampah/v_register');
+                $this->load->view('logreg/Register');
             } else{
                 $mailCode = $this->m_auth->add();
                 $email = $mailCode['email'];
                 $kode_verif = $mailCode['kode_verif'];
                 $data['verif'] = $this->m_auth->mail($kode_verif, $email);
 
-                $this->load->view('banksampah/Verifikasi', $data);
+                // $this->load->view('banksampah/Verifikasi', $data);
             }
 
         }
@@ -97,7 +97,7 @@
         }
 
         public function goRegister(){
-            $this->load->view('banksampah/v_register');
+            $this->load->view('logreg/Register');
         }
 
         public function verify() {
