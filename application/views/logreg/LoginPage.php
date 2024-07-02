@@ -178,17 +178,17 @@
                     </div>
                 </div>
                 <div class="row">
-                    <form class="form" action="">
+                    <form action=""<?php echo base_url('auth/proses_login')?>method="post">
                         <label for="Email">Email</label><br>
-                        <input type="email" name="" id=""><br>
+                        <input type="email" name="email" id=""><br>
                         <label for="Password">Password</label><br>
-                        <input type="password" name="" id=""><br>
+                        <input type="password" name="password" id=""><br>
                         <a href="" class="forgotpw">Forgot Password?</a>
                         <div class="laysumbit">
                             <input type="submit" value="Login" class="submit-button"><br>
                         </div>
                         <div class="laysignup">
-                            <a href="<?php echo base_url("auth/regisGuest")?>">SignUp</a>
+                            <a href="<?php echo base_url("auth/view_register")?>">SignUp</a>
                         </div>
                     </form>
                 </div>
