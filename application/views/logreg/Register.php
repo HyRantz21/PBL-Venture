@@ -164,7 +164,7 @@
     <div class="background">
         <div class="layout">
             <div class="col1 col">
-                <img src="<?php echo base_url("views/assets/Image/Download Airplane traveling around globe and hand with passport and ticket for free.jpeg")?>" alt="">
+                <img src="<?php echo base_url("assets/Image/Download Airplane traveling around globe and hand with passport and ticket for free.jpeg")?>" alt="">
             </div>
             <div class="col2 col">
                 <div class="row">
