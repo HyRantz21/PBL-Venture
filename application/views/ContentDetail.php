@@ -48,6 +48,7 @@
             padding-left: 50px;
             border-radius: 10px;
             background-image: url('<?php echo base_url('assets/Icon/search.png'); ?>');
+            background-image: url('<?php echo base_url('assets/Icon/search.png'); ?>');
             background-size: 20px;
             background-position: left 20px center;
             background-repeat: no-repeat;
@@ -212,6 +213,14 @@
                 <input type="text" class="bar" placeholder="Find Your Happiness">
             </form>
             <div class="section1">
+                <button onclick="openModal('<?php echo base_url('assets/Image/31d037cebdaf4a318b586751e3dc1d397482fd3f.jpg'); ?>')">
+                    <img src="<?php echo base_url('assets/Image/31d037cebdaf4a318b586751e3dc1d397482fd3f.jpg'); ?>" alt="" class="tImg1">
+                </button>
+                <button onclick="openModal('<?php echo base_url('assets/Image/8c0b5f0914c97c30c94a9cbe3d257f2e3583fc6c.jpg'); ?>')">
+                    <img src="<?php echo base_url('assets/Image/8c0b5f0914c97c30c94a9cbe3d257f2e3583fc6c.jpg'); ?>" alt="" class="tImg2">
+                </button>
+                <button onclick="openModal('<?php echo base_url('assets/Image/e742e0ad10409b7065e565dfb95a9046e55205c0.jpg'); ?>')">
+                    <img src="<?php echo base_url('assets/Image/e742e0ad10409b7065e565dfb95a9046e55205c0.jpg'); ?>" alt="" class="tImg3">
                 <button onclick="openModal('<?php echo base_url('assets/Image/31d037cebdaf4a318b586751e3dc1d397482fd3f.jpg'); ?>')">
                     <img src="<?php echo base_url('assets/Image/31d037cebdaf4a318b586751e3dc1d397482fd3f.jpg'); ?>" alt="" class="tImg1">
                 </button>

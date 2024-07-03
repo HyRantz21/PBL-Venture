@@ -61,6 +61,7 @@
         z-index: 1;
         border-radius: var(--border-radius);
         background-image: url('assets/Icon/search.png');
+        background-image: url('assets/Icon/search.png');
         background-size: 20px;
         background-position: left 20px center;
         background-repeat: no-repeat;
@@ -160,6 +161,7 @@
 
     .bookmarkButton:hover .BMicon {
         content: url('assets/Icon/bookmark-fill.png');
+        content: url('assets/Icon/bookmark-fill.png');
     }
 
     .layPrice {
@@ -224,6 +226,7 @@
 
     .arrowrightButton:hover .ARicon {
         content: url('assets/Icon/arrow-right-square-fill.png');
+        content: url('assets/Icon/arrow-right-square-fill.png');
         transition: var(--transition-speed) ease-in-out;
     }
     
@@ -253,6 +256,7 @@
                 <div class="wrapImg">
                     <figure class="img">
                         <img src="assets/Image/ea545f3990f88524a9472220454ab63bedc0b6aa.jpg" alt="" class="imgR">
+                        <img src="assets/Image/ea545f3990f88524a9472220454ab63bedc0b6aa.jpg" alt="" class="imgR">
                     </figure>
                 </div>
                 <div class="layHeader">
@@ -261,6 +265,7 @@
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit,</p>
                     </header>
                     <button class="bookmarkButton" onclick="addToWishlist(1, 101)"> <!-- Example values for userId and paketId -->
+                        <img src="assets/Icon/bookmark.png" alt="Bookmark" class="BMicon">
                         <img src="assets/Icon/bookmark.png" alt="Bookmark" class="BMicon">
                     </button>
                 </div>
@@ -274,6 +279,7 @@
                         <p>Acomodation Lorem ipsum</p>
                     </footer>
                     <a href="ContentDetail.html" class="arrowrightButton">
+                        <img src="assets/Icon/arrow-right-square.png" alt="" class="ARicon">
                         <img src="assets/Icon/arrow-right-square.png" alt="" class="ARicon">
                     </a>
                 </div>
