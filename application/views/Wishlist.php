@@ -8,6 +8,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <style>
+    /* Your existing styles */
     :root {
         --main-bg-color: black;
         --main-text-color: gray;
@@ -25,7 +26,6 @@
         width: 100%;
     }
 
-    /*NavBar*/
     .navbar {
         background-color: white;
         top: 0;
@@ -44,7 +44,6 @@
         margin-right: 20px;
     }
 
-    /*Searchbar*/
     .searchbar {
         display: flex;
         justify-content: center;
@@ -86,12 +85,12 @@
         padding: 9px;
     }
 
-    /*History*/
-    .LayRecomended{
+    .LayRecomended {
         display: grid;
         gap: 10px 10px;
     }
-    .wrapRecomended{
+
+    .wrapRecomended {
         width: 100%; 
         max-width: 290px;
         box-shadow: 1px 1px 5px 0px rgba(0, 0, 0, 0.5);
@@ -99,15 +98,18 @@
         min-height: 400px;
         padding-bottom: 15px;
     }
-    .wrapImg{
+
+    .wrapImg {
         display: flex;
         justify-content: center;
     }
-    .img{
+
+    .img {
         padding-right: 10px;
         padding-left: 10px;
         height: 200px;
     }
+
     .imgR {
         object-fit: cover;
         margin-top: 15px;
@@ -115,6 +117,7 @@
         width: 100%;
         border-radius: var(--border-radius);
     }
+
     .layHeader {
         max-width: 460px;
         width: 100%;
@@ -155,20 +158,21 @@
         margin-top: 5px;
     }
 
-    .bookmarkButton:hover .BMicon{
-        content: url(assets/Icon/bookmark-fill.png);
+    .bookmarkButton:hover .BMicon {
+        content: url('assets/Icon/bookmark-fill.png');
     }
 
-    .layPrice{
+    .layPrice {
         margin-top: 10px;
         padding-left: 20px;
-
     }
-    .layPrice h6{
+
+    .layPrice h6 {
         margin: 0;
         font-weight: 700;
     }
-    .layPrice p{
+
+    .layPrice p {
         padding-right: 20px;
         word-break:break-all;
         margin: 0;
@@ -177,7 +181,7 @@
         font-weight: var(--main-font-weight);
     }
 
-    .layFooter{
+    .layFooter {
         max-width: 460px;
         width: 100%;
         padding-right: 20px;
@@ -189,13 +193,13 @@
         column-gap: 20px;
     }
 
-    .layFooter h4{
+    .layFooter h4 {
         margin: 0;
         margin-top: 10px;
         font-weight: 700;
     }
 
-    .layFooter p{
+    .layFooter p {
         padding-right: 20px;
         word-break:break-all;
         margin: 0;
@@ -212,22 +216,20 @@
         padding: 0;
     }
 
-    .arrowrightButton .ARicon{
+    .arrowrightButton .ARicon {
         width: 40px;
         height: 40px;
         transition: var(--transition-speed) ease-in-out;
     }
 
-    .arrowrightButton:hover .ARicon{
+    .arrowrightButton:hover .ARicon {
         content: url('assets/Icon/arrow-right-square-fill.png');
         transition: var(--transition-speed) ease-in-out;
     }
     
-    /*Universal*/
-    .link{
+    .link {
         text-decoration: none;
     }
-
 </style>
 <body>
     <header>
@@ -237,10 +239,10 @@
                     <a class="link" href="#"><h1 class="brand">Venture</h1></a>
                 </div>
                 <div class="LayoutItem">  
-                    <a class="nav-item" href="#"><img src="" alt="">Wishlist</a>      
-                    <a class="nav-item" href="#"><img src="" alt="">History</a>
-                    <a class="nav-item" href="#"><img src="" alt="">Contact Us</a>
-                    <a class="nav-item" href="#"><img src="" alt="">Profile</a>
+                    <a class="nav-item" href="#">Wishlist</a>      
+                    <a class="nav-item" href="#">History</a>
+                    <a class="nav-item" href="#">Contact Us</a>
+                    <a class="nav-item" href="#">Profile</a>
                 </div>
             </div>
         </nav>
@@ -258,7 +260,7 @@
                         <h3>Camp Fire</h3>
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit,</p>
                     </header>
-                    <button class="bookmarkButton" id="addWishlistButton1" onclick="addToWishlist('Camp Fire', 'addWishlistButton1')">
+                    <button class="bookmarkButton" onclick="addToWishlist(1, 101)"> <!-- Example values for userId and paketId -->
                         <img src="assets/Icon/bookmark.png" alt="Bookmark" class="BMicon">
                     </button>
                 </div>
@@ -279,11 +281,14 @@
         </div>
     </main>
     <script>
-        function addToWishlist(productName) {
+        function addToWishlist(userId, paketId) {
             $.ajax({
                 url: 'http://localhost/your_codeigniter_project_folder/index.php/wishlist/add',
                 type: 'POST',
-                data: { productName: productName },
+                data: { 
+                    userId: userId, 
+                    paketId: paketId 
+                },
                 success: function(response) {
                     alert('Produk berhasil ditambahkan ke wishlist');
                 },
@@ -294,7 +299,4 @@
         }
     </script>
 </body>
-
-</html>
-</html>
 </html>
