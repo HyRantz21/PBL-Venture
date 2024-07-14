@@ -16,19 +16,6 @@ class M_user extends CI_Model {
             return array();
         }
     }
-    
-    public function inputUser()
-    {
-        $data = array(
-            'Full_Name' => $this->input->post('Full_Name'),
-            'Email' => $this->input->post('Email'),
-            'Password' => password_hash($this->input->post('Password'), PASSWORD_BCRYPT),
-            'Role' => $this->input->post('Role'),
-            'token' => $this->input->post('token'),
-            'email_verified' => $this->input->post('email_verified')
-        );
-        return $this->db->insert('users', $data);
-    }
 
     public function getUserById($id)
     {
