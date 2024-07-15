@@ -55,12 +55,7 @@
             <tr>
                 <td>Waktu Tour</td>
                 <td>:</td>
-                <td>
-                    <input type="number" name="Hari" placeholder="Hari" min="0">
-                    <input type="number" name="Jam" placeholder="Jam" min="0" max="23">
-                    <input type="number" name="Menit" placeholder="Menit" min="0" max="59">
-                    <input type="number" name="Detik" placeholder="Detik" min="0" max="59">
-                </td>
+                <td><input type="text" name="Waktu_Tour"></td>
             </tr>
             <tr>
                 <td><?php echo form_error('QR_Code') ?></td>

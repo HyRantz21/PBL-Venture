@@ -55,10 +55,7 @@
             <tr>
                 <td>Waktu Tour</td>
                 <td>:</td>
-                <td>
-                    <input type="time" name="Waktu_Tour" value="<?php echo $paket['Waktu_Tour']; ?>">
-                    <small>Format: HH:MM:SS</small>
-                </td>
+                <td><input type="text" name="Waktu_Tour"></td>
             </tr>
             <tr>
                 <td><?php echo form_error('QR_Code') ?></td>

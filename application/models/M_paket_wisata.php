@@ -32,7 +32,7 @@ class M_paket_wisata extends CI_Model {
         }
     }
 
-    public function inputPaket($waktu_tour)
+    public function inputPaket()
     {
         $data = array(
             'Nama_Paket' => $this->input->post('Nama_Paket'),
@@ -40,7 +40,7 @@ class M_paket_wisata extends CI_Model {
             'Harga' => $this->input->post('Harga'),
             'Lokasi' => $this->input->post('Lokasi'),
             'Deskripsi' => $this->input->post('Deskripsi'),
-            'Waktu_Tour' => $waktu_tour, // Menggunakan waktu tour yang sudah dihitung
+            'Waktu_Tour' => $$this->input->post('Waktu_Tour'), // Menggunakan waktu tour yang sudah dihitung
             'QR_Code' => $this->input->post('QR_Code'),
             'ID_Perusahaan' => $this->input->post('ID_Perusahaan')
         );

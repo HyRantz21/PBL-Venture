@@ -52,16 +52,8 @@ class dashboard extends CI_Controller {
     }
 
     public function aksiTambahPaket() {
-        $hari = intval($this->input->post('Hari'));
-        $jam = intval($this->input->post('Jam'));
-        $menit = intval($this->input->post('Menit'));
-        $detik = intval($this->input->post('Detik'));
-    
-        // Mengonversi waktu ke format yang diinginkan
-        $waktu_tour = ($hari * 24 * 60 * 60) + ($jam * 3600) + ($menit * 60) + $detik;
-    
         // Mengirim data ke model
-        $this->M_paket_wisata->inputPaket($waktu_tour);
+        $this->M_paket_wisata->inputPaket();
         redirect('dashboard');
     }
     
@@ -123,4 +115,61 @@ class dashboard extends CI_Controller {
         }
     }
 
+    public function viewPerusahaan()
+    {
+        $data['perusahaan'] = $this->M_perusahaan->getPerusahaan();
+        $this->load->view('dashboard/v_perusahaan', $data);
+    }
+
+    public function tambahPerusahaan()
+    {
+        $this->load->view('dashboard/v_t_perusahaan');
+    }
+
+    public function aksiTambahPerusahaan() {
+        // Mengirim data ke model
+        $this->M_perusahaan->inputPerusahaan();
+        redirect('dashboard/viewPerusahaan');
+    }
+
+    public function editPerusahaan($id)
+    {
+        $data['perusahaan'] = $this->M_perusahaan->getPerusahaanById($id);
+        $this->load->view('dashboard/v_e_perusahaan', $data);
+    }
+
+    public function aksiEditPerusahaan()
+{
+    $this->load->model('M_perusahaan');
+
+    // Set validation rules
+    $this->form_validation->set_rules('Nama_Perusahaan', 'Nama Perusahaan', 'required');
+    $this->form_validation->set_rules('Alamat', 'Alamat', 'required');
+    $this->form_validation->set_rules('Nomor_Telepon', 'Nomor Telepon', 'required');
+    $this->form_validation->set_rules('Email', 'Email', 'required|valid_email');
+    $this->form_validation->set_rules('Password', 'Password', 'required');
+
+    if ($this->form_validation->run() == FALSE) {
+        // Reload the form with validation errors
+        $this->editPerusahaan($this->input->post('ID_Perusahaan'));
+    } else {
+        $result = $this->M_perusahaan->updateDataPerusahaan();
+        if ($result) {
+            redirect('dashboard/viewPerusahaan');
+        } else {
+            echo "Failed to update user. Please try again.";
+        }
+    }
+}
+
+    public function hapusPerusahaan($id)
+    {
+        $result = $this->M_perusahaan->deleteDataPerusahaan($id);
+        if ($result) {
+            redirect('dashboard/viewPerusahaan');
+        } else {
+            // Handle the error appropriately
+            echo "Failed to delete user.";
+        }
+    }
 }
