@@ -4,9 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link rel="stylesheet" href="asset/bootstrap-5.3.3-dist/css/bootstrap.css">
+    <link rel="stylesheet" href="assets/bootstrap-5.3.3-dist/css/bootstrap.css">
     <title>Login</title>
-</head>
     <style>
         body, html {
             height: 100%;
@@ -33,7 +32,7 @@
             display: flex;
             align-items: center;
         }
-        .img{
+        .img {
             height: 620px;
             width: 100%;
             margin: 10px;
@@ -57,18 +56,17 @@
         .h1 {
             display: flex;
             justify-content: center;
-            margin-bottom: 20px;
             font-weight: 650;
             font-size: 400%;
             margin-bottom: 0px;
         }
-        h6{
+        h6 {
             font-weight: 400;
             display: flex;
             justify-content: center;
-            margin-bottom: 100px;
+            margin-bottom: 20px;
         }
-        input[type=email], select {
+        input[type=email], input[type=password], select {
             width: 320px;
             padding: 10px;
             margin: 5px 0px;
@@ -77,16 +75,7 @@
             border-radius: 10px;
             box-sizing: border-box;
         }
-        input[type=password], select {
-            width: 320px;
-            padding: 10px;
-            margin: 5px 0px;
-            display: inline-block;
-            border: 2px solid #ccc;
-            border-radius: 10px;
-            box-sizing: border-box;
-        }
-        .forgotpw{
+        .forgotpw {
             font-size: 80%;
             display: flex;
             justify-content: end;
@@ -94,15 +83,14 @@
             text-decoration: none;
             color: black;
         }
-        .forgotpw:hover{
+        .forgotpw:hover {
             color: rgb(180, 180, 180);
         }
-        .laysumbit,.laysignup{
+        .laysubmit, .laysignup {
             display: flex;
             justify-content: center;
         }
-
-        label{
+        label {
             font-weight: 500;
         }
         input[type=submit] {
@@ -120,15 +108,11 @@
             font-weight: 700;
             box-shadow: 2px 2px 4px 0px rgba(0, 0, 0, 0.5);
         }
-
         input[type=submit]:hover {
-            background-color: white;
-        }
-        .submit-button:hover {
             background-color: white;
             color: black;
         }
-        .SignUp{
+        .SignUp {
             text-decoration: none;
             color: rgb(180, 180, 180);
             font-weight: 700;
@@ -139,19 +123,18 @@
             color: black;
         }
         @media only screen and (max-width: 850px) {
-            .col1{
+            .col1 {
                 display: none;
             }
-            .col2{
+            .col2 {
                 width: 100%;
-                height: 100%; 
+                height: 100%;
                 margin-right: 0;
                 border-top-right-radius: 0;
                 border-bottom-right-radius: 0;
                 box-shadow: 1px 15px 15px 0px rgba(0, 0, 0, 0.5);
-
             }
-            .layout{
+            .layout {
                 align-items: normal;
             }
             .h1 {
@@ -167,29 +150,32 @@
     <div class="background">
         <div class="layout">
             <div class="col1 col">
-                <img class="img" src="assets/Download Airplane traveling around globe and hand with passport and ticket for free.jpeg" alt="">
+                <img class="img" src="assets/Download Airplane traveling around globe and hand with passport and ticket for free.jpeg" alt="Airplane traveling around globe">
             </div>
             <div class="col2 col">
                 <div class="row">
-                    <div class="layheding">
-                        <h1 class="h1">Welcome
-                            <h6>Login valo capat wir</h6>
-                        </h1>
+                    <div class="layheading">
+                        <h1 class="h1">Welcome</h1>
+                        <h6>Login to continue</h6>
                     </div>
                 </div>
                 <div class="row">
-                    <form action=""<?php echo base_url('auth/proses_login')?>method="post">
-                        <label for="Email">Email</label><br>
-                        <input type="email" name="email" id=""><br>
-                        <label for="Password">Password</label><br>
-                        <input type="password" name="password" id=""><br>
-                        <a href="" class="forgotpw">Forgot Password?</a>
-                        <div class="laysumbit">
+                        <?php if ($this->session->flashdata('error')): ?>
+                            <p style="color: red;"><?= $this->session->flashdata('error'); ?></p>
+                        <?php endif; ?>
+                    <form action="<?php echo base_url('auth/proses_login') ?>" method="post">
+                        <label for="email">Email</label><br>
+                        <input type="email" name="email" id="email" required><br>
+                        <label for="password">Password</label><br>
+                        <input type="password" name="password" id="password" required><br>
+                        <a href="#" class="forgotpw">Forgot Password?</a>
+                        <div class="laysubmit">
                             <input type="submit" value="Login" class="submit-button"><br>
                         </div>
                         <div class="laysignup">
-                            <a href="<?php echo base_url("auth/view_register")?>">SignUp</a>
+                            <a class="SignUp" href="<?php echo base_url('auth/register_user') ?>">SignUp</a>
                         </div>
+                        
                     </form>
                 </div>
             </div>

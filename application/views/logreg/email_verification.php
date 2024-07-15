@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Verification</title>
+    <link rel="stylesheet" href="<?php echo base_url('styles.css'); ?>">
+</head>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f8f9fa;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+    }
+
+    .container {
+        background-color: #ffffff;
+        padding: 40px;
+        border-radius: 20px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        width: 400px;
+    }
+
+    .icon img {
+        width: 50px;
+        margin-bottom: 20px;
+    }
+
+    h1 {
+        font-size: 24px;
+        margin-bottom: 20px;
+        color: #333333;
+    }
+
+    .subtext {
+        color: #666666;
+        margin-bottom: 20px;
+    }
+
+    strong {
+        color: #000000;
+    }
+
+    button.resend-button {
+        background-color: #000000;
+        color: #ffffff;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        font-size: 16px;
+        margin-top: 20px;
+    }
+
+    button.resend-button:hover {
+        background-color: #ffffff;
+        color: black;
+    }
+
+</style>
+<body>
+    <div class="container">
+        <div class="icon">
+            <img src="<?php echo base_url('assets/Icon/envelope-check.png'); ?>" alt="Email Icon">
+        </div>
+        <h1>Please verify your email</h1>
+        <p class="subtext">You're almost there! We sent an email to <strong><?php echo $email; ?></strong></p>
+        <p>Just click on the link in that email to complete your signup. If you don't see it, you may need to check your spam folder.</p>
+        <p>Still can't find the email? No problem.</p>
+        <button class="resend-button" onclick="window.location.href='<?php echo base_url('auth/resend_verification?email=') . urlencode($email); ?>'">Resend Verification Email</button>
+    </div>
+</body>
+</html>

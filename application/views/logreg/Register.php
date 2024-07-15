@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="assets/bootstrap-5.3.3-dist/css/bootstrap.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <title>Register</title>
     <style>
         body, html {
@@ -32,7 +33,7 @@
             display: flex;
             align-items: center;
         }
-        .img{
+        .img {
             height: 620px;
             width: 100%;
             margin: 10px;
@@ -60,7 +61,7 @@
             font-size: 400%;
             margin: 0;
         }
-        h6{
+        h6 {
             font-weight: 400;
             display: flex;
             justify-content: center;
@@ -93,12 +94,11 @@
             border-radius: 10px;
             box-sizing: border-box;
         }
-        .laysumbit,.layLogin{
+        .laysumbit, .layLogin {
             display: flex;
             justify-content: center;
         }
-
-        label{
+        label {
             font-weight: 500;
         }
         input[type=submit] {
@@ -116,7 +116,6 @@
             font-weight: 700;
             box-shadow: 2px 2px 4px 0px rgba(0, 0, 0, 0.5);
         }
-
         input[type=submit]:hover {
             background-color: white;
             color: black;
@@ -125,7 +124,7 @@
             background-color: white;
             color: black;
         }
-        .Login{
+        .Login {
             text-decoration: none;
             color: rgb(180, 180, 180);
             font-weight: 700;
@@ -136,19 +135,18 @@
             color: black;
         }
         @media only screen and (max-width: 850px) {
-            .col1{
+            .col1 {
                 display: none;
             }
-            .col2{
+            .col2 {
                 width: 100%;
                 height: 100%; 
                 margin-right: 0;
                 border-top-right-radius: 0;
                 border-bottom-right-radius: 0;
                 box-shadow: 1px 15px 15px 0px rgba(0, 0, 0, 0.5);
-
             }
-            .layout{
+            .layout {
                 align-items: normal;
             }
             .h1 {
@@ -164,7 +162,7 @@
     <div class="background">
         <div class="layout">
             <div class="col1 col">
-                <img src="<?php echo base_url("assets/Image/Download Airplane traveling around globe and hand with passport and ticket for free.jpeg")?>" alt="">
+                <img src="<?php echo base_url("assets/Image/Download Airplane traveling around globe and hand with passport and ticket for free.jpeg") ?>" alt="">
             </div>
             <div class="col2 col">
                 <div class="row">
@@ -174,11 +172,16 @@
                     </div>
                 </div>
                 <div class="row">
-                    <form action="<?php echo base_url('auth/register_pelamar')?>" method="post">
+                    <?php if(isset($errors) && !empty($errors)): ?>
+                        <div class="alert alert-danger" role="alert">
+                            <?php echo $errors; ?>
+                        </div>
+                    <?php endif; ?>
+                    <form action="<?php echo base_url('auth/register_user') ?>" method="post">
                         <label for="full_name">Full Name</label><br>
-                        <input type="text" name="full_name" id="full_name"><br>
+                        <input type="text" name="full_name" id="full_name" value="<?php echo set_value('full_name'); ?>"><br>
                         <label for="email">Email</label><br>
-                        <input type="email" name="email" id="email"><br>
+                        <input type="email" name="email" id="email" value="<?php echo set_value('email'); ?>"><br>
                         <label for="password">Password</label><br>
                         <input type="password" name="password" id="password"><br>
                         <label for="password1">Confirm Password</label><br>
@@ -187,12 +190,38 @@
                             <input type="submit" value="Sign Up" class="submit-button"><br>
                         </div>
                         <div class="layLogin">
-                            <a class="Login" href="<?php echo base_url("auth/login")?>">Login</a>
+                            <a class="Login" href="<?php echo base_url("auth/login") ?>">Login</a>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
     </div>
+
+    <script>
+        <?php if ($this->session->flashdata('success')): ?>
+        Swal.fire({
+            icon: 'success',
+            title: 'Success',
+            text: '<?php echo $this->session->flashdata('success'); ?>',
+        });
+        <?php endif; ?>
+
+        <?php if ($this->session->flashdata('error')): ?>
+        Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: '<?php echo $this->session->flashdata('error'); ?>',
+        });
+        <?php endif; ?>
+
+        <?php if (!empty($errors)): ?>
+        Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            html: '<?php echo nl2br($errors); ?>',
+        });
+        <?php endif; ?>
+    </script>
 </body>
 </html>
