@@ -136,7 +136,7 @@ class Auth extends CI_Controller {
                                 redirect('Perusahaan');
                                 break;
                             case "Admin":
-                                redirect('Admin');
+                                redirect('dashboard');
                                 break;
                             default:
                                 redirect('auth/login');
@@ -153,6 +153,77 @@ class Auth extends CI_Controller {
             }
         }
     }
+    public function forgot_password() {
+        $data = array('title' => 'Forgot Password');
+        $this->load->view('logreg/ForgotPassword', $data);
+    }
+    
+    public function reset_password() {
+        $email = $this->input->post('email');
+        $user = $this->m_auth->getUser($email)->row();
+    
+        if ($user) {
+            $token = bin2hex(random_bytes(50));
+            $this->m_auth->save_reset_token($user->ID_User, $token);
+            $this->m_auth->config_email($email, $token, 'reset');
+    
+            $data['email'] = $email;
+            $this->load->view('logreg/email_passwordchange', $data);
+        } else {
+            $this->session->set_flashdata('error', 'Email not registered.');
+            redirect('auth/forgot_password');
+        }
+    }
+    
+    
+    public function update_password() {
+        $email = $this->input->get('email');
+        $token = $this->input->get('token');
+        $user = $this->m_auth->getUser($email)->row();
+    
+        if ($user && hash_equals($token, $user->reset_token)) {
+            $token_life = 3600; // Token validity in seconds (1 hour)
+            $token_created_at = strtotime($user->token_created_at);
+            if ((time() - $token_created_at) < $token_life) {
+                $data = array(
+                    'title' => 'Update Password',
+                    'email' => $email,
+                    'token' => $token
+                );
+                $this->load->view('logreg/UpdatePassword', $data);
+                return;
+            }
+        }
+        $this->session->set_flashdata('error', 'Invalid or expired reset token.');
+        redirect('auth/login');
+    }
+    
+    public function process_update_password() {
+        $email = $this->input->post('email');
+        $token = $this->input->post('token');
+        $new_password = $this->input->post('password');
+    
+        $user = $this->m_auth->getUser($email)->row();
+    
+        if ($user && hash_equals($token, $user->reset_token)) {
+            $token_life = 3600; // Token validity in seconds (1 hour)
+            $token_created_at = strtotime($user->token_created_at);
+            if ((time() - $token_created_at) < $token_life) {
+                $hashed_password = password_hash($new_password, PASSWORD_DEFAULT);
+                $this->m_auth->update_password($user->ID_User, $hashed_password);
+    
+                // Invalidate the token after a successful password update
+                $this->m_auth->save_reset_token($user->ID_User, null);
+    
+                $this->session->set_flashdata('success', 'Password updated successfully! Please login.');
+                redirect('auth/login');
+                return;
+            }
+        }
+        $this->session->set_flashdata('error', 'Invalid or expired reset token.');
+        redirect('auth/login');
+    }
+    
 
     public function logout(){
         $this->session->sess_destroy();

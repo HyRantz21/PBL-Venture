@@ -29,11 +29,16 @@ class m_auth extends CI_Model {
 
         $message = '';
         if ($type == 'verify') {
+            $this->email->subject('Account Verification');
+            $this->email->message($message);
             $message = "Please click the following link to verify your account: " . base_url() . "auth/verify?email=" . urlencode($email) . "&token=" . urlencode($token);
+        }elseif ($type == 'reset') {
+            $message = "Please click the following link to reset your password: " . base_url() . "auth/update_password?email=" . urlencode($email) . "&token=" . urlencode($token);
+            $this->email->subject('Account Verification');
+            $this->email->message($message);
         }
 
-        $this->email->subject('Account Verification');
-        $this->email->message($message);
+        
 
         if (!$this->email->send()) {
             log_message('error', 'Email not sent: ' . $this->email->print_debugger());
@@ -60,6 +65,10 @@ class m_auth extends CI_Model {
             return $this->db->insert_id(); // Return user ID
         }
     }
+    public function updateUser($id, $data) {
+        $this->db->where('ID_User', $id);
+        $this->db->update('user', $data);
+    }
     public function get_all_passwords() {
         $this->db->select('Password');
         $query = $this->db->get('user');
@@ -76,5 +85,30 @@ class m_auth extends CI_Model {
         $this->db->where('ID_User', $id);
         $this->db->update('user');
     }
+    public function save_reset_token($user_id, $token) {
+        $data = [
+            'reset_token' => $token,
+            'token_created_at' => date('Y-m-d H:i:s')
+        ];
+        $this->db->where('ID_User', $user_id);
+        $this->db->update('user', $data);
+    }
+    
+    public function update_password($id, $hashed_password) {
+        $data = [
+            'Password' => $hashed_password,
+            'reset_token' => null, // Invalidate the token
+            'token_created_at' => null
+        ];
+        $this->db->where('ID_User', $id);
+        $this->db->update('user', $data);
+    }
+    
+    // public function update_password($id, $hashed_password) {
+    //     $this->db->set('Password', $hashed_password);
+    //     $this->db->where('ID_User', $id);
+    //     $this->db->update('user');
+    // }
+
 }
 ?>

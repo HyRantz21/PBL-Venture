@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="assets/bootstrap-5.3.3-dist/css/bootstrap.css">
-    <title>Login</title>
+    <title>Forgot Password</title>
     <style>
         body, html {
             height: 100%;
@@ -57,8 +57,8 @@
             display: flex;
             justify-content: center;
             font-weight: 650;
-            font-size: 400%;
-            margin-bottom: 0px;
+            font-size: 250%;
+            margin-bottom: 20px;
         }
         h6 {
             font-weight: 400;
@@ -155,27 +155,20 @@
             <div class="col2 col">
                 <div class="row">
                     <div class="layheading">
-                        <h1 class="h1">Welcome</h1>
-                        <h6>Login to continue</h6>
+                        <h1 class="h1">Forget Password</h1>
+                        <h6>please input your email</h6>
                     </div>
                 </div>
                 <div class="row">
                         <?php if ($this->session->flashdata('error')): ?>
                             <p style="color: red;"><?= $this->session->flashdata('error'); ?></p>
                         <?php endif; ?>
-                    <form action="<?php echo base_url('auth/proses_login') ?>" method="post">
-                        <label for="email">Email</label><br>
-                        <input type="email" name="email" id="email" required><br>
-                        <label for="password">Password</label><br>
-                        <input type="password" name="password" id="password" required><br>
-                        <a href="<?php echo base_url('auth/forgot_password') ?>" class="forgotpw">Forgot Password?</a>
+                        <form method="post" action="<?php echo base_url('auth/reset_password'); ?>">
+                        <label for="email">Email:</label>
+                        <input type="email" name="email" required>
                         <div class="laysubmit">
-                            <input type="submit" value="Login" class="submit-button"><br>
+                            <input type="submit" class="submit-button" value="Change"></button><br>
                         </div>
-                        <div class="laysignup">
-                            <a class="SignUp" href="<?php echo base_url('auth/register_user') ?>">SignUp</a>
-                        </div>
-                        
                     </form>
                 </div>
             </div>

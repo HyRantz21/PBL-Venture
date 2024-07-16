@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Email Verification</title>
+    <title>Email Password Change</title>
     <link rel="stylesheet" href="<?php echo base_url('styles.css'); ?>">
 </head>
 <style>
@@ -70,7 +70,7 @@
         </div>
         <h1>Please verify your email</h1>
         <p class="subtext">You're almost there! We sent an email to <strong><?php echo $email; ?></strong></p>
-        <p>Just click on the link in that email to complete your signup. If you don't see it, you may need to check your spam folder.</p>
+        <p>Just click on the link in that email to change your Password. If you don't see it, you may need to check your spam folder.</p>
         <!-- <p>Still can't find the email? No problem.</p> -->
         <!-- <button class="resend-button" onclick="window.location.href='<?php echo base_url('auth/resend_verification?email=') . urlencode($email); ?>'">Resend Verification Email</button> -->
     </div>
