@@ -4,55 +4,85 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link rel="stylesheet" href="assets/bootstrap-5.3.3-dist/css/bootstrap.css">
     <title>Personal Information</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f9f9f9;
+        html, body {
+            height: 100%;
             margin: 0;
-            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #cfcfcf;
         }
+
+        .Brand{
+            font-weight: 700; 
+            font-size: 50px;
+            color: black;
+            word-break: break-all;
+            padding-right: 30px;
+        }
+
+        nav{
+            background-color: #ffffff;
+        }
+
+        .nav-item, .nav-item-profile {
+            border-radius: 10px;
+            padding: 10px;
+            font-weight: 500;
+            color: black;
+            font-size: 20px;
+            text-decoration: none;
+            transition: 0.3s ease-in-out;
+            padding-left: 5px;
+        }
+
+        .nav-item:hover {
+            color: white;
+            background-color: black;
+            transition: 0.3s ease-in-out;
+            padding: 10px;
+        }
+
+        .nav-item-profile:hover{
+            color: white;
+            background-color: black;
+            transition: 0.3s ease-in-out;
+            padding: 10px;
+        }
+
+
         .container {
-            display: flex;
+            display: grid;
+            grid-template-columns: 0.25fr 1fr;
+            height: 100%;
         }
+
         .sidebar {
-            width: 250px;
-            background-color: #fff;
+            height: 100%;
+            background-color: #ffffff;
             box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-            padding: 20px;
+            padding: 50px;
         }
+
         .profile {
             text-align: center;
         }
-        .profile img {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-        }
-        .profile h2 {
-            margin: 10px 0 5px;
-        }
-        .profile p {
-            margin: 0;
-            color: #888;
-        }
+
         .main-content {
-            flex-grow: 1;
             padding: 40px;
             background-color: #fff;
         }
-        .main-content h1 {
-            margin-top: 0;
-        }
+
         .form-group {
             margin-bottom: 20px;
         }
+
         .form-group label {
             display: block;
             margin-bottom: 5px;
             color: #333;
         }
+
         .form-group input[type="text"],
         .form-group input[type="email"],
         .form-group input[type="date"] {
@@ -61,31 +91,37 @@
             border: 1px solid #ddd;
             border-radius: 4px;
         }
+
         .phone-input {
             display: flex;
             gap: 10px;
         }
-        .phone-input select,
+
         .phone-input input {
             padding: 10px;
             border: 1px solid #ddd;
             border-radius: 4px;
         }
+
         .gender-options {
             display: flex;
             gap: 20px;
         }
+
         .gender-options label {
             display: flex;
             align-items: center;
         }
+
         .gender-options input[type="radio"] {
             margin-right: 5px;
         }
+
         .form-actions {
             display: flex;
             gap: 10px;
         }
+
         .save-btn,
         .cancel-btn {
             padding: 10px 20px;
@@ -93,21 +129,41 @@
             border-radius: 4px;
             cursor: pointer;
         }
+
         .save-btn {
             background-color: #007bff;
             color: #fff;
         }
+
         .cancel-btn {
             background-color: #6c757d;
             color: #fff;
         }
+        .link{
+            text-decoration: none;
+        }
+
+        .p{
+            color: gray;
+            font-weight: 500;
+        }
     </style>
 </head>
 <body>
+    <nav class="navbar navbar-expand-lg mb-2">
+        <div class="container">
+            <a class="link" href="#"><h1 class="Brand">Venture</h1></a> 
+            <div class="LayoutItem">  
+                <a class="nav-item" href="#"><img src="" alt="">Wishlist</a>      
+                <a class="nav-item" href="#"><img src="" alt="">History</a>
+                <a class="nav-item" href="#"><img src="" alt="">Contact Us</a>
+                <a class="nav-item-profile" href="#"><img src="" alt="">Profile</a>
+            </div>
+        </div>
+    </nav>
     <div class="container">
         <div class="sidebar">
             <div class="profile">
-                <img src="profile.jpg" alt="Profile Picture">
                 <h2>Denis Holland</h2>
             </div>
         </div>
@@ -148,7 +204,6 @@
                 </div>
                 <div class="form-actions">
                     <button type="submit" class="save-btn">Save</button>
-                    <!-- <button type="button" class="cancel-btn">Cancel</button> -->
                 </div>
             </form>
         </div>
