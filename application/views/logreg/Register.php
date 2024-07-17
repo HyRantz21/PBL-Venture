@@ -162,13 +162,13 @@
     <div class="background">
         <div class="layout">
             <div class="col1 col">
-                <img src="<?php echo base_url("assets/Image/Download Airplane traveling around globe and hand with passport and ticket for free.jpeg") ?>" alt="">
+                <img class="img" src="<?php echo base_url('assets/Image/Download Airplane traveling around globe and hand with passport and ticket for free.jpeg'); ?>" alt="Airplane traveling around globe">
             </div>
             <div class="col2 col">
                 <div class="row">
                     <div class="layheding">
                         <h1 class="h1">Welcome</h1>
-                        <h6>Login valo capat wir</h6>
+                        <h6>Register to exploring</h6>
                     </div>
                 </div>
                 <div class="row">
