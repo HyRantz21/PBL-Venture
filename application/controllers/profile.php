@@ -6,34 +6,46 @@ class Profile extends CI_Controller {
     public function __construct() {
         parent::__construct();
         $this->load->model('M_profile');
+        $this->load->helper('url');
     }
 
+    // Load the profile form with no ID
     public function index() {
-        $data['profile'] = $this->Profile_model->get_profile();
-        $this->load->view('profile_view', $data);
+        $data = array('title' => 'Edit Profile', 'profile' => null);
+        $this->load->view('ProfilePage', $data);
     }
 
-    public function update() {
-        $this->form_validation->set_rules('full_name', 'Full Name', 'required');
-        $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
-        $this->form_validation->set_rules('phone', 'Phone', 'required');
-        $this->form_validation->set_rules('dob', 'Date of Birth', 'required');
-        $this->form_validation->set_rules('gender', 'Gender', 'required');
-
-        if ($this->form_validation->run() == FALSE) {
-            $data['profile'] = $this->Profile_model->get_profile();
-            $this->load->view('profile_view', $data);
-        } else {
-            $profile_data = array(
-                'full_name' => $this->input->post('full_name'),
-                'email' => $this->input->post('email'),
-                'phone' => $this->input->post('phone'),
-                'dob' => $this->input->post('dob'),
-                'gender' => $this->input->post('gender')
-            );
-
-            $this->Profile_model->update_profile($profile_data);
-            redirect('profile');
+    // Load the profile form with an ID
+    public function edit_profile($id = null) {
+        if (!isset($id) || !is_numeric($id)) {
+            show_404();
         }
+
+        $data['profile'] = $this->M_profile->get_profile($id);
+        if (empty($data['profile'])) {
+            show_404();
+        }
+
+        $data['title'] = 'Edit Profile';
+        $this->load->view('ProfilePage', $data);
+    }
+
+    // Process the form submission and update profile
+    public function process_edit($id = null) {
+        if (!isset($id) || !is_numeric($id)) {
+            show_404();
+        }
+
+        $data = [
+            'Email' => $this->input->post('email'),
+            'phone' => $this->input->post('phone'),
+            'Full_name' => $this->input->post('full_name'),
+            'dob' => $this->input->post('dob'),
+            'gender' => $this->input->post('gender')
+        ];
+
+        $this->M_profile->update_profile($id, $data);
+        redirect('profile/edit_profile/' . $id);
     }
 }
+?>

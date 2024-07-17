@@ -22,48 +22,59 @@ class m_auth extends CI_Model {
             'smtp_timeout' => 30,
             'wordwrap' => TRUE
         ];
-
+    
         $this->email->initialize($config);
         $this->email->from('VentureTravelAgent1@gmail.com', 'Venture');
         $this->email->to($email);
-
-        $message = '';
+    
         if ($type == 'verify') {
             $this->email->subject('Account Verification');
-            $this->email->message($message);
             $message = "Please click the following link to verify your account: " . base_url() . "auth/verify?email=" . urlencode($email) . "&token=" . urlencode($token);
-        }elseif ($type == 'reset') {
+        } elseif ($type == 'reset') {
+            $this->email->subject('Reset Password');
             $message = "Please click the following link to reset your password: " . base_url() . "auth/update_password?email=" . urlencode($email) . "&token=" . urlencode($token);
-            $this->email->subject('Account Verification');
-            $this->email->message($message);
         }
-
-        
-
+    
+        $this->email->message($message);
+    
         if (!$this->email->send()) {
             log_message('error', 'Email not sent: ' . $this->email->print_debugger());
         }
     }
+    
 
     public function add($email, $pass, $name) {
+        $token = bin2hex(random_bytes(50));
+
         $datausers = [
             'Email' => $email,
             'Password' => $pass,
             'Role' => 'User',
             'Full_Name' => $name,
-            'email_verified' => NULL
+            'email_verified' => NULL,
+            'token' => $token
         ];
 
         $this->db->trans_start();
         $this->db->insert('user', $datausers);
+
+        $last_id_user = $this->db->insert_id();
+        
+        $data_profile = array(
+            'Full_name' => $name,
+            'Email' => $email,
+            'fk_profile_user' => $last_id_user
+        );
+        $this->db->insert('profile', $data_profile);
+        
         $this->db->trans_complete();
 
         if ($this->db->trans_status() === FALSE) {
             $this->db->trans_rollback();
-            return false;
         } else {
-            return $this->db->insert_id(); // Return user ID
+            $this->db->trans_commit();
         }
+        $this->config_email($email, $token, 'verify');
     }
     public function updateUser($id, $data) {
         $this->db->where('ID_User', $id);
@@ -103,6 +114,7 @@ class m_auth extends CI_Model {
         $this->db->where('ID_User', $id);
         $this->db->update('user', $data);
     }
+    
     
     // public function update_password($id, $hashed_password) {
     //     $this->db->set('Password', $hashed_password);

@@ -50,20 +50,20 @@ class Auth extends CI_Controller {
             $hashed_password = password_hash($password, PASSWORD_DEFAULT);
             
             // Use transaction to ensure data integrity
-            $this->db->trans_start();
+            // $this->db->trans_start();
             $user_id = $this->m_auth->add($email, htmlspecialchars($hashed_password), $name);
-            $this->db->trans_complete();
+            // $this->db->trans_complete();
 
-            if ($this->db->trans_status() === FALSE) {
-                // If transaction failed, show error
-                $this->session->set_flashdata('error', 'Failed to create an account. Please try again.');
-                redirect('auth/view_register');
-            } else {
+            // if ($this->db->trans_status() === FALSE) {
+            //     // If transaction failed, show error
+            //     $this->session->set_flashdata('error', 'Failed to create an account. Please try again.');
+            //     redirect('auth/view_register');
+            // } else {
                 // If transaction successful, send verification email and show verification view
-                $this->send_verification_email($user_id, $email);
+                // $this->send_verification_email($user_id, $email);
                 $data['email'] = $email;
                 $this->load->view('logreg/email_verification', $data);
-            }
+            // }
         }
     }
 
@@ -82,12 +82,12 @@ class Auth extends CI_Controller {
         return TRUE;
     }
 
-    public function send_verification_email($user_id, $email) {
-        $this->load->helper('string');
-        $token = random_string('alnum', 50);
-        $this->m_auth->save_verification_token($user_id, $token);
-        $this->m_auth->config_email($email, $token, 'verify'); // Pass the third argument
-    }
+    // public function send_verification_email($user_id, $email) {
+    //     $this->load->helper('string');
+    //     $token = random_string('alnum', 50);
+    //     $this->m_auth->save_verification_token($user_id, $token);
+    //     $this->m_auth->config_email($email, $token, 'verify'); // Pass the third argument
+    // }
 
     public function verify() {
         $email = $this->input->get('email');
@@ -168,7 +168,7 @@ class Auth extends CI_Controller {
             $this->m_auth->config_email($email, $token, 'reset');
     
             $data['email'] = $email;
-            $this->load->view('logreg/email_passwordchange', $data);
+            $this->load->view('logreg/email_verification', $data);
         } else {
             $this->session->set_flashdata('error', 'Email not registered.');
             redirect('auth/forgot_password');
@@ -223,6 +223,7 @@ class Auth extends CI_Controller {
         $this->session->set_flashdata('error', 'Invalid or expired reset token.');
         redirect('auth/login');
     }
+    
     
 
     public function logout(){
