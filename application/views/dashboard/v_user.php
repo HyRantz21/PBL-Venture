@@ -3,35 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Data Perusahaan</title>
+    <title>Data User</title>
 </head>
 <body>
-    <h1>Data Perusahaan</h1>
-    <a href="<?php echo base_url('dashboard/tambahPerusahaan/') ?>">Tambah Perusahaan</a>
+    <h1>Data User</h1>
     <table border="1px black">
         <tr>
             <td>No</td>
-            <td>Nama Perusahaan</td>
-            <td>Alamat</td>
-            <td>Nomor Telepon</td>
+            <td>ID User</td>
+            <td>Full Name</td>
             <td>Email</td>
             <td>Password</td>
             <td>Aksi</td>
         </tr>
         <?php 
             $no = 1; // Initialize the counter
-            foreach ($perusahaan as $key): 
+            foreach ($user as $key): 
         ?>
         <tr>
             <td><?php echo $no; ?></td> <!-- Display the counter -->
-            <td><?php echo $key['Nama_Perusahaan']; ?></td>
-            <td><?php echo $key['Alamat']; ?></td>
-            <td><?php echo $key['Nomor_Telepon']; ?></td>
+            <td><?php echo $key['ID_User']; ?></td>
+            <td><?php echo $key['Full_Name']; ?></td>
             <td><?php echo $key['Email']; ?></td>
             <td><?php echo $key['Password']; ?></td>
             <td>
-                <a href="<?php echo base_url('dashboard/editPerusahaan/'.$key['ID_Perusahaan']); ?>">Edit</a>
-                <a href="<?php echo base_url('dashboard/hapusPerusahaan/'.$key['ID_Perusahaan']); ?>">Delete</a>
+                <a href="<?php echo base_url('dashboard/editUser/'.$key['ID_User']); ?>">Edit</a>
+                <a href="<?php echo base_url('dashboard/hapusUser/'.$key['ID_User']); ?>">Delete</a>
             </td>
         </tr>
         <?php 

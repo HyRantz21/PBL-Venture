@@ -24,7 +24,7 @@ class M_perusahaan extends CI_Model {
             'Alamat' => $this->input->post('Alamat'),
             'Nomor_Telepon' => $this->input->post('Nomor_Telepon'),
             'Email' => $this->input->post('Email'),
-            'Password' => $this->input->post('Password')
+            'Password' => password_hash($this->input->post('Password'), PASSWORD_BCRYPT)
         );
         return $this->db->insert('perusahaan', $data);
     }
@@ -51,6 +51,10 @@ class M_perusahaan extends CI_Model {
             'Email' => $this->input->post('Email'),
             'Password' => $this->input->post('Password')
         );
+
+        if (empty($this->input->post('ID_Perusahaan')) || empty($data['Nama_Perusahaan']) || empty($data['Alamat']) || empty($data['Nomor_Telepon']) || empty($data['Email']) || empty($data['Password'])) {
+            return false;
+        }
 
         $this->db->where('ID_Perusahaan', $this->input->post('ID_Perusahaan'));
         return $this->db->update('perusahaan', $data);
