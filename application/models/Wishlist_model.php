@@ -20,4 +20,15 @@ class Wishlist_model extends CI_Model {
         // Insert data into 'wishlist' table
         return $this->db->insert('wishlist', $data);
     }
+
+    // Function to get package details by ID_Paket
+    public function get_package_details($paketId) {
+        $this->db->select('Nama_Paket, Deskripsi, Harga, Waktu_Tour');
+        $this->db->from('paket_wisata');
+        $this->db->where('ID_Paket', $paketId);
+        $query = $this->db->get();
+        return $query->row_array();
+    }
 }
+
+?>

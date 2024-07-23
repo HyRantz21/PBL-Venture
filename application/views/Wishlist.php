@@ -3,12 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wishlist Example</title>
+    <title>Wishlist</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <style>
-    /* Your existing styles */
     :root {
         --main-bg-color: black;
         --main-text-color: gray;
@@ -26,6 +25,7 @@
         width: 100%;
     }
 
+    /*NavBar*/
     .navbar {
         background-color: white;
         top: 0;
@@ -44,6 +44,7 @@
         margin-right: 20px;
     }
 
+    /*Searchbar*/
     .searchbar {
         display: flex;
         justify-content: center;
@@ -60,7 +61,6 @@
         padding-left: 50px;
         z-index: 1;
         border-radius: var(--border-radius);
-        background-image: url('assets/Icon/search.png');
         background-image: url('assets/Icon/search.png');
         background-size: 20px;
         background-position: left 20px center;
@@ -86,12 +86,12 @@
         padding: 9px;
     }
 
-    .LayRecomended {
+    /*History*/
+    .LayRecomended{
         display: grid;
         gap: 10px 10px;
     }
-
-    .wrapRecomended {
+    .wrapRecomended{
         width: 100%; 
         max-width: 290px;
         box-shadow: 1px 1px 5px 0px rgba(0, 0, 0, 0.5);
@@ -99,18 +99,15 @@
         min-height: 400px;
         padding-bottom: 15px;
     }
-
-    .wrapImg {
+    .wrapImg{
         display: flex;
         justify-content: center;
     }
-
-    .img {
+    .img{
         padding-right: 10px;
         padding-left: 10px;
         height: 200px;
     }
-
     .imgR {
         object-fit: cover;
         margin-top: 15px;
@@ -118,7 +115,6 @@
         width: 100%;
         border-radius: var(--border-radius);
     }
-
     .layHeader {
         max-width: 460px;
         width: 100%;
@@ -159,22 +155,20 @@
         margin-top: 5px;
     }
 
-    .bookmarkButton:hover .BMicon {
-        content: url('assets/Icon/bookmark-fill.png');
-        content: url('assets/Icon/bookmark-fill.png');
+    .bookmarkButton:hover .BMicon{
+        content: url(assets/Icon/bookmark-fill.png);
     }
 
-    .layPrice {
+    .layPrice{
         margin-top: 10px;
         padding-left: 20px;
-    }
 
-    .layPrice h6 {
+    }
+    .layPrice h6{
         margin: 0;
         font-weight: 700;
     }
-
-    .layPrice p {
+    .layPrice p{
         padding-right: 20px;
         word-break:break-all;
         margin: 0;
@@ -183,11 +177,9 @@
         font-weight: var(--main-font-weight);
     }
 
-    .layFooter {
-        max-width: 460px;
-        width: 100%;
+    .layFooter{
+        margin-top: 20px;
         padding-right: 20px;
-        padding-left: 20px;
         padding-left: 20px;
         display: grid;
         grid-template-columns: 1fr auto; 
@@ -195,13 +187,13 @@
         column-gap: 20px;
     }
 
-    .layFooter h4 {
+    .layFooter h4{
         margin: 0;
         margin-top: 10px;
         font-weight: 700;
     }
 
-    .layFooter p {
+    .layFooter p{
         padding-right: 20px;
         word-break:break-all;
         margin: 0;
@@ -214,25 +206,26 @@
         margin-top: 10px;
         background: none;
         border: none;
-        cursor: pointer;
+        cursor: button;
         padding: 0;
     }
 
-    .arrowrightButton .ARicon {
+    .arrowrightButton .ARicon{
         width: 40px;
         height: 40px;
         transition: var(--transition-speed) ease-in-out;
     }
 
-    .arrowrightButton:hover .ARicon {
-        content: url('assets/Icon/arrow-right-square-fill.png');
+    .arrowrightButton:hover .ARicon{
         content: url('assets/Icon/arrow-right-square-fill.png');
         transition: var(--transition-speed) ease-in-out;
     }
     
-    .link {
+    /*Universal*/
+    .link{
         text-decoration: none;
     }
+
 </style>
 <body>
     <header>
@@ -242,67 +235,62 @@
                     <a class="link" href="#"><h1 class="brand">Venture</h1></a>
                 </div>
                 <div class="LayoutItem">  
-                    <a class="nav-item" href="#">Wishlist</a>      
-                    <a class="nav-item" href="#">History</a>
-                    <a class="nav-item" href="#">Contact Us</a>
-                    <a class="nav-item" href="#">Profile</a>
+                    <a class="nav-item" href="<?php echo base_url("WishlistCon")?>"><img src="" alt="">Wishlist</a>      
+                    <a class="nav-item" href="<?php echo base_url("HistoryCon") ?>"><img src="" alt="">History</a>
+                    <a class="nav-item" href="#"><img src="" alt="">Contact Us</a>
+                    <a class="nav-item" href="#"><img src="" alt="">Profile</a>
                 </div>
             </div>
         </nav>
     </header>
     <main class="container">
         <div class="LayRecomended">
+            <?php foreach ($wishlistItems as $item): ?>
             <div class="wrapRecomended">
                 <div class="wrapImg">
                     <figure class="img">
-                        <img src="assets/Image/ea545f3990f88524a9472220454ab63bedc0b6aa.jpg" alt="" class="imgR">
                         <img src="assets/Image/ea545f3990f88524a9472220454ab63bedc0b6aa.jpg" alt="" class="imgR">
                     </figure>
                 </div>
                 <div class="layHeader">
                     <header class="titleR">
-                        <h3>Camp Fire</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit,</p>
+                        <h3><?php echo $item['nama_paket']; ?></h3>
+                        <p><?php echo $item['deskripsi']; ?></p>
                     </header>
-                    <button class="bookmarkButton" onclick="addToWishlist(1, 101)"> <!-- Example values for userId and paketId -->
-                        <img src="assets/Icon/bookmark.png" alt="Bookmark" class="BMicon">
+                    <button class="bookmarkButton" id="addWishlistButton1" onclick="addToWishlist(<?php echo $item['userId']; ?>, <?php echo $item['paketId']; ?>)">
                         <img src="assets/Icon/bookmark.png" alt="Bookmark" class="BMicon">
                     </button>
                 </div>
                 <div class="layPrice">
-                    <h6 class="textPrice">Rp.2.000.3000</h6>
+                    <h6 class="textPrice">Rp. <?php echo $item['harga']; ?></h6>
                     <p>Starting Price</p>
                 </div>
                 <div class="layFooter">
                     <footer class="textFooter">
-                        <h4>4 Days</h4>
-                        <p>Acomodation Lorem ipsum</p>
+                        <h4><?php echo $item['waktu_tour'] ?></h4>
                     </footer>
-                    <a href="ContentDetail.html" class="arrowrightButton">
-                        <img src="assets/Icon/arrow-right-square.png" alt="" class="ARicon">
+                    <a href="<?php echo base_url("ContentCon/detail") ?>" class="arrowrightButton">
                         <img src="assets/Icon/arrow-right-square.png" alt="" class="ARicon">
                     </a>
                 </div>
             </div>
+            <?php endforeach; ?>
         </div>
     </main>
     <script>
-        function addToWishlist(userId, paketId) {
-            $.ajax({
-                url: 'http://localhost/your_codeigniter_project_folder/index.php/wishlist/add',
-                type: 'POST',
-                data: { 
-                    userId: userId, 
-                    paketId: paketId 
-                },
-                success: function(response) {
-                    alert('Produk berhasil ditambahkan ke wishlist');
-                },
-                error: function() {
-                    alert('Error menambahkan produk ke wishlist');
-                }
-            });
-        }
+    function addToWishlist(userId, paketId) {
+        $.ajax({
+            url: '<?php echo base_url("WishlistCon/add"); ?>',
+            type: 'POST',
+            data: { userId: userId, paketId: paketId },
+            success: function(response) {
+                alert(response);
+            },
+            error: function() {
+                alert('Error menambahkan produk ke wishlist');
+            }
+        });
+    }
     </script>
 </body>
 </html>

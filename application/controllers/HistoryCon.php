@@ -18,4 +18,6 @@ class HistoryCon extends CI_Controller {
         // Load view dan kirim data
         $this->load->view('History', $data);
     }
+
+    
 }

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="asset/bootstrap-5.3.3-dist/css/bootstrap.css">
     <title>History</title>
 </head>
@@ -61,7 +61,7 @@
         padding-left: 50px;
         z-index: 1;
         border-radius: var(--border-radius);
-        background-image: url('<?php echo base_url('assets/Icon/search.png'); ?>');
+        background-image: url('assets/Icon/search.png');
         background-size: 20px;
         background-position: left 20px center;
         background-repeat: no-repeat;
@@ -168,7 +168,7 @@
     }
 
     .bookmarkButton:hover .BMicon{
-        content: url('<?php echo base_url('assets/Icon/bookmark-fill.png'); ?>');
+        content: url(assets/Icon/bookmark-fill.png);
     }
 
     .layPrice{
@@ -231,7 +231,7 @@
     }
 
     .arrowrightButton:hover .ARicon{
-        content: url('<?php echo base_url('assets/Icon/arrow-right-square-fill.png'); ?>');
+        content: url('assets/Icon/arrow-right-square-fill.png');
         transition: var(--transition-speed) ease-in-out;
     }
 
@@ -304,8 +304,8 @@
                     <a class="link" href="#"><h1 class="brand">Venture</h1></a>
                 </div>
                 <div class="LayoutItem">  
-                    <a class="nav-item" href="#"><img src="" alt="">Wishlist</a>      
-                    <a class="nav-item" href="#"><img src="" alt="">History</a>
+                    <a class="nav-item" href="<?php echo base_url("WishlistCon")?>">Wishlist</a>      
+                    <a class="nav-item" href="<?php echo base_url("HistoryCon")?>">History</a>
                     <a class="nav-item" href="#"><img src="" alt="">Contact Us</a>
                     <a class="nav-item" href="#"><img src="" alt="">Profile</a>
                 </div>
@@ -314,65 +314,77 @@
     </header>
     <main class="container d-flex justify-content-center">
         <div class="LayRecomended">
-            <?php foreach ($transaksi as $row): ?>
-            <div class="panel">
-                <div class="wrapRecomended">
-                    <div class="wrapImg">
-                        <figure class="img">
-                            <img src="assets/Image/e742e0ad10409b7065e565dfb95a9046e55205c0.jpg" alt="" class="img">
-                        </figure>
+            <?php foreach ($transaksi as $item): ?>
+                <div class="panel">
+                    <div class="wrapRecomended">
+                        <div class="wrapImg">
+                            <figure class="img">
+                                <img src="assets/Image/ea545f3990f88524a9472220454ab63bedc0b6aa.jpg" alt="" class="imgR">
+                            </figure>
+                        </div>
+                        <div class="layHeader">
+                            <header class="titleR">
+                                <h3>ID Transaksi: <?php echo $item['ID_Transaksi']; ?></h3>
+                                <p>Status: <?php echo $item['Status']; ?></p>
+                            </header>
+                            <button class="bookmarkButton" id="addWishlistButton1" onclick="addToWishlist('Camp Fire', 'addWishlistButton1')">
+                                <img src="assets/Icon/bookmark.png" alt="Bookmark" class="BMicon">
+                            </button>
+                        </div>
+                        <div class="layPrice">
+                            <h5 class="textPrice">Tanggal Transaksi: <?php echo $item['Tanggal_Transaksi']; ?></h5>
+                            <p>Catatan: <?php echo $item['Catatan']; ?></p>
+                        </div>
+                        <div class="layFooter">
+                            <footer class="textFooter">
+                                <h5>Tanggal Update: <?php echo $item['Tanggal_Update']; ?></h5>
+                            </footer>
+                            <a href="#" class="arrowrightButton">
+                                <img src="assets/Icon/arrow-right-square.png" alt="" class="ARicon">
+                            </a>
+                        </div>
                     </div>
-                    <div class="layHeader">
-                        <header class="titleR">
-                            <h3>Paket ID: <?= $row['ID_Paket']; ?></h3>
-                            <p><?= $row['Catatan']; ?></p>
-                        </header>
-                    </div>
-                    <div class="layPrice">
-                        <h5 class="textPrice">Status: <?= $row['Status']; ?></h5>
-                    </div>
-                    <div class="layFooter">
-                        <footer class="textFooter">
-                            <h5><?= date('d M Y', strtotime($row['Tanggal_Transaksi'])); ?></h5>
-                            <p>Updated: <?= date('d M Y', strtotime($row['Tanggal_Update'])); ?></p>
-                        </footer>
+                    <div class="detail">
+                        <div class="row1">
+                            <img src="assets/Icon/check-circle-fill.png" alt="" class="iChecklist">
+                        </div>
+                        <div class="row2">
+                            <h3>ID Paket: <?php echo $item['ID_Paket']; ?></h3>
+                        </div>
+                        <div class="row3">
+                            <div class="idT">ID Transaksi</div>
+                            <div class="ID"><?php echo $item['ID_Transaksi']; ?></div>
+                        </div>
+                        <div class="row5">
+                            <div class="tTanggal">Tanggal</div>
+                            <div class="Tanggal"><?php echo $item['Tanggal_Transaksi']; ?></div>
+                        </div>
+                        <div class="row6">
+                            <div class="tTotal">Update</div>
+                            <div class="Total"><?php echo $item['Tanggal_Update']; ?></div>
+                        </div>        
+                        <div class="row7">
+                            <div class="tTotal">Status</div>
+                            <div class="Total"><?php echo $item['Status']; ?></div>
+                        </div>    
+                        <div class="row8">
+                            <div class="tCatatan">Catatan</div>
+                            <p class="Catatan"><?php echo $item['Catatan']; ?></p>
+                        </div>           
                     </div>
                 </div>
-                <div class="detail">
-                    <div class="row1">
-                        <img src="assets/Icon/check-circle-fill.png" alt="" class="iChecklist">
-                    </div>
-                    <div class="row2">
-                        <h3>Status</h3>
-                    </div>
-                    <div class="row3">
-                        <div class="idT">ID Transaksi</div>
-                        <div class="ID"><?= $row['ID_Transaksi']; ?></div>
-                    </div>
-                    <div class="row4">
-                        <div class="tNama">Nama</div>
-                        <div class="Nama">User Name</div>
-                    </div>
-                    <div class="row5">
-                        <div class="tTanggal">Tanggal</div>
-                        <div class="Tanggal"><?= date('d M Y', strtotime($row['Tanggal_Transaksi'])); ?></div>
-                    </div>
-                    <div class="row6">
-                        <div class="tTotal">Waktu</div>
-                        <div class="Total"><?= date('H:i', strtotime($row['Tanggal_Transaksi'])); ?></div>
-                    </div>        
-                    <div class="row7">
-                        <div class="tTotal">Total</div>
-                        <div class="Total">Rp.678.000</div>
-                    </div>    
-                    <div class="row8">
-                        <div class="tCatatan">Catatan</div>
-                        <p class="Catatan"><?= $row['Catatan']; ?></p>
-                    </div>           
-                </div>
-            </div>
             <?php endforeach; ?>
         </div>
     </main>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const container = document.querySelector('.LayRecomended');
+            const original = document.querySelector('.panel');
+            for (let i = 0; i < 4; i++) { // Sudah ada 1, tambah 4 lagi
+                const clone = original.cloneNode(true);
+                container.appendChild(clone);
+            }
+        });
+    </script>
 </body>
 </html>
