@@ -1,51 +1,52 @@
-<?php
+<?php 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Profile extends CI_Controller {
 
-    public function __construct() {
+    public function __construct(){
         parent::__construct();
         $this->load->model('M_profile');
-        $this->load->helper('url');
+        $this->load->model('M_user');
+        $this->load->library('form_validation');
+        $this->load->library('session');
+        $this->load->library('email');
     }
 
-    // Load the profile form with no ID
-    public function index() {
-        $data = array('title' => 'Edit Profile', 'profile' => null);
+    public function index()
+    {
+        redirect('profile/editprofile');
+    }
+
+    public function viewprofile(){
+        $data = array('title' => 'profile', 'profile' => $this->M_profile->getprofile($this->session->userdata('ID_User'))->row());
         $this->load->view('ProfilePage', $data);
     }
 
-    // Load the profile form with an ID
-    public function edit_profile($id = null) {
-        if (!isset($id) || !is_numeric($id)) {
-            show_404();
+    public function editprofile(){
+        
+        $email = $this->input->post('email');
+        $phone = $this->input->post('phone');
+        $name = $this->input->post('full_name');
+        $dob = $this->input->post('dob');
+        $gender = $this->input->post('gender');
+        $user_id = $this->session->userdata('ID_User'); // Assuming you have user ID stored in session
+        $profile = $this->M_profile->getprofile($this->session->userdata('ID_User'))->num_rows();
+        if ($profile>0) {
+            $update_status = $this->M_profile->update($user_id, $phone, $dob, $gender);
+        }else{
+            $update_status = $this->M_profile->insert($user_id, $phone, $dob, $gender);
         }
-
-        $data['profile'] = $this->M_profile->get_profile($id);
-        if (empty($data['profile'])) {
-            show_404();
+        $update_user = $this->M_user->updateprofile($user_id, $name, $email);
+        
+            if ($update_user&&$update_status) {
+                // Jika update berhasil
+                $this->session->set_flashdata('message', 'Profile updated successfully');
+                redirect('profile/viewprofile'); // Redirect setelah update
+            } else {
+                // Jika update gagal
+                $this->session->set_flashdata('message', 'Profile update failed');
+                redirect('profile/viewprofile');
+            }
         }
-
-        $data['title'] = 'Edit Profile';
-        $this->load->view('ProfilePage', $data);
     }
-
-    // Process the form submission and update profile
-    public function process_edit($id = null) {
-        if (!isset($id) || !is_numeric($id)) {
-            show_404();
-        }
-
-        $data = [
-            'Email' => $this->input->post('email'),
-            'phone' => $this->input->post('phone'),
-            'Full_name' => $this->input->post('full_name'),
-            'dob' => $this->input->post('dob'),
-            'gender' => $this->input->post('gender')
-        ];
-
-        $this->M_profile->update_profile($id, $data);
-        redirect('profile/edit_profile/' . $id);
-    }
-}
-?>
+/* End of file profile.php */

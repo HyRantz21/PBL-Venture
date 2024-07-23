@@ -170,34 +170,34 @@
         <div class="main-content">
             <h1>Personal Information</h1>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-            <form action="<?php echo base_url('profile/process_edit/' . (isset($profile['id']) ? $profile['id'] : '')); ?>" method="post">
+            <form action="<?php echo base_url('profile/editprofile/'); ?>" method="post">
             <div class="form-group">
                 <label for="full_name">Full Name</label>
-                <input type="text" id="full_name" name="full_name" value="<?php echo isset($profile['Full_name']) ? $profile['Full_name'] : ''; ?>">
+                <input type="text" id="full_name" name="full_name" value="<?= $this->session->userdata('Full_Name')?>">
             </div>
             <div class="form-group">
                 <label for="email">Email</label>
-                <input type="email" id="email" name="email" value="<?php echo isset($profile['Email']) ? $profile['Email'] : ''; ?>">
+                <input type="email" id="email" name="email" value="<?= $this->session->userdata('Email') ?>">
             </div>
             <div class="form-group">
                 <label for="phone">Phone</label>
                 <div class="phone-input">
-                    <input type="text" id="phone" name="phone" value="<?php echo isset($profile['phone']) ? $profile['phone'] : ''; ?>">
+                    <input type="text" id="phone" name="phone" value="<?= (isset($profile->phone))?$profile->phone:'';?>">
                 </div>
             </div>
             <div class="form-group">
                 <label for="dob">Date of Birth</label>
-                <input type="date" id="dob" name="dob" value="<?php echo isset($profile['dob']) ? $profile['dob'] : ''; ?>">
+                <input type="date" id="dob" name="dob" value="<?= (isset($profile->dob))?$profile->dob:'';?>">
             </div>
             <div class="form-group">
                 <label>Gender</label>
                 <div class="gender-options">
                     <label>
-                        <input type="radio" name="gender" value="male" <?php echo (isset($profile['gender']) && $profile['gender'] == 'male') ? 'checked' : ''; ?>>
+                        <input type="radio" name="gender" value="male" <?= (isset($profile->gender)&&$profile->gender == 'male') ? 'checked' : ''; ?>>
                         <span>Male</span>
                     </label>
                     <label>
-                        <input type="radio" name="gender" value="female" <?php echo (isset($profile['gender']) && $profile['gender'] == 'female') ? 'checked' : ''; ?>>
+                        <input type="radio" name="gender" value="female" <?= (isset($profile->gender)&&$profile->gender == 'female') ? 'checked' : ''; ?>>
                         <span>Female</span>
                     </label>
                 </div>

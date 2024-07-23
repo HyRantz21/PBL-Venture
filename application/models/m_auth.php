@@ -60,13 +60,6 @@ class m_auth extends CI_Model {
 
         $last_id_user = $this->db->insert_id();
         
-        $data_profile = array(
-            'Full_name' => $name,
-            'Email' => $email,
-            'fk_profile_user' => $last_id_user
-        );
-        $this->db->insert('profile', $data_profile);
-        
         $this->db->trans_complete();
 
         if ($this->db->trans_status() === FALSE) {

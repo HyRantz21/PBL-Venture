@@ -50,5 +50,19 @@ class M_user extends CI_Model {
         $this->db->where('ID_User', $this->input->post('ID_User'));
         return $this->db->update('user', $data); // Ensure this is 'user' and not 'users'
     }
+    public function updateprofile($id_user, $full_name, $email)
+    {
+        $data_profile = [
+            'Full_Name' => $full_name,
+            'Email' => $email
+        ];
+        
+        $this->session->set_userdata( $data_profile );
+        
+        $this->db->where('ID_User', $id_user);
+        return $this->db->update('user', $data_profile);
+        
+        
+    }
 }
 ?>

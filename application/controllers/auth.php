@@ -127,7 +127,12 @@ class Auth extends CI_Controller {
                         $this->session->set_flashdata('error', 'Account not verified, please check your email.');
                         redirect('auth/login');
                     } else {
-                        $this->session->set_userdata('email', $user->Email);
+
+                        $this->session->set_userdata([
+                            'email'=> $user->Email,
+                            'Full_name' => $user->Full_name,
+                            'ID_User' => $user->ID_User,
+                    ]);
                         switch ($user->Role) {
                             case "User":
                                 redirect('Contentcon');
