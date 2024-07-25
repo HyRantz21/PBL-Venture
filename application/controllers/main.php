@@ -40,6 +40,11 @@ class main extends CI_Controller {
     {
         $this->load->view('Wishlist.php');
     }
+
+    public function viewHistory()
+    {  
+        redirect('HistoryCon','refresh');
+    }
 }
 
 /* End of file main.php */
