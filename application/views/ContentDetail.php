@@ -286,7 +286,7 @@
                     <a class="nav-item" href="<?php echo base_url("WishlistCon/")?>"><img src="" alt="">Wishlist</a>      
                     <a class="nav-item" href="<?php echo base_url("HistoryCon/")?>"><img src="" alt="">History</a>
                     <a class="nav-item" href="#"><img src="" alt="">Contact Us</a>
-                    <a class="nav-item-profile" href="#"><img src="" alt="">Profile</a>
+                    <a class="nav-item-profile" href="<?php echo base_url("profile/")?>"><img src="" alt="">Profile</a>
                 </div>
             </div>
         </nav>

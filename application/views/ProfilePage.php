@@ -59,13 +59,14 @@
 
         .sidebar {
             height: 100%;
-            background-color: #ffffff;
+            background-color: rgba(75, 75, 75, 25);
             box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
             padding: 50px;
         }
 
         .profile {
             text-align: center;
+            color: #fff;
         }
 
         .main-content {
@@ -154,58 +155,59 @@
         <div class="container">
             <a class="link" href="#"><h1 class="Brand">Venture</h1></a> 
             <div class="LayoutItem">  
-                <a class="nav-item" href="#"><img src="" alt="">Wishlist</a>      
-                <a class="nav-item" href="#"><img src="" alt="">History</a>
+                <a class="nav-item" href="<?php echo base_url("WishlistCon/")?>"><img src="" alt="">Wishlist</a>      
+                <a class="nav-item" href="<?php echo base_url("HistoryCon/")?>"><img src="" alt="">History</a>
                 <a class="nav-item" href="#"><img src="" alt="">Contact Us</a>
-                <a class="nav-item-profile" href="#"><img src="" alt="">Profile</a>
+                <a class="nav-item-profile" href="<?php echo base_url("profile/")?>"><img src="" alt="">Profile</a>
             </div>
         </div>
     </nav>
     <div class="container">
         <div class="sidebar">
             <div class="profile">
-                <h2>Denis Holland</h2>
+                <h2><?php echo $this->session->userdata('Full_Name'); ?></h2>
             </div>
         </div>
         <div class="main-content">
             <h1>Personal Information</h1>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
             <form action="<?php echo base_url('profile/editprofile/'); ?>" method="post">
-            <div class="form-group">
-                <label for="full_name">Full Name</label>
-                <input type="text" id="full_name" name="full_name" value="<?= $this->session->userdata('Full_Name')?>">
-            </div>
-            <div class="form-group">
-                <label for="email">Email</label>
-                <input type="email" id="email" name="email" value="<?= $this->session->userdata('Email') ?>">
-            </div>
-            <div class="form-group">
-                <label for="phone">Phone</label>
-                <div class="phone-input">
-                    <input type="text" id="phone" name="phone" value="<?= (isset($profile->phone))?$profile->phone:'';?>">
+                <div class="form-group">
+                    <label for="full_name">Full Name</label>
+                    <input type="text" id="full_name" name="full_name" value="<?php echo $this->session->userdata('Full_Name'); ?>">
                 </div>
-            </div>
-            <div class="form-group">
-                <label for="dob">Date of Birth</label>
-                <input type="date" id="dob" name="dob" value="<?= (isset($profile->dob))?$profile->dob:'';?>">
-            </div>
-            <div class="form-group">
-                <label>Gender</label>
-                <div class="gender-options">
-                    <label>
-                        <input type="radio" name="gender" value="male" <?= (isset($profile->gender)&&$profile->gender == 'male') ? 'checked' : ''; ?>>
-                        <span>Male</span>
-                    </label>
-                    <label>
-                        <input type="radio" name="gender" value="female" <?= (isset($profile->gender)&&$profile->gender == 'female') ? 'checked' : ''; ?>>
-                        <span>Female</span>
-                    </label>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" value="<?php echo $this->session->userdata('Email'); ?>">
                 </div>
-            </div>
-            <div class="form-actions">
-                <button type="submit" class="save-btn">Save</button>
-            </div>
-        </form>
+                <div class="form-group">
+                    <label for="phone">Phone</label>
+                    <div class="phone-input">
+                        <input type="text" id="phone" name="phone" value="<?php echo (isset($profile->phone)) ? $profile->phone : ''; ?>">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="dob">Date of Birth</label>
+                    <input type="date" id="dob" name="dob" value="<?php echo (isset($profile->dob)) ? $profile->dob : ''; ?>">
+                </div>
+                <div class="form-group">
+                    <label>Gender</label>
+                    <div class="gender-options">
+                        <label>
+                            <input type="radio" name="gender" value="male" <?php echo (isset($profile->gender) && $profile->gender == 'male') ? 'checked' : ''; ?>>
+                            <span>Male</span>
+                        </label>
+                        <label>
+                            <input type="radio" name="gender" value="female" <?php echo (isset($profile->gender) && $profile->gender == 'female') ? 'checked' : ''; ?>>
+                            <span>Female</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="save-btn">Save</button>
+                    <a class="cancel-btn" href="<?php echo base_url("auth/logout"); ?>">Log out</a>
+                </div>
+            </form>
         </div>
     </div>
 </body>
