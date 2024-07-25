@@ -9,7 +9,7 @@ class M_paket_wisata extends CI_Model {
     }
 
     public function getPaket(){
-        $this->db->select('paket_wisata.*, perusahaan.Nama_Perusahaan');
+        $this->db->select('paket_wisata.*, perusahaan.*');
         $this->db->from('paket_wisata');
         $this->db->join('perusahaan', 'paket_wisata.ID_Perusahaan = perusahaan.ID_Perusahaan');
         $result = $this->db->get();
@@ -40,7 +40,7 @@ class M_paket_wisata extends CI_Model {
             'Harga' => $this->input->post('Harga'),
             'Lokasi' => $this->input->post('Lokasi'),
             'Deskripsi' => $this->input->post('Deskripsi'),
-            'Waktu_Tour' => $$this->input->post('Waktu_Tour'), // Menggunakan waktu tour yang sudah dihitung
+            'Waktu_Tour' => $this->input->post('Waktu_Tour'), // Menggunakan waktu tour yang sudah dihitung
             'QR_Code' => $this->input->post('QR_Code'),
             'ID_Perusahaan' => $this->input->post('ID_Perusahaan')
         );

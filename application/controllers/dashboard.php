@@ -32,7 +32,7 @@ class dashboard extends CI_Controller {
     public function aksiTambahPaket() 
     {
         $this->M_paket_wisata->inputPaket();
-        redirect('dashboard');
+        redirect('dashboard/viewPaket');
     }
 
     public function editPaket($id_paket)
@@ -93,7 +93,7 @@ class dashboard extends CI_Controller {
     public function viewPerusahaan()
     {
         $data['perusahaan'] = $this->M_perusahaan->getPerusahaan();
-        $this->load->view('dashboard/v_perusahaan', $data);
+        $this->load->view('dashboard/dashboard/Perusahaan.html', $data);
     }
 
     public function tambahPerusahaan()
