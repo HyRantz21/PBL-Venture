@@ -23,17 +23,17 @@ class main extends CI_Controller {
 
     public function viewContent()
     {
-        $this->load->view('ContentDetail.php');
+        redirect('ContentCon','refresh');
     }
 
     public function viewWishlist()
     {
-        $this->load->view('Wishlist.php');
+        redirect('WishlistCon','refresh');
     }
 
     public function viewProfile()
-    {
-        $this->load->view('ProfilePage.php');
+    {  
+        redirect('profile','refresh');
     }
 
     public function viewContact()
