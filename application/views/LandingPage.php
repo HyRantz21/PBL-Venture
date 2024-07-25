@@ -271,99 +271,94 @@
         }
 
         .LayRecomendedContainer {
-    display: flex;
-    overflow-x: auto;
-    padding: 20px;
-}
+        display: flex;
+        overflow-x: auto;
+        padding: 20px;
+        }
 
-.wrapRecomended {
-    flex: 0 0 auto;
-    margin-right: 20px;
-    width: 300px; /* Adjust width as needed */
-}
+        .LayRecomendedContainer {
+            display: flex;
+            overflow-x: auto;
+            padding: 20px;
+        }
 
-.wrapImg img {
-    width: 100%;
-}
+        .wrapRecomended {
+            flex: 0 0 auto;
+            margin-right: 20px;
+            width: 400px; /* Adjust width as needed */
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 15px;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
 
-.textRecomended {
-    text-align: center;
-}
+        .wrapImg img {
+            width: 100%;
+            border-radius: 10px;
+        }
 
-.titleR h2, .titleR p, .textPrice, .textFooter h4, .textFooter p {
-    margin: 5px 0;
-}
+        .textRecomended {
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+        }
 
-.bookmarkButton {
-    background: none;
-    border: none;
-    cursor: pointer;
-}
+        .titleR h2, .titleR p, .textPrice, .textFooter h4, .textFooter p {
+            margin: 5px 0;
+        }
 
-.layPrice, .layFooter {
-    display: flex;
-    justify-content: space-between;
-}
+        .bookmarkButton {
+            background: none;
+            border: none;
+            cursor: pointer;
+            float: right;
+        }
 
-.LayRecomendedContainer {
-    display: flex;
-    overflow-x: auto;
-    padding: 20px;
-}
+        .layPrice, .layFooter {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
 
-.wrapRecomended {
-    flex: 0 0 auto;
-    margin-right: 20px;
-    width: 400px; /* Adjust width as needed */
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    padding: 15px;
-    background-color: #fff;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
+        .layFooter {
+            margin-top: 10px;
+        }
 
-.wrapImg img {
-    width: 100%;
-    border-radius: 10px;
-}
+        .textPrice {
+            font-size: 20px;
+            font-weight: bold;
+        }
 
-.textRecomended {
-    text-align: center;
-    font-size: 24px;
-    font-weight: bold;
-}
+        .arrowrightButton img {
+            width: 24px;
+            height: 24px;
+        }
 
-.titleR h2, .titleR p, .textPrice, .textFooter h4, .textFooter p {
-    margin: 5px 0;
-}
-
-.bookmarkButton {
-    background: none;
-    border: none;
-    cursor: pointer;
-    float: right;
-}
-
-.layPrice, .layFooter {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.layFooter {
-    margin-top: 10px;
-}
-
-.textPrice {
-    font-size: 20px;
-    font-weight: bold;
-}
-
-.arrowrightButton img {
-    width: 24px;
-    height: 24px;
-}
-
+         /* Styling untuk overlay */
+         .search-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            color: white;
+        }
+        .search-overlay .results {
+            background: white;
+            color: black;
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 600px;
+            width: 80%;
+            max-height: 80%;
+            overflow-y: auto;
+        }
 
     </style>
 </head>
@@ -386,9 +381,9 @@
     <main>
         <section id="carouselExampleInterval" class="container carousel slide" data-bs-ride="carousel">
             <div class="wrapC carousel-inner" style="border-radius: var(--border-radius);">
-                <form action="" class="searchbar">
-                    <input type="text" class="bar" placeholder="Find Your Happiness">
-                </form>
+            <form class="d-flex" id="searchForm">
+                <input class="form-control me-2" type="search" id="searchBar" placeholder="Search" aria-label="Search">
+            </form>
                 <div class="carousel-item active" data-bs-interval="10000">
                     <a href="#"><img src="<?php echo base_url('assets/Image/31d037cebdaf4a318b586751e3dc1d397482fd3f.jpg'); ?>" class="cImg d-block w-100" alt="..."></a>
                 </div>
@@ -431,7 +426,7 @@
     </header>
     <div class="LayRecomendedContainer">
         <?php foreach ($paket_wisata as $key): ?>
-        <div class="wrapRecomended">
+            <div class="wrapRecomended" data-package-name="<?php echo strtolower($key['Nama_Paket']); ?>">
             <div class="wrapImg">
                 <figure class="img">
                     <img src="<?php echo base_url('assets/Image/ea545f3990f88524a9472220454ab63bedc0b6aa.jpg'); ?>" alt="" class="imgR">
@@ -464,6 +459,9 @@
     </div>
 </article>
         </section>
+        <div id="searchOverlay" class="search-overlay">
+        <div id="searchResults" class="results"></div>
+    </div>
     </main>
     <footer>
         <div class="container text-center">
@@ -504,6 +502,27 @@
                 }
             });
         }
+    </script>
+        <script>
+        document.getElementById('searchForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const query = document.getElementById('searchBar').value.toLowerCase();
+            const results = [];
+            document.querySelectorAll('.wrapRecomended').forEach(function(packageDiv) {
+                if (packageDiv.dataset.packageName.includes(query)) {
+                    results.push(packageDiv.outerHTML);
+                }
+            });
+
+            document.getElementById('searchResults').innerHTML = results.join('');
+            document.getElementById('searchOverlay').style.display = 'flex';
+        });
+
+        document.getElementById('searchOverlay').addEventListener('click', function(event) {
+            if (event.target.id === 'searchOverlay') {
+                this.style.display = 'none';
+            }
+        });
     </script>
 </body>
 </html>
