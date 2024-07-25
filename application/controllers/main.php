@@ -7,7 +7,11 @@ class main extends CI_Controller {
     {
         parent::__construct();
         $this->load->model('M_paket_wisata');
-        $this->load->model('M_user'); // Ensure model name is correct
+        $this->load->model('M_user'); 
+        $this->load->model('Wishlist_model');
+        $this->load->model('HistoryModel');
+        $this->load->model('ContentModel');
+        
     }
 
     public function index()

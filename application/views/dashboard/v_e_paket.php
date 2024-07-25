@@ -66,20 +66,6 @@
                 <td><input type="text" name="QR_Code" value="<?php echo $paket['QR_Code']; ?>"></td>
             </tr>
             <tr>
-                <td><?php echo form_error('ID_Perusahaan') ?></td>
-            </tr>
-            <tr>
-                <td>Penyedia</td>
-                <td>:</td>
-                <td>
-                    <select name="ID_Perusahaan">
-                        <?php foreach ($perusahaan as $row): ?>
-                            <option value="<?php echo $row['ID_Perusahaan']; ?>" <?php echo ($row['ID_Perusahaan'] == $paket['ID_Perusahaan']) ? 'selected' : ''; ?>><?php echo $row['Nama_Perusahaan']; ?></option>
-                        <?php endforeach; ?>
-                    </select>
-                </td>
-            </tr>
-            <tr>
                 <td><button type="submit">Update</button></td>
             </tr>
         </table>
