@@ -269,6 +269,102 @@
         .link{
             text-decoration: none;
         }
+
+        .LayRecomendedContainer {
+    display: flex;
+    overflow-x: auto;
+    padding: 20px;
+}
+
+.wrapRecomended {
+    flex: 0 0 auto;
+    margin-right: 20px;
+    width: 300px; /* Adjust width as needed */
+}
+
+.wrapImg img {
+    width: 100%;
+}
+
+.textRecomended {
+    text-align: center;
+}
+
+.titleR h2, .titleR p, .textPrice, .textFooter h4, .textFooter p {
+    margin: 5px 0;
+}
+
+.bookmarkButton {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.layPrice, .layFooter {
+    display: flex;
+    justify-content: space-between;
+}
+
+.LayRecomendedContainer {
+    display: flex;
+    overflow-x: auto;
+    padding: 20px;
+}
+
+.wrapRecomended {
+    flex: 0 0 auto;
+    margin-right: 20px;
+    width: 400px; /* Adjust width as needed */
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 15px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.wrapImg img {
+    width: 100%;
+    border-radius: 10px;
+}
+
+.textRecomended {
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.titleR h2, .titleR p, .textPrice, .textFooter h4, .textFooter p {
+    margin: 5px 0;
+}
+
+.bookmarkButton {
+    background: none;
+    border: none;
+    cursor: pointer;
+    float: right;
+}
+
+.layPrice, .layFooter {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.layFooter {
+    margin-top: 10px;
+}
+
+.textPrice {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.arrowrightButton img {
+    width: 24px;
+    height: 24px;
+}
+
+
     </style>
 </head>
 <body>
@@ -276,7 +372,7 @@
         <nav class="navbar navbar-expand-lg mb-2">
             <div class="container">
                 <div class="wrapper">
-                    <a class="link" href="#"><h1 class="brand">Venture</h1></a>
+                    <a class="link" href="<?php echo base_url('main'); ?>"><h1 class="brand">Venture</h1></a>
                 </div>
                 <div class="LayoutItem">  
                     <a class="nav-item" href="<?php echo base_url('main/viewWishlist'); ?>"><img src="" alt="">Wishlist</a>      
@@ -329,42 +425,44 @@
             </article>
             
             <article class="Recomended">
-                <header>
-                    <h1 class="textRecomended">Recomended</h1>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+    <header>
+        <h1 class="textRecomended">Recomended</h1>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+    </header>
+    <div class="LayRecomendedContainer">
+        <?php foreach ($paket_wisata as $key): ?>
+        <div class="wrapRecomended">
+            <div class="wrapImg">
+                <figure class="img">
+                    <img src="<?php echo base_url('assets/Image/ea545f3990f88524a9472220454ab63bedc0b6aa.jpg'); ?>" alt="" class="imgR">
+                </figure>
+            </div>
+            <div class="layHeader">
+                <header class="titleR">
+                    <h2><?php echo $key['Nama_Paket']; ?></h2>
+                    <p><?php echo $key['Kategori']; ?></p>
                 </header>
-                <div class="LayRecomended">
-                    <div class="wrapRecomended">
-                        <div class="wrapImg">
-                            <figure class="img">
-                                <img src="<?php echo base_url('assets/Image/ea545f3990f88524a9472220454ab63bedc0b6aa.jpg'); ?>" alt="" class="imgR">
-                            </figure>
-                        </div>
-                        <div class="layHeader">
-                            <header class="titleR">
-                                <h2>Camp Fire</h2>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit,</p>
-                            </header>
-                            <button class="bookmarkButton" id="addWishlistButton1" onclick="addToWishlist('Camp Fire', 'addWishlistButton1')">
-                                <img src="<?php echo base_url('assets/Icon/bookmark.png'); ?>" alt="Bookmark" class="BMicon">
-                            </button>
-                        </div>
-                        <div class="layPrice">
-                            <h4 class="textPrice">Rp.2.000.3000</h4>
-                            <p>Starting Price</p>
-                        </div>
-                        <div class="layFooter">
-                            <footer class="textFooter">
-                                <h4>4 Days</h4>
-                                <p>Acomodation Lorem ipsum</p>
-                            </footer>
-                            <a href="<?php echo base_url('main/viewContent'); ?>" class="arrowrightButton">
-                                <img src="<?php echo base_url('assets/Icon/arrow-right-square.png'); ?>" alt="" class="ARicon">
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </article>
+                <button class="bookmarkButton" id="addWishlistButton<?php echo $key['ID_Paket']; ?>" onclick="addToWishlist('<?php echo $key['Nama_Paket']; ?>', 'addWishlistButton<?php echo $key['ID_Paket']; ?>')">
+                    <img src="<?php echo base_url('assets/Icon/bookmark.png'); ?>" alt="Bookmark" class="BMicon">
+                </button>
+            </div>
+            <div class="layPrice">
+                <h4 class="textPrice">Rp.<?php echo number_format($key['Harga'], 2, ',', '.'); ?></h4>
+                <p>Starting Price</p>
+            </div>
+            <div class="layFooter">
+                <footer class="textFooter">
+                    <h4><?php echo $key['Waktu_Tour']; ?></h4>
+                    <p><?php echo $key['Lokasi']; ?></p>
+                </footer>
+                <a href="<?php echo base_url('main/viewContent'); ?>" class="arrowrightButton">
+                    <img src="<?php echo base_url('assets/Icon/arrow-right-square.png'); ?>" alt="" class="ARicon">
+                </a>
+            </div>
+        </div>
+        <?php endforeach; ?>
+    </div>
+</article>
         </section>
     </main>
     <footer>
