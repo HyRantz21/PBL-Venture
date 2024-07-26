@@ -5,53 +5,45 @@ class WishlistCon extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
-        // Load the Wishlist Model
         $this->load->model('Wishlist_model');
+        $this->load->helper('url');
     }
 
     public function index() {
-        $data['title'] = "Wishlist";
-
-        // Assume we are getting the package IDs from the wishlist
-        $wishlistItems = [
-            ['userId' => 1, 'paketId' => 1], // Example data, replace with real data
-        ];
-
-        foreach ($wishlistItems as $key => $item) {
-            $packageDetails = $this->Wishlist_model->get_package_details($item['paketId']);
-            $wishlistItems[$key]['nama_paket'] = $packageDetails['Nama_Paket'];
-            $wishlistItems[$key]['deskripsi'] = $packageDetails['Deskripsi'];
-            $wishlistItems[$key]['harga'] = $packageDetails['Harga'];
-            $wishlistItems[$key]['waktu_tour'] = $packageDetails['Waktu_Tour'];
-        }
-
-        $data['wishlistItems'] = $wishlistItems;
-
+        $userID = $this->session->userdata('ID_User'); // Assuming you store the user ID in session
+        $data['wishlist'] = $this->Wishlist_model->get_wishlist($userID);
         $this->load->view('Wishlist', $data);
     }
 
-    // Function to add item to the wishlist
     public function add() {
-        // Get the user ID and package ID from POST request
-        $userId = $this->input->post('userId');
-        $paketId = $this->input->post('paketId');
+        $userID = $this->session->userdata('ID_User'); // Assuming you store the user ID in session
+        $packageName = $this->input->post('productName');
+        $packageID = $this->Wishlist_model->get_package_id($packageName);
 
-        // Check if the inputs are valid
-        if ($userId && $paketId) {
-            // Insert into the database
-            $result = $this->Wishlist_model->add_to_wishlist($userId, $paketId);
-
-            // Send response back
-            if ($result) {
-                echo 'Produk berhasil ditambahkan ke wishlist';
-            } else {
-                echo 'Error menambahkan produk ke wishlist';
-            }
+        if ($packageID) {
+            $this->Wishlist_model->add_to_wishlist($userID, $packageID);
+            echo 'Produk berhasil ditambahkan ke wishlist';
         } else {
-            echo 'ID User dan ID Paket tidak boleh kosong';
+            echo 'Error menambahkan produk ke wishlist';
         }
     }
 
-}
+    public function remove() {
+        $userID = $this->session->userdata('ID_User'); // Assuming you store the user ID in session
+        $packageID = $this->input->post('ID_Paket');
 
-?>
+        $delete = $this->Wishlist_model->remove_from_wishlist($userID, $packageID);
+
+        if ($delete) {
+            // echo "Produk berhasil dihapus dari wishlist";
+            echo "<script>
+                alert('Produk berhasil dihapus dari wishlist');
+                setTimeout(function() {
+                window.location.href = 'http://localhost/PBL-Venture/WishlistCon'; // Ubah URL sesuai dengan yang diinginkan
+            }, 1000);
+            </script>";
+        } else {
+            echo 'Error menghapus produk dari wishlist';
+        }
+    }
+}

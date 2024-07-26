@@ -3,14 +3,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class HistoryModel extends CI_Model {
 
-    public function getTransaksiByUserId($user_id) {
-        // Query untuk mengambil data transaksi berdasarkan ID user
-        $this->db->select('ID_Transaksi, ID_Paket, Tanggal_Transaksi, Tanggal_Update, Status, Catatan');
+    public function __construct() {
+        parent::__construct();
+        $this->load->database();
+    }
+
+    // Get user transactions
+    public function get_user_transactions($user_id) {
+        $this->db->select('transaksi.*, user.Full_Name');
         $this->db->from('transaksi');
-        $this->db->where('ID_User', $user_id);
+        $this->db->join('user', 'transaksi.ID_User = user.ID_User');
+        $this->db->where('transaksi.ID_User', $user_id);
         $query = $this->db->get();
 
-        // Return hasil query sebagai array
-        return $query->result_array();
+        return $query->result();
     }
 }

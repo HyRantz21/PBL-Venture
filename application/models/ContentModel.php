@@ -19,4 +19,9 @@ class ContentModel extends CI_Model {
             return null;
         }
     }
+
+    public function getDetail($id){
+        $query = $this->db->get_where('ID_Paket', $id);
+        return $query->row();
+    }
 }

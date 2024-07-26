@@ -5,12 +5,11 @@ class ContentCon extends CI_Controller {
 
     public function index() {
         $this->load->model('ContentModel'); // Muat model sebelum view
-        // Anda mungkin perlu mengambil detail dari model jika perlu
-        // $data['detail'] = $this->ContentModel->getDetail();
-        $this->load->view('ContentDetail');
+        $data['detail'] = $this->ContentModel->getPaketById(1);
+        $this->load->view('ContentDetail', $data);
     }
 
-    public function detail($id_paket = 1) {
+    public function detail($id_paket) {
         // Periksa apakah ID paket tersedia
         if ($id_paket === null) {
             show_404();
@@ -33,4 +32,6 @@ class ContentCon extends CI_Controller {
         // Load view dan kirim data
         $this->load->view('ContentDetail', $data);
     }
+
+
 }

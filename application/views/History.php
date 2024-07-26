@@ -304,17 +304,17 @@
                     <a class="link" href="#"><h1 class="brand">Venture</h1></a>
                 </div>
                 <div class="LayoutItem">  
-                    <a class="nav-item" href="<?php echo base_url("WishlistCon")?>">Wishlist</a>      
-                    <a class="nav-item" href="<?php echo base_url("HistoryCon")?>">History</a>
+                    <a class="nav-item" href="<?php echo base_url("WishlistCon") ?>"><img src="" alt="">Wishlist</a>      
+                    <a class="nav-item" href="<?php echo base_url("HistoryCon") ?>"><img src="" alt="">History</a>
                     <a class="nav-item" href="#"><img src="" alt="">Contact Us</a>
-                    <a class="nav-item" href="#"><img src="" alt="">Profile</a>
+                    <a class="nav-item" href="<?php echo base_url("profile/")?>"><img src="" alt="">Profile</a>
                 </div>
             </div>
         </nav>
     </header>
     <main class="container d-flex justify-content-center">
         <div class="LayRecomended">
-            <?php foreach ($transaksi as $item): ?>
+            <?php foreach ($transactions as $transaction): ?>
                 <div class="panel">
                     <div class="wrapRecomended">
                         <div class="wrapImg">
@@ -324,24 +324,15 @@
                         </div>
                         <div class="layHeader">
                             <header class="titleR">
-                                <h3>ID Transaksi: <?php echo $item['ID_Transaksi']; ?></h3>
-                                <p>Status: <?php echo $item['Status']; ?></p>
+                                <h3>Paket <?= $transaction->ID_Paket ?></h3>
+                                <p><?= $transaction->Catatan ?></p>
                             </header>
-                            <button class="bookmarkButton" id="addWishlistButton1" onclick="addToWishlist('Camp Fire', 'addWishlistButton1')">
-                                <img src="assets/Icon/bookmark.png" alt="Bookmark" class="BMicon">
-                            </button>
-                        </div>
-                        <div class="layPrice">
-                            <h5 class="textPrice">Tanggal Transaksi: <?php echo $item['Tanggal_Transaksi']; ?></h5>
-                            <p>Catatan: <?php echo $item['Catatan']; ?></p>
                         </div>
                         <div class="layFooter">
                             <footer class="textFooter">
-                                <h5>Tanggal Update: <?php echo $item['Tanggal_Update']; ?></h5>
+                                <h5><?= $transaction->Tanggal_Update ?></h5>
+                                <p>Tanggal Update</p>
                             </footer>
-                            <a href="#" class="arrowrightButton">
-                                <img src="assets/Icon/arrow-right-square.png" alt="" class="ARicon">
-                            </a>
                         </div>
                     </div>
                     <div class="detail">
@@ -349,27 +340,29 @@
                             <img src="assets/Icon/check-circle-fill.png" alt="" class="iChecklist">
                         </div>
                         <div class="row2">
-                            <h3>ID Paket: <?php echo $item['ID_Paket']; ?></h3>
+                            <h3>Status</h3>
                         </div>
+
                         <div class="row3">
                             <div class="idT">ID Transaksi</div>
-                            <div class="ID"><?php echo $item['ID_Transaksi']; ?></div>
+                            <div class="ID"><?= $transaction->ID_Transaksi ?></div>
+                        </div>
+                        <div class="row4">
+                            <div class="tNama">Nama</div>
+                            <div class="Nama"><?= $transaction->Full_Name ?></div>
                         </div>
                         <div class="row5">
                             <div class="tTanggal">Tanggal</div>
-                            <div class="Tanggal"><?php echo $item['Tanggal_Transaksi']; ?></div>
+                            <div class="Tanggal"><?= date('d-m-Y', strtotime($transaction->Tanggal_Transaksi)) ?></div>
                         </div>
                         <div class="row6">
-                            <div class="tTotal">Update</div>
-                            <div class="Total"><?php echo $item['Tanggal_Update']; ?></div>
+                            <div class="tTotal">Waktu</div>
+                            <div class="Total"><?= date('H:i', strtotime($transaction->Tanggal_Transaksi)) ?></div>
                         </div>        
-                        <div class="row7">
-                            <div class="tTotal">Status</div>
-                            <div class="Total"><?php echo $item['Status']; ?></div>
-                        </div>    
+                           
                         <div class="row8">
                             <div class="tCatatan">Catatan</div>
-                            <p class="Catatan"><?php echo $item['Catatan']; ?></p>
+                            <p class="Catatan"><?= $transaction->Catatan ?></p>
                         </div>           
                     </div>
                 </div>
@@ -377,14 +370,7 @@
         </div>
     </main>
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const container = document.querySelector('.LayRecomended');
-            const original = document.querySelector('.panel');
-            for (let i = 0; i < 4; i++) { // Sudah ada 1, tambah 4 lagi
-                const clone = original.cloneNode(true);
-                container.appendChild(clone);
-            }
-        });
+        
     </script>
 </body>
 </html>

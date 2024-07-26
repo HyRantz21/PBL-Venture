@@ -292,7 +292,7 @@
 
     function addToWishlist(productName, buttonId) {
         $.ajax({
-            url: 'http://localhost/PBL-Venture/index.php/wishlist/add',
+            url: 'http://localhost/PBL-Venture/WishlistCon/add',
             type: 'POST',
             data: { productName: productName },
             success: function(response) {
@@ -316,10 +316,10 @@
                     <a class="link" href="#"><h1 class="brand">Venture</h1></a>
                 </div>
                 <div class="LayoutItem">  
-                    <a class="nav-item" href="<?php echo base_url('main/viewWishlist') ?>"><img src="" alt="">Wishlist</a>      
-                    <a class="nav-item" href="<?php echo base_url('main/viewHistory') ?>"><img src="" alt="">History</a>
+                    <a class="nav-item" href="<?php echo base_url('WishlistCon') ?>"><img src="" alt="">Wishlist</a>      
+                    <a class="nav-item" href="<?php echo base_url('HistoryCon') ?>"><img src="" alt="">History</a>
                     <a class="nav-item" href="<?php echo base_url('main/viewContact') ?>"><img src="" alt="">Contact Us</a>
-                    <a class="nav-item" href="<?php echo base_url('main/viewProfile') ?>"><img src="" alt="">Profile</a>
+                    <a class="nav-item" href="<?php echo base_url('Profile') ?>"><img src="" alt="">Profile</a>
                 </div>
             </div>
         </nav>
@@ -395,7 +395,7 @@
                                 <h4>4 Days</h4>
                                 <p>Acomodation Lorem ipsum</p>
                             </footer>
-                            <a href="<?php echo base_url('main/viewContent') ?>" class="arrowrightButton">
+                            <a href="<?php echo base_url('ContentCon') ?>" class="arrowrightButton">
                                 <img src="assets/Icon/arrow-right-square.png" alt="" class="ARicon">
                             </href=>
                         </div>
