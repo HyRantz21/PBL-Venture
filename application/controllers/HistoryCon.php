@@ -5,19 +5,21 @@ class HistoryCon extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
-        $this->load->model('HistoryModel'); // Load model di constructor
+        $this->load->model('HistoryModel');
+        // Load session library for user session management
+        $this->load->library('session');
     }
 
+    // Index function to display user transactions
     public function index() {
-        // Gantilah dengan ID user sebenarnya (misalnya, dari sesi login)
-        $user_id = 1; // Contoh hardcoded, sebaiknya ambil dari sesi atau autentikasi
+        // Assume user is logged in and get user ID from session
+        $user_id = $this->session->userdata('ID_User');
 
-        // Ambil data transaksi berdasarkan ID user
-        $data['transaksi'] = $this->HistoryModel->getTransaksiByUserId($user_id);
+        // Get user transactions from model
+        $data['transactions'] = $this->HistoryModel->get_user_transactions($user_id);
 
-        // Load view dan kirim data
+        // Load the view and pass the transactions data
         $this->load->view('History', $data);
     }
-
     
 }

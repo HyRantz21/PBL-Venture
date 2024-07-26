@@ -1,34 +1,44 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
-
 class Wishlist_model extends CI_Model {
 
     public function __construct() {
-        parent::__construct();
-        // Load database
         $this->load->database();
     }
 
-    // Function to add item to the wishlist
-    public function add_to_wishlist($userId, $paketId) {
-        // Define data to be inserted
+    public function get_wishlist($userID) {
+        $this->db->select('paket_wisata.*');
+        $this->db->from('wishlist');
+        $this->db->join('paket_wisata', 'wishlist.ID_Paket = paket_wisata.ID_Paket');
+        $this->db->where('wishlist.ID_User', $userID);
+        $query = $this->db->get();
+
+        return $query->result_array();
+    }
+
+    public function get_package_id($packageName) {
+        $this->db->select('ID_Paket');
+        $this->db->from('paket_wisata');
+        $this->db->where('Nama_Paket', $packageName);
+        $query = $this->db->get();
+
+        if ($query->num_rows() > 0) {
+            return $query->row()->ID_Paket;
+        } else {
+            return false;
+        }
+    }
+
+    public function add_to_wishlist($userID, $packageID) {
         $data = array(
-            'ID_User' => $userId,
-            'ID_Paket' => $paketId
+            'ID_User' => $userID,
+            'ID_Paket' => $packageID
         );
 
-        // Insert data into 'wishlist' table
         return $this->db->insert('wishlist', $data);
     }
 
-    // Function to get package details by ID_Paket
-    public function get_package_details($paketId) {
-        $this->db->select('Nama_Paket, Deskripsi, Harga, Waktu_Tour');
-        $this->db->from('paket_wisata');
-        $this->db->where('ID_Paket', $paketId);
-        $query = $this->db->get();
-        return $query->row_array();
+    public function remove_from_wishlist($userID, $packageID) {
+        $this->db->where(['ID_User' => $userID, 'ID_Paket'=> $packageID]);
+        return $this->db->delete('wishlist');
     }
 }
-
-?>

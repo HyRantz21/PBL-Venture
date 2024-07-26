@@ -235,62 +235,65 @@
                     <a class="link" href="<?php echo base_url('main'); ?>"><h1 class="brand">Venture</h1></a>
                 </div>
                 <div class="LayoutItem">  
-                    <a class="nav-item" href="<?php echo base_url("WishlistCon")?>"><img src="" alt="">Wishlist</a>      
+                    <a class="nav-item" href="<?php echo base_url("WishlistCon") ?>"><img src="" alt="">Wishlist</a>      
                     <a class="nav-item" href="<?php echo base_url("HistoryCon") ?>"><img src="" alt="">History</a>
                     <a class="nav-item" href="#"><img src="" alt="">Contact Us</a>
-                    <a class="nav-item" href="#"><img src="" alt="">Profile</a>
+                    <a class="nav-item" href="<?php echo base_url("profile/")?>"><img src="" alt="">Profile</a>
                 </div>
             </div>
         </nav>
     </header>
     <main class="container">
         <div class="LayRecomended">
-            <?php foreach ($wishlistItems as $item): ?>
-            <div class="wrapRecomended">
-                <div class="wrapImg">
-                    <figure class="img">
-                        <img src="assets/Image/ea545f3990f88524a9472220454ab63bedc0b6aa.jpg" alt="" class="imgR">
-                    </figure>
+            <?php foreach ($wishlist as $item): ?>
+                
+                <div class="wrapRecomended">
+                    <div class="wrapImg">
+                        <figure class="img">
+                            <img src="assets/Image/ea545f3990f88524a9472220454ab63bedc0b6aa.jpg<?= $item['QR_Code']; ?>" alt="" class="imgR">
+                        </figure>
+                    </div>
+                    <div class="layHeader">
+                        <header class="titleR">
+                            <h3><?= $item['Nama_Paket']; ?></h3>
+                            <p><?= $item['Deskripsi']; ?></p>
+                        </header>
+                        <form action="http://localhost/PBL-Venture/WishlistCon/remove" method="post">
+                            <input type="hidden" name="ID_Paket" value="<?= $item['ID_Paket']; ?>">
+                            <button type="submit" class="bookmarkButton">
+                                <img src="assets/Icon/bookmark-fill.png" alt="Bookmark" class="BMicon">
+                            </button>
+                        </form>
+                    </div>
+                    <div class="layPrice">
+                        <h6 class="textPrice">Rp.<?= number_format($item['Harga'], 0, ',', '.'); ?></h6>
+                        <p>Starting Price</p>
+                    </div>
+                    <div class="layFooter">
+                        <footer class="textFooter">
+                            <h4><?= $item['Waktu_Tour']; ?> Days</h4>
+                            <p><?= $item['Lokasi']; ?></p>
+                        </footer>
+                    </div>
                 </div>
-                <div class="layHeader">
-                    <header class="titleR">
-                        <h3><?php echo $item['nama_paket']; ?></h3>
-                        <p><?php echo $item['deskripsi']; ?></p>
-                    </header>
-                    <button class="bookmarkButton" id="addWishlistButton1" onclick="addToWishlist(<?php echo $item['userId']; ?>, <?php echo $item['paketId']; ?>)">
-                        <img src="assets/Icon/bookmark.png" alt="Bookmark" class="BMicon">
-                    </button>
-                </div>
-                <div class="layPrice">
-                    <h6 class="textPrice">Rp. <?php echo $item['harga']; ?></h6>
-                    <p>Starting Price</p>
-                </div>
-                <div class="layFooter">
-                    <footer class="textFooter">
-                        <h4><?php echo $item['waktu_tour'] ?></h4>
-                    </footer>
-                    <a href="<?php echo base_url("ContentCon/detail") ?>" class="arrowrightButton">
-                        <img src="assets/Icon/arrow-right-square.png" alt="" class="ARicon">
-                    </a>
-                </div>
-            </div>
             <?php endforeach; ?>
         </div>
     </main>
     <script>
-    function addToWishlist(userId, paketId) {
-        $.ajax({
-            url: '<?php echo base_url("WishlistCon/add"); ?>',
-            type: 'POST',
-            data: { userId: userId, paketId: paketId },
-            success: function(response) {
-                alert(response);
-            },
-            error: function() {
-                alert('Error menambahkan produk ke wishlist');
-            }
-        });
-    }
+        function removeFromWishlist(packageID) {
+            $.ajax({
+                url: 'http://localhost/PBL-Venture/WishlistCon/remove',
+                type: 'POST',
+                data: { packageID: packageID },
+                success: function(response) {
+                    alert(response);
+                    location.reload();
+                },
+                error: function() {
+                    alert('Error menghapus produk dari wishlist');
+                }
+            });
+        }
     </script>
 </body>
 </html>

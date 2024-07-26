@@ -155,8 +155,8 @@
         <div class="container">
             <a class="link" href="<?php echo base_url('main'); ?>"><h1 class="Brand">Venture</h1></a> 
             <div class="LayoutItem">  
-                <a class="nav-item" href="<?php echo base_url("WishlistCon/")?>"><img src="" alt="">Wishlist</a>      
-                <a class="nav-item" href="<?php echo base_url("HistoryCon/")?>"><img src="" alt="">History</a>
+                <a class="nav-item" href="<?php echo base_url("WishlistCon")?>"><img src="" alt="">Wishlist</a>      
+                <a class="nav-item" href="<?php echo base_url("HistoryCon")?>"><img src="" alt="">History</a>
                 <a class="nav-item" href="#"><img src="" alt="">Contact Us</a>
                 <a class="nav-item-profile" href="<?php echo base_url("profile/")?>"><img src="" alt="">Profile</a>
             </div>
