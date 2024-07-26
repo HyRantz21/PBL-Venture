@@ -380,47 +380,6 @@
             document.getElementById('modalImage').src = imageSrc;
             modal.style.display = 'flex';
         }
-
-        const pricePerAdult = 100000;
-
-        function calculateTotal() {
-            const adultInput = document.getElementById('adult');
-            const totalPriceElement = document.getElementById('totalPrice');
-            const numberOfAdults = adultInput.value;
-
-            const totalPrice = numberOfAdults * pricePerAdult;
-            totalPriceElement.textContent = `Rp. ${totalPrice.toLocaleString('id-ID')}`;
-        }
-
-        function displayTotal() {
-            const adultInput = document.getElementById('adult');
-            const numberOfAdults = adultInput.value;
-            const dateInput = document.getElementById('date');
-            const selectedDate = dateInput.value;
-
-            const totalPrice = numberOfAdults * pricePerAdult;
-
-            const orderPanel = document.getElementById('orderPanel');
-            const orderAdults = document.getElementById('orderAdults');
-            const orderTotalPrice = document.getElementById('orderTotalPrice');
-            const orderDate = document.getElementById('orderDate');
-
-            orderAdults.textContent = numberOfAdults;
-            orderTotalPrice.textContent = `Rp. ${totalPrice.toLocaleString('id-ID')}`;
-            orderDate.textContent = selectedDate;
-            orderPanel.style.display = 'block';
-
-            // Update total price in the detail section
-            const totalPriceElement = document.getElementById('totalPrice');
-            totalPriceElement.textContent = `Rp. ${totalPrice.toLocaleString('id-ID')}`;
-        }
-
-
-        function closeOrderPanel() {
-            const orderPanel = document.getElementById('orderPanel');
-            orderPanel.style.display = 'none';
-        }
-
     </script>
 </body>
 </html>

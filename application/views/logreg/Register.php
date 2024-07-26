@@ -172,16 +172,16 @@
                     </div>
                 </div>
                 <div class="row">
-                    <?php if(isset($errors) && !empty($errors)): ?>
-                        <div class="alert alert-danger" role="alert">
-                            <?php echo $errors; ?>
-                        </div>
-                    <?php endif; ?>
                     <form action="<?php echo base_url('auth/register_user') ?>" method="post">
+                        <?php if(isset($errors) && !empty($errors)): ?>
+                            <div class="alert alert-danger" role="alert">
+                                <?php echo $errors; ?>
+                            </div>
+                        <?php endif; ?>
                         <label for="full_name">Full Name</label><br>
-                        <input type="text" name="full_name" id="full_name" value="<?php echo set_value('full_name'); ?>"><br>
+                        <input type="text" name="full_name" id="full_name" value="<?php echo set_value('full_name'); ?>"required><br>
                         <label for="email">Email</label><br>
-                        <input type="email" name="email" id="email" value="<?php echo set_value('email'); ?>"><br>
+                        <input type="email" name="email" id="email" value="<?php echo set_value('email'); ?>"required><br>
                         <label for="password">Password</label><br>
                         <input type="password" name="password" id="password"><br>
                         <label for="password1">Confirm Password</label><br>

@@ -160,10 +160,10 @@
                     </div>
                 </div>
                 <div class="row">
-                        <?php if ($this->session->flashdata('error')): ?>
-                            <p style="color: red;"><?= $this->session->flashdata('error'); ?></p>
-                        <?php endif; ?>
                     <form action="<?php echo base_url('auth/proses_login') ?>" method="post">
+                        <?php if ($this->session->flashdata('error')): ?>
+                            <p><?= $this->session->flashdata('error'); ?></p>
+                        <?php endif; ?>
                         <label for="email">Email</label><br>
                         <input type="email" name="email" id="email" required><br>
                         <label for="password">Password</label><br>
