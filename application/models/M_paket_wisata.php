@@ -9,22 +9,9 @@ class M_paket_wisata extends CI_Model {
     }
 
     public function getPaket(){
-        $this->db->select('paket_wisata.*, perusahaan.*');
+        $this->db->select('paket_wisata.*');
         $this->db->from('paket_wisata');
-        $this->db->join('perusahaan', 'paket_wisata.ID_Perusahaan = perusahaan.ID_Perusahaan');
         $result = $this->db->get();
-        if ($result->num_rows() > 0) {
-            return $result->result_array();
-        } else {
-            return array();
-        }
-    }
-    
-    public function getPerusahaan(){
-        $this->db->select('ID_Perusahaan, Nama_Perusahaan');
-        $this->db->from('perusahaan');
-        $result = $this->db->get();
-        
         if ($result->num_rows() > 0) {
             return $result->result_array();
         } else {
@@ -42,8 +29,7 @@ class M_paket_wisata extends CI_Model {
             'Deskripsi' => $this->input->post('Deskripsi'),
             'Waktu_Tour' => $this->input->post('Waktu_Tour'), // Menggunakan waktu tour yang sudah dihitung
             'QR_Code' => $this->input->post('QR_Code'),
-            'ID_Perusahaan' => $this->input->post('ID_Perusahaan')
-        );
+            );
         return $this->db->insert('paket_wisata', $data);
     }
 
@@ -72,7 +58,6 @@ class M_paket_wisata extends CI_Model {
             'Lokasi' => $this->input->post('Lokasi'),
             'Deskripsi' => $this->input->post('Deskripsi'),
             'Waktu_Tour' => $this->input->post('Waktu_Tour'), // Directly using the input value
-            'ID_Perusahaan' => $this->input->post('ID_Perusahaan'),
             'QR_Code' => $this->input->post('QR_Code')
         );
         $this->db->where('ID_Paket', $this->input->post('ID_Paket'));

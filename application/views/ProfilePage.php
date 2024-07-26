@@ -153,7 +153,7 @@
 <body>
     <nav class="navbar navbar-expand-lg mb-2">
         <div class="container">
-            <a class="link" href="#"><h1 class="Brand">Venture</h1></a> 
+            <a class="link" href="<?php echo base_url('main'); ?>"><h1 class="Brand">Venture</h1></a> 
             <div class="LayoutItem">  
                 <a class="nav-item" href="<?php echo base_url("WishlistCon")?>"><img src="" alt="">Wishlist</a>      
                 <a class="nav-item" href="<?php echo base_url("HistoryCon")?>"><img src="" alt="">History</a>

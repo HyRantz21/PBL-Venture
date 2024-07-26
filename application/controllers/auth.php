@@ -135,10 +135,10 @@ class Auth extends CI_Controller {
                     ]);
                         switch ($user->Role) {
                             case "User":
-                                redirect('ContentCon');
+                                redirect('main');
                                 break;
                             case "Admin":
-                                redirect('dashboard/viewPerusahaan');
+                                redirect('dashboard');
                                 break;
                             default:
                                 redirect('auth/login');
