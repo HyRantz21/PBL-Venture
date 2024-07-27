@@ -29,7 +29,7 @@
     .navbar {
         background-color: white;
         top: 0;
-        width: 100%;
+        width: 100%; 
     }
 
     .wrapper{
@@ -41,6 +41,22 @@
         font-size: var(--font-size-large);
         color: black;
         margin-right: 20px;
+    }
+    
+    .nav-item {
+        font-weight: var(--main-font-weight);
+        color: black;
+        font-size: var(--font-size-medium);
+        text-decoration: none;
+        transition: var(--transition-speed) ease-in-out;
+        padding-left: 5px;
+    }
+
+    .nav-item:hover {
+        color: white;
+        background-color: var(--main-bg-color);
+        border-radius: var(--border-radius);
+        padding: 9px;
     }
 
     /*Searchbar*/
@@ -68,22 +84,6 @@
         transition: 0.5s ease-in-out;
         box-shadow: 1px 1px 5px 0px rgba(0, 0, 0, 0.5);
     }
-    
-    .nav-item {
-        font-weight: var(--main-font-weight);
-        color: black;
-        font-size: var(--font-size-medium);
-        text-decoration: none;
-        transition: var(--transition-speed) ease-in-out;
-        padding-left: 5px;
-    }
-
-    .nav-item:hover {
-        color: white;
-        background-color: var(--main-bg-color);
-        border-radius: var(--border-radius);
-        padding: 9px;
-    }
 
     /*Carousel*/
     .cImg{
@@ -93,8 +93,8 @@
     }
 
     /*Category styles*/
-    .textCategory {
-        margin-top: 15px;
+    .Category {
+        margin-top: 25px;
     }
 
     .layCategory {
@@ -117,32 +117,36 @@
         box-shadow: 1px 1px 5px 0px rgba(0, 0, 0, 0.5);
     }
 
-    /*recomended*/
-    .LayRecomended{
+    /*Explore*/
+    .Explore{
+        margin-top: 25;
+    }
+
+    .LayExplore{
         display: grid;
         grid-template-columns: 1fr 1fr 1fr;
         gap: 10px 10px;
     }
-    .wrapRecomended{
+    .wrapExplore{
         width: 100%; 
-        max-width: 420px;
+        max-width: 320px;
         box-shadow: 1px 1px 5px 0px rgba(0, 0, 0, 0.5);
         border-radius: var(--border-radius);
-        min-height: 540px;
+        min-height: 440px;
         padding-bottom: 15px;
     }
     .wrapImg{
         padding-right: 10px;
         padding-left: 10px;
         width: 100%;
-        max-width: 460px;
-        height: 300px;
+        max-width: 360px;
+        height: 200px;
         display: flex;
         justify-content: center;
     }
     .img{
-        width: 430px;
-        height: 300px;
+        width: 330px;
+        height: 200px;
     }
     .imgR {
         object-fit: cover;
@@ -152,7 +156,7 @@
         border-radius: var(--border-radius);
     }
     .layHeader {
-        max-width: 460px;
+        max-width: 360px;
         width: 100%;
         padding-right: 20px;
         padding-left: 20px;
@@ -163,19 +167,22 @@
         column-gap: 20px;
     }
 
-    .titleR h2 {
+    .titleR h3 {
         word-wrap: break-word;
         margin: 0;
         font-weight: 650;
     }
 
     .titleR p {
-        padding-right: 80px;
         word-break:keep-all;
         margin: 0;
         font-size: var(--font-size-small);
         color: var(--main-text-color);
         font-weight: var(--main-font-weight);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 200px; 
     }
 
     .bookmarkButton {
@@ -186,13 +193,13 @@
     }
 
     .bookmarkButton .BMicon {
-        width: 50px;
-        height: 50px;
+        width: 45px;
+        height: 45px;
         margin-top: 5px;
     }
 
     .bookmarkButton:hover .BMicon{
-        content: url(asset/Icon/bookmark-fill.png);
+        content: url(<?php echo base_url('assets/Icon/bookmark-fill.png')?>);
     }
 
     .layPrice{
@@ -200,7 +207,7 @@
         padding-left: 20px;
 
     }
-    .layPrice h4{
+    .layPrice h5{
         margin: 0;
     }
     .layPrice p{
@@ -211,6 +218,10 @@
         color: var(--main-text-color);
         font-weight: var(--main-font-weight);
     }
+
+    .dtxt{
+        margin-left: 10px;
+    }   
 
     .layFooter{
         max-width: 460px;
@@ -224,7 +235,7 @@
         column-gap: 20px;
     }
 
-    .layFooter h4{
+    .layFooter h5{
         margin: 0;
         margin-top: 10px;
     }
@@ -246,14 +257,58 @@
     }
 
     .arrowrightButton .ARicon{
-        width: 65px;
-        height: 65px;
+        width: 55px;
+        height: 55px;
         transition: var(--transition-speed) ease-in-out;
     }
 
     .arrowrightButton:hover .ARicon{
-        content: url('asset/Icon/arrow-right-square-fill.png');
+        content: url(<?php echo base_url('assets/Icon/arrow-right-square-fill.png')?>);
         transition: var(--transition-speed) ease-in-out;
+    }
+
+    /*Recomended*/
+    .Recomended{
+        margin-top: 25px;
+    }
+
+    .LayRecomended{
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 10px 10px;
+    }
+    .wrapRecomended{
+        width: 100%; 
+        max-width: 320px;
+        box-shadow: 1px 1px 5px 0px rgba(0, 0, 0, 0.5);
+        border-radius: var(--border-radius);
+        min-height: 440px;
+        padding-bottom: 15px;
+    }
+
+    /*rPlace styles*/
+    .rPlace {
+        margin-top: 25px;
+    }
+
+    .layrPlace {
+        overflow: auto;
+        white-space: nowrap;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+    }
+
+    .layrPlace::-webkit-scrollbar {
+        display: none;
+    }
+
+    .wraprPlace {
+        border-radius: var(--border-radius);
+        display: inline-block;
+        width: 191px;
+        height: 250px;
+        margin: 10px;
+        box-shadow: 1px 1px 5px 0px rgba(0, 0, 0, 0.5);
     }
     
     
@@ -273,6 +328,10 @@
 
     .link{
         text-decoration: none;
+    }
+
+    .time{
+        display: flex;
     }
 
 </style>
@@ -334,14 +393,14 @@
                 </div>
             </article>
             
-            <article class="Recomended">
+            <article class="Explore">
                 <header>
-                    <h1 class="textRecomended">Recomended</h1>
+                    <h1 class="textExplore">Explore</h1>
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
                 </header>
-                <div class="LayRecomendedContainer">
+                <div class="LayExplore">
                     <?php foreach ($paket_wisata as $key): ?>
-                        <div class="wrapRecomended" data-package-name="<?php echo strtolower($key['Nama_Paket']); ?>">
+                        <div class="wrapExplore" data-package-name="<?php echo strtolower($key['Nama_Paket']); ?>">
                         <div class="wrapImg">
                             <figure class="img">
                                 <img src="<?php echo base_url('assets/Image/ea545f3990f88524a9472220454ab63bedc0b6aa.jpg'); ?>" alt="" class="imgR">
@@ -349,21 +408,22 @@
                         </div>
                         <div class="layHeader">
                             <header class="titleR">
-                                <h2><?php echo $key['Nama_Paket']; ?></h2>
-                                <p><?php echo $key['Kategori']; ?></p>
+                                <h3><?php echo $key['Nama_Paket']; ?></h3>
+                                <p><?php echo $key['Lokasi']; ?></p>
+                                <p><?php echo $key['Deskripsi']?></p>
                             </header>
                             <button class="bookmarkButton" id="addWishlistButton<?php echo $key['ID_Paket']; ?>" onclick="addToWishlist('<?php echo $key['Nama_Paket']; ?>', 'addWishlistButton<?php echo $key['ID_Paket']; ?>')">
                                 <img src="<?php echo base_url('assets/Icon/bookmark.png'); ?>" alt="Bookmark" class="BMicon">
                             </button>
                         </div>
                         <div class="layPrice">
-                            <h4 class="textPrice">Rp.<?php echo number_format($key['Harga'], 2, ',', '.'); ?></h4>
+                            <h5 class="textPrice">Rp.<?php echo number_format($key['Harga'], 2, ',', '.'); ?></h5>
                             <p>Starting Price</p>
                         </div>
                         <div class="layFooter">
                             <footer class="textFooter">
-                                <h4><?php echo $key['Waktu_Tour']; ?></h4>
-                                <p><?php echo $key['Lokasi']; ?></p>
+                                <h5><?php echo $key['Waktu_Tour'];?>Days</h5>
+                                <p><?php echo $key['Kategori'];?></p>
                             </footer>
                             <a href="<?php echo base_url('main/viewContent'); ?>" class="arrowrightButton">
                                 <img src="<?php echo base_url('assets/Icon/arrow-right-square.png'); ?>" alt="" class="ARicon">
@@ -373,6 +433,66 @@
                     <?php endforeach; ?>
                 </div>
             </article>
+            
+            <article class="Recomended">
+                <header>
+                    <h1 class="textRecomended">Recomended</h1>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                </header>
+                <div class="LayRecomended">
+                    <?php foreach ($paket_wisata as $key): ?>
+                        <div class="wrapRecomended" data-package-name="<?php echo strtolower($key['Nama_Paket']); ?>">
+                        <div class="wrapImg">
+                            <figure class="img">
+                                <img src="<?php echo base_url('assets/Image/ea545f3990f88524a9472220454ab63bedc0b6aa.jpg'); ?>" alt="" class="imgR">
+                            </figure>
+                        </div>
+                        <div class="layHeader">
+                            <header class="titleR">
+                                <h3><?php echo $key['Nama_Paket']; ?></h3>
+                                <p><?php echo $key['Lokasi']; ?></p>
+                                <p><?php echo $key['Deskripsi']?></p>
+                            </header>
+                            <button class="bookmarkButton" id="addWishlistButton<?php echo $key['ID_Paket']; ?>" onclick="addToWishlist('<?php echo $key['Nama_Paket']; ?>', 'addWishlistButton<?php echo $key['ID_Paket']; ?>')">
+                                <img src="<?php echo base_url('assets/Icon/bookmark.png'); ?>" alt="Bookmark" class="BMicon">
+                            </button>
+                        </div>
+                        <div class="layPrice">
+                            <h5 class="textPrice">Rp.<?php echo number_format($key['Harga'], 2, ',', '.'); ?></h5>
+                            <p>Starting Price</p>
+                        </div>
+                        <div class="layFooter">
+                            <footer class="textFooter">
+                                <div class="time">
+                                    <h5><?php echo $key['Waktu_Tour'];?></h5>
+                                    <h5 class="dtxt">Days</h5>
+                                </div>
+                                <p><?php echo $key['Kategori']; ?></p>
+                            </footer>
+                            <a href="<?php echo base_url('main/viewContent'); ?>" class="arrowrightButton">
+                                <img src="<?php echo base_url('assets/Icon/arrow-right-square.png'); ?>" alt="" class="ARicon">
+                            </a>
+                        </div>
+                    </div>
+                    <?php endforeach; ?>
+                </div>
+            </article>
+
+            <article class="rPlace">
+                <header>
+                    <h1 class="txtrPlace">Discover Place</h1>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                </header>
+                <div class="layrPlace">
+                    <a href="" class="wraprPlace"></a>
+                    <a href="" class="wraprPlace"></a>
+                    <a href="" class="wraprPlace"></a>
+                    <a href="" class="wraprPlace"></a>
+                    <a href="" class="wraprPlace"></a>
+                    <a href="" class="wraprPlace"></a>
+                </div>
+            </article>
+
         </section>
         <div id="searchOverlay" class="search-overlay">
         <div id="searchResults" class="results"></div>
@@ -388,9 +508,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
-        document.addEventListener('contextmenu', function(event) {
-            event.preventDefault();
-        });
 
         document.addEventListener('DOMContentLoaded', () => {
             const layCategory = document.querySelector('.layCategory');
@@ -408,9 +525,7 @@
                 data: { productName: productName },
                 success: function(response) {
                     alert('Produk berhasil ditambahkan ke wishlist');
-                    // Mengubah warna tombol menjadi hitam
                     document.getElementById(buttonId).style.backgroundColor = 'black';
-                    // Mengubah ikon menjadi versi "terisi"
                     document.getElementById(buttonId).getElementsByTagName('img')[0].src = '<?php echo base_url('assets/Icon/bookmark-fill.png'); ?>';
                 },
                 error: function() {
@@ -418,8 +533,7 @@
                 }
             });
         }
-    </script>
-        <script>
+        
         document.getElementById('searchForm').addEventListener('submit', function(event) {
             event.preventDefault();
             const query = document.getElementById('searchBar').value.toLowerCase();
