@@ -361,6 +361,38 @@
         }
 
     </style>
+    <script>
+    document.addEventListener('contextmenu', function(event) {
+        event.preventDefault();
+    });
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const layCategory = document.querySelector('.layCategory');
+
+        layCategory.addEventListener('wheel', (event) => {
+            event.preventDefault();
+            layCategory.scrollLeft += event.deltaY; 
+        });
+    });
+
+    function addToWishlist(productName, buttonId) {
+        $.ajax({
+            url: 'http://localhost/PBL-Venture/WishlistCon/add',
+            type: 'POST',
+            data: { productName: productName },
+            success: function(response) {
+                alert('Produk berhasil ditambahkan ke wishlist');
+                // Mengubah warna tombol menjadi hitam
+                document.getElementById(buttonId).style.backgroundColor = 'black';
+                // Mengubah ikon menjadi versi "terisi"
+                document.getElementById(buttonId).getElementsByTagName('img')[0].src = 'assets/Icon/bookmark-fill.png';
+            },
+            error: function() {
+                alert('Error menambahkan produk ke wishlist');
+            }
+        });
+    }
+</script>
 </head>
 <body>
     <header>
@@ -370,10 +402,10 @@
                     <a class="link" href="<?php echo base_url('main'); ?>"><h1 class="brand">Venture</h1></a>
                 </div>
                 <div class="LayoutItem">  
-                    <a class="nav-item" href="<?php echo base_url('main/viewWishlist'); ?>"><img src="" alt="">Wishlist</a>      
-                    <a class="nav-item" href="<?php echo base_url('main/viewHistory'); ?>"><img src="" alt="">History</a>
-                    <a class="nav-item" href="<?php echo base_url('main/viewContact'); ?>"><img src="" alt="">Contact Us</a>
-                    <a class="nav-item" href="<?php echo base_url('main/viewProfile'); ?>"><img src="" alt="">Profile</a>
+                <a class="nav-item" href="<?php echo base_url('WishlistCon') ?>"><img src="" alt="">Wishlist</a>      
+                    <a class="nav-item" href="<?php echo base_url('HistoryCon') ?>"><img src="" alt="">History</a>
+                    <a class="nav-item" href="<?php echo base_url('main/viewContact') ?>"><img src="" alt="">Contact Us</a>
+                    <a class="nav-item" href="<?php echo base_url('Profile') ?>"><img src="" alt="">Profile</a>
                 </div>
             </div>
         </nav>
@@ -450,7 +482,7 @@
                     <h4><?php echo $key['Waktu_Tour']; ?></h4>
                     <p><?php echo $key['Lokasi']; ?></p>
                 </footer>
-                <a href="<?php echo base_url('main/viewContent'); ?>" class="arrowrightButton">
+                <a href="<?php echo base_url('ContentCon') ?>" class="arrowrightButton">
                     <img src="<?php echo base_url('assets/Icon/arrow-right-square.png'); ?>" alt="" class="ARicon">
                 </a>
             </div>

@@ -378,7 +378,7 @@
             modal.style.display = 'flex';
         }
 
-        const pricePerAdult = 100000;
+        const pricePerAdult = <?= $detail->Harga ?>;
 
         function calculateTotal() {
             const adultInput = document.getElementById('adult');
