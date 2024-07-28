@@ -293,6 +293,9 @@
     </header>
     <main class="container mb-4">
         <section class="">
+            <form action="" class="searchbar">
+                <input type="text" class="bar" placeholder="Find Your Happiness">
+            </form>
             <div class="section1">
                 <button onclick="openModal('assets/Image/31d037cebdaf4a318b586751e3dc1d397482fd3f.jpg')"><img src="assets/Image/31d037cebdaf4a318b586751e3dc1d397482fd3f.jpg" alt="" class="tImg1"></button>
                 <button onclick="openModal('assets/Image/8c0b5f0914c97c30c94a9cbe3d257f2e3583fc6c.jpg')"><img src="assets/Image/8c0b5f0914c97c30c94a9cbe3d257f2e3583fc6c.jpg" alt="" class="tImg2"></button>
@@ -301,14 +304,14 @@
         </section>
         <section class="layOverview">
             <div class="overview">
-                <h2><?= $detail->ID_Paket ?></h2>
-                <h6><?= $detail->Lokasi ?></h6>
-                <p class="p"><?= $detail->Deskripsi ?></p>
+                <h2>Suicide Bomb</h2>
+                <h6>bali, indonesia</h6>
+                <p class="p">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
             </div>
             <div class="panel">
                 <div class="price">
                     <h2>Price</h3>
-                    <h3 id="pricePerAdult">Rp.<?= $detail->Harga ?></h2>
+                    <h3 id="pricePerAdult">Rp.100.000</h2>
                 </div>
 
                 <div class="formwrap">
@@ -323,18 +326,19 @@
                 </div>
 
                 <div class="laybtn">
-                    <button class="order" onclick="displayTotal()">Check Availability</button>
+                    <button class="order" onclick="displayTotal()">Check Reservation</button>
                 </div>
                 <div id="orderPanel" class="order-panel" style="display: none;">
                     <button class="close-btn" onclick="closeOrderPanel()">X</button>
                     <h2>Your Order</h3>
                     <div class="wrapOutput">
+                        <div class="Name"></div>
                         <div id="orderDate"></div>
-                        <div id="orderAdults"></div>
+                        <div id="orderperAdults"></div>
                         <div id="orderTotalPrice"></div>
                     </div>
-                    <img src="assets/Image/image.png" alt="" class="QRcode">
-                    <button class="pay">Pay</button>
+                    <img src="" alt="" class="QRcode">
+                    <button class="pay">Confirm</button>
                 </div>
                 
             </div>
@@ -378,7 +382,20 @@
             modal.style.display = 'flex';
         }
 
-        const pricePerAdult = <?= $detail->Harga ?>;
+        let pricePerAdult;
+
+        // Function to fetch the price from the server
+        function fetchPricePerAdult() {
+            const xhr = new XMLHttpRequest();
+            xhr.open('GET', '<?= base_url("PriceController/get_price_per_adult") ?>', true);
+            xhr.onload = function() {
+                if (this.status == 200) {
+                    const response = JSON.parse(this.responseText);
+                    pricePerAdult = response.price;
+                }
+            };
+            xhr.send();
+        }
 
         function calculateTotal() {
             const adultInput = document.getElementById('adult');
@@ -412,12 +429,15 @@
             totalPriceElement.textContent = `Rp. ${totalPrice.toLocaleString('id-ID')}`;
         }
 
-
         function closeOrderPanel() {
             const orderPanel = document.getElementById('orderPanel');
             orderPanel.style.display = 'none';
         }
 
+        // Fetch the price when the page loads
+        window.onload = function() {
+            fetchPricePerAdult();
+        };
     </script>
 </body>
 </html>
