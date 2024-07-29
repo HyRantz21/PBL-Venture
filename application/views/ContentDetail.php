@@ -315,7 +315,9 @@
                 <div class="formwrap">
                     <div class="People">
                         <img src="assets/Icon/person-fill.png" alt="" class="person">
-                        <input type="number" id="adult" name="adult" min="0" max="31" value="0" oninput="calculateTotal()">
+                        <input type="number" id="adult" name="adult" min="0" max="<?= $detail->max ?>" value="0" oninput="calculateTotal()">
+                        <p>Maximum: <?= $detail->max ?></p>
+
                     </div>
                     <div class="date">
                         <img src="assets/Icon/calendar3.png" alt="" class="calendar">

@@ -42,3 +42,4 @@ class ContentCon extends CI_Controller {
         redirect('ReservationCon');
     }
 }
+?>

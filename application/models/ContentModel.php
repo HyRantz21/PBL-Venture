@@ -16,7 +16,7 @@ class ContentModel extends CI_Model {
     }
 
     public function getDetail($id){
-        $query = $this->db->get_where('ID_Paket', $id);
+        $query = $this->db->get_where('paket_wisata', ['ID_Paket' => $id]);
         return $query->row();
     }
     
@@ -30,5 +30,5 @@ class ContentModel extends CI_Model {
     public function saveReservation($data) {
         return $this->db->insert('reservasi', $data);
     }
-    
 }
+?>
