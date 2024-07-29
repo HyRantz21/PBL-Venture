@@ -20,7 +20,7 @@ class main extends CI_Controller {
         $data['user'] = $this->M_user->getUser();
         $this->load->view('LandingPage.php', $data);
     }
-
+    
     public function viewContent()
     {
         redirect('ContentCon','refresh');
@@ -45,6 +45,7 @@ class main extends CI_Controller {
     {  
         redirect('HistoryCon','refresh');
     }
+    
 }
 
 /* End of file main.php */
