@@ -14,12 +14,16 @@ class main extends CI_Controller {
         
     }
 
-    public function index()
-    {
+    public function index() {
         $data['paket_wisata'] = $this->M_paket_wisata->getPaket();
         $data['user'] = $this->M_user->getUser();
-        $data['wishlist'] = $this->Wishlist_model->get_wishlist();
-        $this->load->view('LandingPage.php', $data);
+        $this->load->view('LandingPage', $data);
+    }
+
+    public function getPaketByCategory() {
+        $category = $this->input->post('category');
+        $data['paket_wisata'] = $this->M_paket_wisata->getPaketByCategory($category);
+        echo json_encode($data['paket_wisata']);
     }
     
     public function viewContent()

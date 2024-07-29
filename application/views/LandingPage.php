@@ -346,7 +346,6 @@
                 <div class="LayoutItem">  
                 <a class="nav-item" href="<?php echo base_url('WishlistCon') ?>"><img src="" alt="">Wishlist</a>      
                     <a class="nav-item" href="<?php echo base_url('HistoryCon') ?>"><img src="" alt="">History</a>
-                    <a class="nav-item" href="<?php echo base_url('ReservationCon'); ?>"><img src="" alt="">Reservation</a>
                     <a class="nav-item" href="<?php echo base_url('main/viewContact') ?>"><img src="" alt="">Contact Us</a>
                     <a class="nav-item" href="<?php echo base_url('Profile') ?>"><img src="" alt="">Profile</a>
                 </div>
@@ -380,19 +379,26 @@
         </section>
 
         <section class="container panel">
-            <article class="Category">
-                <header>
-                    <h1 class="textCategory">Category</h1>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                </header>
-                <div class="layCategory">
-                    <a href="" class="wrapCategory"></a>
-                    <a href="" class="wrapCategory"></a>
-                    <a href="" class="wrapCategory"></a>
-                    <a href="" class="wrapCategory"></a>
-                    <a href="" class="wrapCategory"></a>
-                </div>
-            </article>
+        <article class="Category">
+            <header>
+                <h1 class="textCategory">Category</h1>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            </header>
+            <div class="layCategory">
+                <a href="#" class="wrapCategory">                                
+                <img src="<?php echo base_url('assets/Image/village.jpg'); ?>" alt="" class="imgR">
+                Culture</a>
+                <a href="#" class="wrapCategory">
+                <img src="<?php echo base_url('assets/Image/village.jpg'); ?>" alt="" class="imgR">
+                Sport</a>
+                <a href="#" class="wrapCategory">
+                <img src="<?php echo base_url('assets/Image/village.jpg'); ?>" alt="" class="imgR">
+                Food</a>
+                <a href="#" class="wrapCategory">
+                <img src="<?php echo base_url('assets/Image/village.jpg'); ?>" alt="" class="imgR">
+                Nature</a>
+            </div>
+        </article>
             
             <article class="Explore">
                 <header>
@@ -404,7 +410,7 @@
                         <div class="wrapExplore" data-package-name="<?php echo strtolower($key['Nama_Paket']); ?>">
                         <div class="wrapImg">
                             <figure class="img">
-                                <img src="<?php echo base_url('assets/Image/ea545f3990f88524a9472220454ab63bedc0b6aa.jpg'); ?>" alt="" class="imgR">
+                                <img src="<?php echo $key['gambar_1']; ?>" alt="" class="imgR">
                             </figure>
                         </div>
                         <div class="layHeader">
@@ -426,7 +432,7 @@
                                 <h5><?php echo $key['Waktu_Tour'];?>Days</h5>
                                 <p><?php echo $key['Kategori'];?></p>
                             </footer>
-                            <a href="<?php echo base_url('main/viewContent'); ?>" class="arrowrightButton">
+                            <a href="<?php echo base_url('ContentCon'); ?>" class="arrowrightButton">
                                 <img src="<?php echo base_url('assets/Icon/arrow-right-square.png'); ?>" alt="" class="ARicon">
                             </a>
                         </div>
@@ -521,12 +527,12 @@
 
         function addToWishlist(productName, buttonId) {
             $.ajax({
-                url: '<?php echo base_url('wishlist/add'); ?>',
+                url: '<?php echo base_url('WishlistCon/add'); ?>',
                 type: 'POST',
                 data: { productName: productName },
                 success: function(response) {
                     alert('Produk berhasil ditambahkan ke wishlist');
-                    document.getElementById(buttonId).style.backgroundColor = 'black';
+                    document.getElementById(buttonId).style.filter = 'black';
                     document.getElementById(buttonId).getElementsByTagName('img')[0].src = '<?php echo base_url('assets/Icon/bookmark-fill.png'); ?>';
                 },
                 error: function() {
@@ -555,5 +561,69 @@
             }
         });
     </script>
+    <script>
+    function loadPaketByCategory(category) {
+        $.ajax({
+            url: '<?php echo base_url('main/getPaketByCategory'); ?>',
+            type: 'POST',
+            data: { category: category },
+            success: function(response) {
+                const paketWisata = JSON.parse(response);
+                const recomendedContainer = document.querySelector('.LayRecomended');
+                recomendedContainer.innerHTML = '';
+
+                paketWisata.forEach(function(paket) {
+                    const paketHtml = `
+                        <div class="wrapRecomended" data-package-name="${paket.Nama_Paket.toLowerCase()}">
+                            <div class="wrapImg">
+                                <figure class="img">
+                                    <img src="<?php echo base_url('assets/Image/ea545f3990f88524a9472220454ab63bedc0b6aa.jpg'); ?>" alt="" class="imgR">
+                                </figure>
+                            </div>
+                            <div class="layHeader">
+                                <header class="titleR">
+                                    <h3>${paket.Nama_Paket}</h3>
+                                    <p>${paket.Lokasi}</p>
+                                    <p>${paket.Deskripsi}</p>
+                                </header>
+                                <button class="bookmarkButton" id="addWishlistButton${paket.ID_Paket}" onclick="addToWishlist('${paket.Nama_Paket}', 'addWishlistButton${paket.ID_Paket}')">
+                                    <img src="<?php echo base_url('assets/Icon/bookmark.png'); ?>" alt="Bookmark" class="BMicon">
+                                </button>
+                            </div>
+                            <div class="layPrice">
+                                <h5 class="textPrice">Rp.${parseInt(paket.Harga).toLocaleString('id-ID', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</h5>
+                                <p>Starting Price</p>
+                            </div>
+                            <div class="layFooter">
+                                <footer class="textFooter">
+                                    <div class="time">
+                                        <h5>${paket.Waktu_Tour}</h5>
+                                        <h5 class="dtxt">Days</h5>
+                                    </div>
+                                    <p>${paket.Kategori}</p>
+                                </footer>
+                                <a href="<?php echo base_url('main/viewContent'); ?>" class="arrowrightButton">
+                                    <img src="<?php echo base_url('assets/Icon/arrow-right-square.png'); ?>" alt="" class="ARicon">
+                                </a>
+                            </div>
+                        </div>
+                    `;
+                    recomendedContainer.innerHTML += paketHtml;
+                });
+            },
+            error: function() {
+                alert('Error loading packages');
+            }
+        });
+    }
+
+    document.querySelectorAll('.wrapCategory').forEach(function(categoryLink) {
+        categoryLink.addEventListener('click', function(event) {
+            event.preventDefault();
+            const category = event.target.innerText.trim();
+            loadPaketByCategory(category);
+        });
+    });
+</script>
 </body>
 </html>
