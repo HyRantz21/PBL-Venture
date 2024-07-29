@@ -66,7 +66,7 @@
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Components:</h6>
-                        <a href="<?php echo base_url('dashboard/viewPaket/'); ?>">Paket Wisata</a>
+                        <a href="<?php echo base_url('dashboard'); ?>">Paket Wisata</a>
                     </div>
                 </div>
             </li>

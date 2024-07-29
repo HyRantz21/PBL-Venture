@@ -2,22 +2,24 @@
 <html lang="en">
 
 <head>
+
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Dashboard Paket Wisata</title>
+    <title>Dashboard Paket</title>
 
     <!-- Custom fonts for this template-->
-    <link href="assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="<?php echo base_url('assets/vendor/fontawesome-free/css/all.min.css'); ?>" rel="stylesheet" type="text/css">
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
 
     <!-- Custom styles for this template-->
-    <link href="assets/css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="<?php echo base_url('assets/css/sb-admin-2.min.css'); ?>" rel="stylesheet">
+
 </head>
 
 <body id="page-top">
@@ -33,7 +35,7 @@
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-laugh-wink"></i>
                 </div>
-                <div class="sidebar-brand-text mx-3">Paket Wisata</div>
+                <div class="sidebar-brand-text mx-3">Dashboard Venture</div>
             </a>
 
             <!-- Divider -->
@@ -43,7 +45,7 @@
             <li class="nav-item active">
                 <a class="nav-link" href="<?php echo base_url('index.html'); ?>">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Dashboard</span></a>
+                    <span>Main Menu</span></a>
             </li>
 
             <!-- Divider -->
@@ -63,8 +65,17 @@
                 </a>
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Components:</h6>
-                        <a href="<?php echo base_url('dashboard/viewUser/'); ?>">User</a>
+                        <a href="<?php echo base_url('dashboard/viewUser'); ?>">Reservasi</a>
+                    </div>
+                </div>
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a href="<?php echo base_url('dashboard/viewUser'); ?>">User</a>
+                    </div>
+                </div>
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a href="<?php echo base_url('dashboard/viewUser'); ?>">History</a>
                     </div>
                 </div>
             </li>
@@ -158,7 +169,6 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
                                 <img class="img-profile rounded-circle"
                                     src="<?php echo base_url('assets/img/undraw_profile.svg'); ?>">
                             </a>
@@ -209,7 +219,7 @@
                                         <td>Lokasi</td>
                                         <td>Deskripsi</td>
                                         <td>Waktu Tour</td>
-                                        <td>QR Code</td>
+                                        <td>Gambar 1</td>
                                         <td>Aksi</td>
                                     </tr>
                                     </thead>
@@ -222,7 +232,7 @@
                                         <td>Lokasi</td>
                                         <td>Deskripsi</td>
                                         <td>Waktu Tour</td>
-                                        <td>QR Code</td>
+                                        <td>Gambar 1</td>
                                         <td>Aksi</td>
                                     </tr>
                                     </tfoot>
@@ -239,7 +249,15 @@
                                         <td><?php echo $key['Lokasi']; ?></td>
                                         <td><?php echo $key['Deskripsi']; ?></td>
                                         <td><?php echo $key['Waktu_Tour']; ?></td>
-                                        <td><?php echo $key['QR_Code']; ?></td>
+                                        <td>
+                                            <?php if (!empty($key['gambar_1']) || file_exists('C:/xampp/htdocs/PBL-Venture/assets/Image' . $key['gambar_1'])): ?>
+                                                <!-- Display uploaded image -->
+                                                <img src="<?php echo base_url($key['gambar_1']); ?>" alt="Image" style="width:100px; height:auto;">
+                                            <?php else: ?>
+                                                <!-- Display default image if no image exists -->
+                                                <img src="<?php echo base_url('assets/Image/default_image.jpg'); ?>" alt="No Image" style="width:100px; height:auto;">
+                                            <?php endif; ?>
+                                        </td>
                                         <td>
                                             <a href="<?php echo base_url('dashboard/editPaket/'.$key['ID_Paket']); ?>">Edit</a>
                                             <a href="<?php echo base_url('dashboard/HapusPaket/'.$key['ID_Paket']); ?>">Delete</a>
@@ -309,14 +327,14 @@
     <script src="<?php echo base_url('assets/vendor/jquery-easing/jquery.easing.min.js'); ?>"></script>
 
     <!-- Custom scripts for all pages-->
-    <script src="<?php echo base_url('assets/js/sb-admin-2.min.js'); ?>"></script>
+    <script src="<?php echo base_url('assets/js/sb-User-2.min.js'); ?>"></script>
 
     <!-- Page level plugins -->
     <script src="<?php echo base_url('assets/vendor/chart.js/Chart.min.js'); ?>"></script>
 
     <!-- Page level custom scripts -->
     <script src="<?php echo base_url('assets/js/demo/chart-area-demo.js'); ?>"></script>
-    <script src="<?php echo base_url('assets/js/demo/chart-pie-demo.js'); ?>"></script>
+    <script src="<?php echo base_url('assest/js/demo/chart-pie-demo.js'); ?>"></script>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -338,9 +356,10 @@
                     .then(data => {
                         document.getElementById('container-fluid').innerHTML = data;
                     })
-                .catch(error => console.error('Error loading content:', error));
+                    .catch(error => console.error('Error loading content:', error));
             }
         });
     </script>
 </body>
+
 </html>

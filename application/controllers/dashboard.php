@@ -13,36 +13,41 @@ class dashboard extends CI_Controller {
     public function index()
     {
         $data['paket_wisata'] = $this->M_paket_wisata->getPaket();
-        $this->load->view('dashboard/dashboard/Paket', $data);
+        $this->load->view('dashboard-beta/paket', $data);
     }
 
     public function viewPaket()
     {
         $data['paket_wisata'] = $this->M_paket_wisata->getPaket();
-        $this->load->view('dashboard/dashboard/Paket', $data);
+        $this->load->view('dashboard-beta/paket', $data);
     }
 
     public function tambahPaket()
     {
-        $this->load->view('dashboard/v_t_paket');
+        $this->load->view('dashboard-beta/v_t_paket');
     }
 
-    public function aksiTambahPaket() 
+    public function aksiTambahPaket()
     {
-        $this->M_paket_wisata->inputPaket();
-        redirect('dashboard/viewPaket');
+        $result = $this->M_paket_wisata->inputPaket();
+        if ($result) {
+            redirect('dashboard/viewPaket');
+        } else {
+            echo "Gagal menambahkan paket wisata";
+        }
     }
+
 
     public function editPaket($id_paket)
     {
         $data['paket'] = $this->M_paket_wisata->getPaketById($id_paket);
-        $this->load->view('dashboard/v_e_paket', $data);
+        $this->load->view('dashboard-beta/v_e_paket', $data);
     }
 
     public function viewUser()
     {
         $data['user'] = $this->M_user->getUser();
-        $this->load->view('dashboard/dashboard/User', $data);
+        $this->load->view('dashboard-beta/User', $data);
     }
 
     public function editUser($id)
@@ -51,10 +56,15 @@ class dashboard extends CI_Controller {
         $this->load->view('dashboard/v_euser', $data);
     }
 
-    public function aksiEditPaket()
+    public function aksiEditPaket($id_paket)
     {
+        // Load model and update data
         $result = $this->M_paket_wisata->updateDataPaket();
-        redirect('dashboard/viewPaket');
+        if ($result) {
+            redirect('dashboard/viewPaket');
+        } else {
+            echo "Gagal memperbarui paket wisata";
+        }
     }
 
     public function aksiEditUser()
@@ -85,5 +95,11 @@ class dashboard extends CI_Controller {
         } else {
             echo "Failed to delete user.";
         }
+    }
+
+    public function test_gambar()
+    {
+        $this->load->view('test_gambar');
+        
     }
 }
