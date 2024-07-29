@@ -321,6 +321,7 @@
                         <img src="assets/Icon/calendar3.png" alt="" class="calendar">
                         <input type="date" id="date">
                     </div>
+                    
                 </div>
 
                 <div class="laybtn">

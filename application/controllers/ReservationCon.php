@@ -16,5 +16,10 @@ class ReservationCon extends CI_Controller {
         $this->ReservationModel->add_reservation($ID_User, $ID_Paket);
         redirect('ReservationCon');
     }
+
+    public function delete($ID_Reservasi) {
+        $this->ReservationModel->delete_reservation($ID_Reservasi);
+        redirect('ReservationCon');
+    }
 }
 ?>

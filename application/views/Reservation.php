@@ -349,7 +349,12 @@
                     <div class="row4">
                         <div class="tNama">Nama</div>
                         <div class="Nama"><?php echo $reservation['Full_Name']; ?></div>
-                    </div>   
+                    </div> 
+                    <div class="row4">
+                        <form action="<?php echo site_url('ReservationCon/delete/' . $reservation['ID_Reservasi']); ?>" method="post">
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
+                    </div>  
                 </div>
             </div>
             <?php endforeach; ?>

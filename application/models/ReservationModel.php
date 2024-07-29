@@ -17,5 +17,10 @@ class ReservationModel extends CI_Model {
         );
         return $this->db->insert('reservasi', $data);
     }
+
+    public function delete_reservation($ID_Reservasi) {
+        $this->db->where('ID_Reservasi', $ID_Reservasi);
+        return $this->db->delete('reservasi');
+    }
 }
 ?>
