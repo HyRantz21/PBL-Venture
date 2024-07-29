@@ -13,36 +13,46 @@ class dashboard extends CI_Controller {
     public function index()
     {
         $data['paket_wisata'] = $this->M_paket_wisata->getPaket();
-        $this->load->view('dashboard/dashboard/Paket', $data);
+        $this->load->view('dashboard-beta/test_gambar', $data);
     }
 
     public function viewPaket()
     {
         $data['paket_wisata'] = $this->M_paket_wisata->getPaket();
-        $this->load->view('dashboard/dashboard/Paket', $data);
+        $this->load->view('dashboard-beta/paket', $data);
     }
 
     public function tambahPaket()
     {
-        $this->load->view('dashboard/v_t_paket');
+        $this->load->view('dashboard-beta/v_t_paket');
     }
 
     public function aksiTambahPaket() 
-    {
-        $this->M_paket_wisata->inputPaket();
+{
+    $result = $this->M_paket_wisata->inputPaket();
+    
+    if ($result) {
+        // Data berhasil dimasukkan ke database
+        $this->session->set_flashdata('success', 'Data berhasil dimasukkan ke database');
         redirect('dashboard/viewPaket');
+    } else {
+        // Gagal memasukkan data ke database
+        $this->session->set_flashdata('error', 'Gagal memasukkan data ke database');
     }
+    
+}
+
 
     public function editPaket($id_paket)
     {
         $data['paket'] = $this->M_paket_wisata->getPaketById($id_paket);
-        $this->load->view('dashboard/v_e_paket', $data);
+        $this->load->view('dashboard-beta/v_e_paket', $data);
     }
 
     public function viewUser()
     {
         $data['user'] = $this->M_user->getUser();
-        $this->load->view('dashboard/dashboard/User', $data);
+        $this->load->view('dashboard-beta/User', $data);
     }
 
     public function editUser($id)
