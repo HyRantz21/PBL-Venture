@@ -131,7 +131,7 @@
         background-color: rgb(255, 255, 255);
         box-shadow: 1px 1px 5px 0px rgba(0, 0, 0, 0.5);
         display: grid;
-        grid-template-rows: 35% 40% 15%;
+        grid-template-rows: 30% 50% 10%;
     }
 
     .price{
@@ -150,6 +150,13 @@
         margin: 10px 0px;
     }
     
+    .max p{
+        display: flex;
+        margin: 0;
+        padding-right: 50px;;
+        justify-content: end;
+    }
+
     .person, .calendar {
         width: 30px;
     }
@@ -316,8 +323,9 @@
                     <div class="People">
                         <img src="assets/Icon/person-fill.png" alt="" class="person">
                         <input type="number" id="adult" name="adult" min="0" max="<?= $detail->max ?>" value="0" oninput="calculateTotal()">
+                    </div>
+                    <div class="max">
                         <p>Maximum: <?= $detail->max ?></p>
-
                     </div>
                     <div class="date">
                         <img src="assets/Icon/calendar3.png" alt="" class="calendar">
