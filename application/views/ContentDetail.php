@@ -285,6 +285,7 @@
                 <div class="LayoutItem">  
                     <a class="nav-item" href="<?php echo base_url("WishlistCon/")?>"><img src="" alt="">Wishlist</a>      
                     <a class="nav-item" href="<?php echo base_url("HistoryCon/")?>"><img src="" alt="">History</a>
+                    <a class="nav-item" href="<?php echo base_url('ReservationCon'); ?>"><img src="" alt="">Reservation</a>
                     <a class="nav-item" href="#"><img src="" alt="">Contact Us</a>
                     <a class="nav-item-profile" href="<?php echo base_url("profile/")?>"><img src="" alt="">Profile</a>
                 </div>
@@ -301,25 +302,28 @@
         </section>
         <section class="layOverview">
             <div class="overview">
-            <h2><?= $detail->ID_Paket ?></h2>
+                <h2><?= $detail->Nama_Paket ?></h2>
                 <h6><?= $detail->Lokasi ?></h6>
                 <p class="p"><?= $detail->Deskripsi ?></p>
             </div>
             <div class="panel">
                 <div class="price">
-                    <h2>Price</h3>
-                    <h3 id="pricePerAdult">Rp.<?= $detail->Harga ?></h2>
+                    <h2>Price</h2>
+                    <h3 id="pricePerAdult">Rp.<?= $detail->Harga ?></h3>
                 </div>
 
                 <div class="formwrap">
                     <div class="People">
                         <img src="assets/Icon/person-fill.png" alt="" class="person">
-                        <input type="number" id="adult" name="adult" min="0" max="31" value="0" oninput="calculateTotal()">
+                        <input type="number" id="adult" name="adult" min="0" max="<?= $detail->max ?>" value="0" oninput="calculateTotal()">
+                        <p>Maximum: <?= $detail->max ?></p>
+
                     </div>
                     <div class="date">
                         <img src="assets/Icon/calendar3.png" alt="" class="calendar">
                         <input type="date" id="date">
                     </div>
+                    
                 </div>
 
                 <div class="laybtn">
@@ -327,17 +331,22 @@
                 </div>
                 <div id="orderPanel" class="order-panel" style="display: none;">
                     <button class="close-btn" onclick="closeOrderPanel()">X</button>
-                    <h2>Your Order</h3>
+                    <h2>Your Order</h2>
                     <div class="wrapOutput">
-                        <div class="Name"></div>
+                        <div class="Name"><?= $detail->Nama_Paket ?></div>
                         <div id="orderDate"></div>
-                        <div id="orderperAdults"></div>
+                        <div id="orderAdults"></div>
                         <div id="orderTotalPrice"></div>
                     </div>
                     <img src="" alt="" class="QRcode">
-                    <button class="pay">Confirm</button>
+                    <form action="<?php echo site_url('ContentCon/reserve'); ?>" method="post">
+                        <input type="hidden" name="ID_Paket" value="<?php echo $detail->ID_Paket; ?>">
+                        <input type="hidden" name="Full_Name" value="<?php echo $this->session->userdata('Full_Name'); ?>">
+                        <input type="hidden" name="Deskripsi" value="<?php echo $detail->Deskripsi; ?>">
+                        <!-- Anda dapat menambahkan input lain sesuai kebutuhan -->
+                        <button type="submit" class="pay">Confirm</button>
+                    </form>
                 </div>
-                
             </div>
         </section>
     </main>
@@ -379,28 +388,14 @@
             modal.style.display = 'flex';
         }
 
-        let pricePerAdult;
-
-        // Function to fetch the price from the server
-        function fetchPricePerAdult() {
-            const xhr = new XMLHttpRequest();
-            xhr.open('GET', '<?= base_url("PriceController/get_price_per_adult") ?>', true);
-            xhr.onload = function() {
-                if (this.status == 200) {
-                    const response = JSON.parse(this.responseText);
-                    pricePerAdult = response.price;
-                }
-            };
-            xhr.send();
-        }
+        let pricePerAdult = <?= $detail->Harga ?>; // Set harga dari server
 
         function calculateTotal() {
             const adultInput = document.getElementById('adult');
-            const totalPriceElement = document.getElementById('totalPrice');
             const numberOfAdults = adultInput.value;
 
             const totalPrice = numberOfAdults * pricePerAdult;
-            totalPriceElement.textContent = `Rp. ${totalPrice.toLocaleString('id-ID')}`;
+            document.getElementById('totalPrice').textContent = `Rp. ${totalPrice.toLocaleString('id-ID')}`;
         }
 
         function displayTotal() {
@@ -416,25 +411,16 @@
             const orderTotalPrice = document.getElementById('orderTotalPrice');
             const orderDate = document.getElementById('orderDate');
 
-            orderAdults.textContent = numberOfAdults;
-            orderTotalPrice.textContent = `Rp. ${totalPrice.toLocaleString('id-ID')}`;
-            orderDate.textContent = selectedDate;
+            orderAdults.textContent = `Number of Adults: ${numberOfAdults}`;
+            orderTotalPrice.textContent = `Total Price: Rp. ${totalPrice.toLocaleString('id-ID')}`;
+            orderDate.textContent = `Reservation Date: ${selectedDate}`;
             orderPanel.style.display = 'block';
-
-            // Update total price in the detail section
-            const totalPriceElement = document.getElementById('totalPrice');
-            totalPriceElement.textContent = `Rp. ${totalPrice.toLocaleString('id-ID')}`;
         }
 
         function closeOrderPanel() {
             const orderPanel = document.getElementById('orderPanel');
             orderPanel.style.display = 'none';
         }
-
-        // Fetch the price when the page loads
-        window.onload = function() {
-            fetchPricePerAdult();
-        };
     </script>
 </body>
 </html>

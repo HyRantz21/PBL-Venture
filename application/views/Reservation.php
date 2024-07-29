@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="asset/bootstrap-5.3.3-dist/css/bootstrap.css">
-    <title>History</title>
+    <title>Reservation Page</title>
 </head>
 <style>
     :root {
@@ -301,77 +301,69 @@
         <nav class="navbar navbar-expand-lg mb-2">
             <div class="container">
                 <div class="wrapper">
-                    <a class="link" href="<?php echo base_url('main'); ?>"><h1 class="brand">Venture</h1></a>
+                <a class="link" href="<?php echo base_url('main'); ?>"><h1 class="brand">Venture</h1></a>
                 </div>
                 <div class="LayoutItem">  
-                    <a class="nav-item" href="<?php echo base_url("WishlistCon") ?>"><img src="" alt="">Wishlist</a>      
-                    <a class="nav-item" href="<?php echo base_url("HistoryCon") ?>"><img src="" alt="">History</a>
+                    <a class="nav-item" href="<?php echo base_url("WishlistCon")?>"><img src="" alt="">Wishlist</a>      
+                    <a class="nav-item" href="<?php echo base_url("HistoryCon")?>"><img src="" alt="">History</a>
                     <a class="nav-item" href="<?php echo base_url('ReservationCon'); ?>"><img src="" alt="">Reservation</a>
                     <a class="nav-item" href="#"><img src="" alt="">Contact Us</a>
                     <a class="nav-item" href="<?php echo base_url("profile/")?>"><img src="" alt="">Profile</a>
+                </div>
                 </div>
             </div>
         </nav>
     </header>
     <main class="container d-flex justify-content-center">
         <div class="LayRecomended">
-            <?php foreach ($transactions as $transaction): ?>
-                <div class="panel">
-                    <div class="wrapRecomended">
-                        <div class="wrapImg">
-                            <figure class="img">
-                                <img src="assets/Image/ea545f3990f88524a9472220454ab63bedc0b6aa.jpg" alt="" class="imgR">
-                            </figure>
-                        </div>
-                        <div class="layHeader">
-                            <header class="titleR">
-                                <h3>Paket <?= $transaction->ID_Paket ?></h3>
-                                <p><?= $transaction->Catatan ?></p>
-                            </header>
-                        </div>
-                        <div class="layFooter">
-                            <footer class="textFooter">
-                                <h5><?= $transaction->Tanggal_Update ?></h5>
-                                <p>Tanggal Update</p>
-                            </footer>
-                        </div>
+            <?php foreach ($reservations as $reservation): ?>
+            <div class="panel">
+                <div class="wrapRecomended">
+                    <div class="wrapImg">
+                        <figure class="img">
+                            <img src="assets/Image/ea545f3990f88524a9472220454ab63bedc0b6aa.jpg" alt="" class="imgR">
+                        </figure>
                     </div>
-                    <div class="detail">
-                        <div class="row1">
-                            <img src="assets/Icon/check-circle-fill.png" alt="" class="iChecklist">
-                        </div>
-                        <div class="row2">
-                            <h3>Status</h3>
-                        </div>
-
-                        <div class="row3">
-                            <div class="idT">ID Transaksi</div>
-                            <div class="ID"><?= $transaction->ID_Transaksi ?></div>
-                        </div>
-                        <div class="row4">
-                            <div class="tNama">Nama</div>
-                            <div class="Nama"><?= $transaction->Full_Name ?></div>
-                        </div>
-                        <div class="row5">
-                            <div class="tTanggal">Tanggal</div>
-                            <div class="Tanggal"><?= date('d-m-Y', strtotime($transaction->Tanggal_Transaksi)) ?></div>
-                        </div>
-                        <div class="row6">
-                            <div class="tTotal">Waktu</div>
-                            <div class="Total"><?= date('H:i', strtotime($transaction->Tanggal_Transaksi)) ?></div>
-                        </div>        
-                           
-                        <div class="row8">
-                            <div class="tCatatan">Catatan</div>
-                            <p class="Catatan"><?= $transaction->Catatan ?></p>
-                        </div>           
+                    <div class="layHeader">
+                        <header class="titleR">
+                            <h3><?php echo $reservation['ID_Paket']; ?></h3>
+                            <p><?php echo $reservation['Deskripsi']; ?></p>
+                        </header>
                     </div>
                 </div>
+                <div class="detail">
+                    <div class="row1">
+                        <img src="assets/Icon/check-circle-fill.png" alt="" class="iChecklist">
+                    </div>
+                    <div class="row2">
+                        <h3>Status</h3>
+                    </div>
+                    <div class="row3">
+                        <div class="idT">ID Transaksi</div>
+                        <div class="ID"><?php echo $reservation['ID_Reservasi']; ?></div>
+                    </div>
+                    <div class="row4">
+                        <div class="tNama">ID User</div>
+                        <div class="Nama"><?php echo $reservation['ID_User']; ?></div>
+                    </div>
+                    <div class="row4">
+                        <div class="tNama">Nama</div>
+                        <div class="Nama"><?php echo $reservation['Full_Name']; ?></div>
+                    </div> 
+                    <div class="row4">
+                        <form action="<?php echo site_url('ReservationCon/delete/' . $reservation['ID_Reservasi']); ?>" method="post">
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
+                    </div>  
+                </div>
+            </div>
             <?php endforeach; ?>
         </div>
     </main>
     <script>
-        
+        function addToWishlist(packageName, buttonId) {
+            // Add to wishlist logic
+        }
     </script>
 </body>
 </html>

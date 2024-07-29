@@ -21,7 +21,7 @@ class main extends CI_Controller {
         $data['wishlist'] = $this->Wishlist_model->get_wishlist();
         $this->load->view('LandingPage.php', $data);
     }
-
+    
     public function viewContent()
     {
         redirect('ContentCon','refresh');
@@ -46,6 +46,7 @@ class main extends CI_Controller {
     {  
         redirect('HistoryCon','refresh');
     }
+    
 }
 
 /* End of file main.php */

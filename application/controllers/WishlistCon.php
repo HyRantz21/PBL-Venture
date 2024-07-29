@@ -17,7 +17,7 @@ class WishlistCon extends CI_Controller {
 
     public function add() {
         $userID = $this->session->userdata('ID_User'); // Assuming you store the user ID in session
-        $packageName = $this->input->post('productName');
+        $packageName = $this->input->post('Nama_Paket');
         $packageID = $this->Wishlist_model->get_package_id($packageName);
 
         if ($packageID) {
