@@ -7,7 +7,7 @@
 </head>
 <body>
     <h1>Edit Paket Wisata</h1>
-    <form action="<?php echo base_url('dashboard/aksiEditPaket/' . $paket['ID_Paket']) ?>" method="post">
+    <form action="<?php echo base_url('dashboard/aksiEditPaket/' . $paket['ID_Paket']) ?>" method="post" enctype="multipart/form-data">
         <table>
             <tr>
                 <td><?php echo form_error('Nama_Paket') ?></td>
@@ -55,15 +55,17 @@
             <tr>
                 <td>Waktu Tour</td>
                 <td>:</td>
-                <td><input type="text" name="Waktu_Tour"></td>
+                <td><input type="text" name="Waktu_Tour" value="<?php echo $paket['Waktu_Tour']; ?>"></td>
+            </tr>
+            <input type="hidden" name="ID_Paket" value="<?php echo $paket['ID_Paket']; ?>"> <!-- Hidden field for ID_Paket -->
+            <input type="hidden" name="existing_image" value="<?php echo $paket['gambar_1']; ?>"> <!-- Hidden field for existing image -->
+            <tr>
+                <td><?php echo form_error('gambar_1') ?></td>
             </tr>
             <tr>
-                <td><?php echo form_error('QR_Code') ?></td>
-            </tr>
-            <tr>
-                <td>QR Code</td>
+                <td>Upload Gambar</td>
                 <td>:</td>
-                <td><input type="text" name="QR_Code" value="<?php echo $paket['QR_Code']; ?>"></td>
+                <td><input type="file" name="gambar_1"></td>
             </tr>
             <tr>
                 <td><button type="submit">Update</button></td>

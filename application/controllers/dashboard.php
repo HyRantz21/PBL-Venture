@@ -13,7 +13,7 @@ class dashboard extends CI_Controller {
     public function index()
     {
         $data['paket_wisata'] = $this->M_paket_wisata->getPaket();
-        $this->load->view('dashboard-beta/test_gambar', $data);
+        $this->load->view('dashboard-beta/paket', $data);
     }
 
     public function viewPaket()
@@ -27,20 +27,15 @@ class dashboard extends CI_Controller {
         $this->load->view('dashboard-beta/v_t_paket');
     }
 
-    public function aksiTambahPaket() 
-{
-    $result = $this->M_paket_wisata->inputPaket();
-    
-    if ($result) {
-        // Data berhasil dimasukkan ke database
-        $this->session->set_flashdata('success', 'Data berhasil dimasukkan ke database');
-        redirect('dashboard/viewPaket');
-    } else {
-        // Gagal memasukkan data ke database
-        $this->session->set_flashdata('error', 'Gagal memasukkan data ke database');
+    public function aksiTambahPaket()
+    {
+        $result = $this->M_paket_wisata->inputPaket();
+        if ($result) {
+            redirect('dashboard/viewPaket');
+        } else {
+            echo "Gagal menambahkan paket wisata";
+        }
     }
-    
-}
 
 
     public function editPaket($id_paket)
@@ -61,10 +56,15 @@ class dashboard extends CI_Controller {
         $this->load->view('dashboard/v_euser', $data);
     }
 
-    public function aksiEditPaket()
+    public function aksiEditPaket($id_paket)
     {
+        // Load model and update data
         $result = $this->M_paket_wisata->updateDataPaket();
-        redirect('dashboard/viewPaket');
+        if ($result) {
+            redirect('dashboard/viewPaket');
+        } else {
+            echo "Gagal memperbarui paket wisata";
+        }
     }
 
     public function aksiEditUser()
@@ -95,5 +95,11 @@ class dashboard extends CI_Controller {
         } else {
             echo "Failed to delete user.";
         }
+    }
+
+    public function test_gambar()
+    {
+        $this->load->view('test_gambar');
+        
     }
 }

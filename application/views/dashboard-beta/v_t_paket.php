@@ -7,7 +7,7 @@
 </head>
 <body>
     <h1>Tambah Paket Wisata</h1>
-    <form action="<?php echo base_url('dashboard/aksiTambahPaket') ?>" method="post">
+    <form action="<?php echo base_url('dashboard/aksiTambahPaket') ?>" method="post" enctype="multipart/form-data">
         <table>
             <tr>
                 <td><?php echo form_error('Nama_Paket') ?></td>
@@ -58,12 +58,12 @@
                 <td><input type="text" name="Waktu_Tour"></td>
             </tr>
             <tr>
-                <td><?php echo form_error('QR_Code') ?></td>
+                <td><?php echo form_error('gambar_1') ?></td>
             </tr>
             <tr>
-                <td>QR Code</td>
+                <td>Upload Gambar</td>
                 <td>:</td>
-                <td><input type="text" name="QR_Code"></td>
+                <td><input type="file" name="gambar_1"></td>
             </tr>
             <tr>
                 <td><button type="submit">Simpan</button></td>
