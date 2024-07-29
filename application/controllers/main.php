@@ -18,7 +18,6 @@ class main extends CI_Controller {
     {
         $data['paket_wisata'] = $this->M_paket_wisata->getPaket();
         $data['user'] = $this->M_user->getUser();
-        $data['wishlist'] = $this->Wishlist_model->get_wishlist();
         $this->load->view('LandingPage.php', $data);
     }
     
