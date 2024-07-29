@@ -293,9 +293,6 @@
     </header>
     <main class="container mb-4">
         <section class="">
-            <form action="" class="searchbar">
-                <input type="text" class="bar" placeholder="Find Your Happiness">
-            </form>
             <div class="section1">
                 <button onclick="openModal('assets/Image/31d037cebdaf4a318b586751e3dc1d397482fd3f.jpg')"><img src="assets/Image/31d037cebdaf4a318b586751e3dc1d397482fd3f.jpg" alt="" class="tImg1"></button>
                 <button onclick="openModal('assets/Image/8c0b5f0914c97c30c94a9cbe3d257f2e3583fc6c.jpg')"><img src="assets/Image/8c0b5f0914c97c30c94a9cbe3d257f2e3583fc6c.jpg" alt="" class="tImg2"></button>
@@ -304,14 +301,14 @@
         </section>
         <section class="layOverview">
             <div class="overview">
-                <h2>Suicide Bomb</h2>
-                <h6>bali, indonesia</h6>
-                <p class="p">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
+            <h2><?= $detail->ID_Paket ?></h2>
+                <h6><?= $detail->Lokasi ?></h6>
+                <p class="p"><?= $detail->Deskripsi ?></p>
             </div>
             <div class="panel">
                 <div class="price">
                     <h2>Price</h3>
-                    <h3 id="pricePerAdult">Rp.100.000</h2>
+                    <h3 id="pricePerAdult">Rp.<?= $detail->Harga ?></h2>
                 </div>
 
                 <div class="formwrap">

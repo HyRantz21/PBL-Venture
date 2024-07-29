@@ -246,7 +246,6 @@
     <main class="container">
         <div class="LayRecomended">
             <?php foreach ($wishlist as $item): ?>
-                
                 <div class="wrapRecomended">
                     <div class="wrapImg">
                         <figure class="img">
@@ -274,6 +273,9 @@
                             <h4><?= $item['Waktu_Tour']; ?> Days</h4>
                             <p><?= $item['Lokasi']; ?></p>
                         </footer>
+                        <a href="<?php echo base_url('ContentCon'); ?>" class="arrowrightButton">
+                            <img src="<?php echo base_url('assets/Icon/arrow-right-square.png'); ?>" alt="" class="ARicon">
+                        </a>
                     </div>
                 </div>
             <?php endforeach; ?>
