@@ -234,6 +234,13 @@
         text-decoration: none;
     }
 
+    .text-kosong{
+        display: flex; 
+        justify-content: center;
+        top: 50%;
+        position: absolute;
+    }
+
 </style>
 <body>
     <header>
@@ -252,6 +259,7 @@
             </div>
         </nav>
     </header>
+        <?php if (!empty($wishlist)): ?>
     <main class="container">
         <div class="LayRecomended">
             <?php foreach ($wishlist as $item): ?>
@@ -282,7 +290,7 @@
                             <h4><?= $item['Waktu_Tour']; ?> Days</h4>
                             <p><?= $item['Lokasi']; ?></p>
                         </footer>
-                        <a href="<?php echo base_url('ContentCon'); ?>" class="arrowrightButton">
+                        <a href="<?php echo base_url('ContentCon/detail/' .$item['ID_Paket']); ?>" class="arrowrightButton">
                             <img src="<?php echo base_url('assets/Icon/arrow-right-square.png'); ?>" alt="" class="ARicon">
                         </a>
                     </div>
@@ -290,6 +298,10 @@
             <?php endforeach; ?>
         </div>
     </main>
+    <?php else: ?>
+        <p class="text-kosong">Wishlist Anda kosong.</p>
+    <?php endif; ?>
+
     <script>
         function removeFromWishlist(packageID) {
             $.ajax({
