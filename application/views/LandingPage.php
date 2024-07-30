@@ -499,7 +499,7 @@
                                 </div>
                                 <p><?php echo $key['Kategori']; ?></p>
                             </footer>
-                            <a href="<?php echo base_url('main/viewContent'); ?>" class="arrowrightButton">
+                            <a href="<?php echo base_url('ContentCon/detail/' .$key['ID_Paket']); ?>" class="arrowrightButton">
                                 <img src="<?php echo base_url('assets/Icon/arrow-right-square.png'); ?>" alt="" class="ARicon">
                             </a>
                         </div>
