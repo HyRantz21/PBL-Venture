@@ -164,4 +164,11 @@ class M_paket_wisata extends CI_Model {
         $this->db->where('ID_Paket', $this->input->post('ID_Paket'));
         return $this->db->update('paket_wisata', $data);
     }
+
+    public function searchPaket($query)
+    {
+        $this->db->like('Nama_Paket', $query);
+        $query = $this->db->get('paket_wisata');
+        return $query->result_array();
+    }
 }

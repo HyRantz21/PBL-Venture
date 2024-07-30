@@ -409,9 +409,12 @@
     <main>
         <section id="carouselExampleInterval" class="container carousel slide" data-bs-ride="carousel">
             <div class="wrapC carousel-inner" style="border-radius: var(--border-radius);">
-                <form class="searchbar" id="searchForm">
-                    <input class="bar" type="search" id="searchBar" placeholder="Search" aria-label="Search">
-                </form>
+            <form class="searchbar" id="searchForm">
+                <input class="bar" type="search" id="searchBar" placeholder="Search" aria-label="Search">
+            </form>
+
+            <div id="sResult"></div> <!-- View untuk menampilkan hasil pencarian -->
+
                 <div class="carousel-item active" data-bs-interval="1000">
                     <a href="#"><img src="<?php echo base_url('assets/Image/31d037cebdaf4a318b586751e3dc1d397482fd3f.jpg'); ?>" class="cImg d-block w-100" alt="..."></a>
                 </div>
@@ -487,7 +490,7 @@
                         </div>
                         <div class="layFooter">
                             <footer class="textFooter">
-                                <h5><?php echo $key['Waktu_Tour'];?>Days</h5>
+                                <h5><?php echo $key['Waktu_Tour'];?> Days</h5>
                                 <p><?php echo $key['Kategori'];?></p>
                             </footer>
                             <a href="<?php echo base_url('ContentCon/detail/' .$key['ID_Paket']); ?>" class="arrowrightButton">
@@ -628,26 +631,18 @@
                 }
             });
         }
-        
         document.getElementById('searchForm').addEventListener('submit', function(event) {
-            event.preventDefault();
-            const query = document.getElementById('searchBar').value.toLowerCase();
-            const results = [];
-            document.querySelectorAll('.wrapRecomended').forEach(function(packageDiv) {
-                if (packageDiv.dataset.packageName.includes(query)) {
-                    results.push(packageDiv.outerHTML);
-                }
-            });
+        event.preventDefault();
+        const query = document.getElementById('searchBar').value.toLowerCase();
+        const url = '<?php echo base_url('main/viewResult'); ?>' + '?query=' + encodeURIComponent(query);
+        window.location.href = url;
+    });
 
-            document.getElementById('searchResults').innerHTML = results.join('');
-            document.getElementById('searchOverlay').style.display = 'flex';
-        });
-
-        document.getElementById('searchOverlay').addEventListener('click', function(event) {
-            if (event.target.id === 'searchOverlay') {
-                this.style.display = 'none';
-            }
-        });
+    document.getElementById('searchOverlay').addEventListener('click', function(event) {
+        if (event.target.id === 'searchOverlay') {
+            this.style.display = 'none';
+        }
+    });
     </script>
     <script>
         function loadPaketByCategory(category) {
@@ -714,7 +709,7 @@
                 loadPaketByCategory(category);
             });
         });
-    </script>
+    </scrip>
     <script>
         function loadPaketByPlace(Place) {
             $.ajax({

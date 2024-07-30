@@ -58,6 +58,14 @@ class main extends CI_Controller {
     {  
         redirect('HistoryCon','refresh');
     }
+
+    public function viewResult()
+    {
+        $query = $this->input->get('query');
+        $data['paket_wisata'] = $this->M_paket_wisata->searchPaket($query);
+        $this->load->view('sResult', $data);
+    }
+
     
 }
 
