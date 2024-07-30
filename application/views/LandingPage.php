@@ -399,31 +399,31 @@
         </section>
 
         <section class="container panel">
-        <article class="Category">
-            <header>
-                <h1 class="textCategory">Category</h1>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-            </header>
-            <div class="layCategory">
-                <a href="#" class="wrapCategory" data-category="Culture">
-                    <div class="text">Culture</div>                               
-                    <img src="<?php echo base_url('assets/Image/village.jpg'); ?>" alt="" class="imgC">
-                </a>
-                <a href="#" class="wrapCategory" data-category="Entertainment">
-                    <div class="text">Entertainment</div>
-                    <img src="<?php echo base_url('assets/Image/village.jpg'); ?>" alt="" class="imgC">
-                </a>
-                <a href="#" class="wrapCategory" data-category="Food">
-                    <div class="text">Food</div>
-                    <img src="<?php echo base_url('assets/Image/village.jpg'); ?>" alt="" class="imgC">
-                </a>
-                <a href="#" class="wrapCategory" data-category="Nature">
-                    <div class="text">Nature</div>
-                    <img src="<?php echo base_url('assets/Image/village.jpg'); ?>" alt="" class="imgC">
-                </a>
-            </div>
-        </article>
-            
+            <article class="Category">
+                <header>
+                    <h1 class="textCategory">Category</h1>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                </header>
+                <div class="layCategory">
+                    <a href="#" class="wrapCategory" data-category="Culture">
+                        <div class="text">Culture</div>                               
+                        <img src="<?php echo base_url('assets/Image/village.jpg'); ?>" alt="" class="imgC">
+                    </a>
+                    <a href="#" class="wrapCategory" data-category="Entertainment">
+                        <div class="text">Entertainment</div>
+                        <img src="<?php echo base_url('assets/Image/village.jpg'); ?>" alt="" class="imgC">
+                    </a>
+                    <a href="#" class="wrapCategory" data-category="Food">
+                        <div class="text">Food</div>
+                        <img src="<?php echo base_url('assets/Image/village.jpg'); ?>" alt="" class="imgC">
+                    </a>
+                    <a href="#" class="wrapCategory" data-category="Nature">
+                        <div class="text">Nature</div>
+                        <img src="<?php echo base_url('assets/Image/village.jpg'); ?>" alt="" class="imgC">
+                    </a>
+                </div>
+            </article>
+                
             <article class="Explore">
                 <header>
                     <h1 class="textExplore">Explore</h1>
@@ -593,15 +593,14 @@
                 success: function(response) {
                     try {
                         const paketWisata = JSON.parse(response);
-                        const recomendedContainer = document.querySelector('.LayRecomended');
+                        const recomendedContainer = document.querySelector('.LayExplore');
                         recomendedContainer.innerHTML = '';
-
                         paketWisata.forEach(function(paket) {
                             const paketHtml = `
                                 <div class="wrapRecomended" data-package-name="${paket.Nama_Paket.toLowerCase()}">
                                     <div class="wrapImg">
                                         <figure class="img">
-                                            <img src="<?php echo base_url('assets/Image/ea545f3990f88524a9472220454ab63bedc0b6aa.jpg'); ?>" alt="" class="imgR">
+                                            <img src="<?php echo $key['gambar_1']; ?>" alt="" class="imgR">
                                         </figure>
                                     </div>
                                     <div class="layHeader">

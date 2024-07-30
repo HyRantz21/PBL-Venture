@@ -10,6 +10,13 @@ class M_paket_wisata extends CI_Model {
 
     }
 
+    public function getPaketByCategory($category)
+    {
+        $this->db->where('Kategori', $category);
+        $query = $this->db->get('paket_wisata');
+        return $query->result_array();
+    }
+
     public function getPaket()
     {
         $this->db->select('paket_wisata.*');
