@@ -307,7 +307,7 @@
                     <a class="nav-item" href="<?php echo base_url("WishlistCon") ?>"><img src="" alt="">Wishlist</a>      
                     <a class="nav-item" href="<?php echo base_url("HistoryCon") ?>"><img src="" alt="">History</a>
                     <a class="nav-item" href="<?php echo base_url('ReservationCon'); ?>"><img src="" alt="">Reservation</a>
-                    <a class="nav-item" href="#"><img src="" alt="">Contact Us</a>
+                    <a class="nav-item" href="<?php echo base_url('main/viewContact'); ?>"><img src="" alt="">Contact Us</a>
                     <a class="nav-item" href="<?php echo base_url("profile/")?>"><img src="" alt="">Profile</a>
                 </div>
             </div>
