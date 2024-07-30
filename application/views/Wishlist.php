@@ -17,7 +17,7 @@
         --main-padding: 10px;
         --font-size-large: 50px;
         --font-size-medium: 20px;
-        --font-size-small: 10px;
+        --font-size-small: 15px;
     }
 
     body {
@@ -89,23 +89,28 @@
     /*History*/
     .LayRecomended{
         display: grid;
+        grid-template-columns: 25% 25% 25% 25% ;
         gap: 10px 10px;
     }
     .wrapRecomended{
         width: 100%; 
-        max-width: 290px;
+        max-width: 320px;
         box-shadow: 1px 1px 5px 0px rgba(0, 0, 0, 0.5);
         border-radius: var(--border-radius);
-        min-height: 400px;
+        min-height: 440px;
         padding-bottom: 15px;
     }
     .wrapImg{
+        padding-right: 10px;
+        padding-left: 10px;
+        width: 100%;
+        max-width: 360px;
+        height: 200px;
         display: flex;
         justify-content: center;
     }
     .img{
-        padding-right: 10px;
-        padding-left: 10px;
+        width: 330px;
         height: 200px;
     }
     .imgR {
@@ -115,12 +120,13 @@
         width: 100%;
         border-radius: var(--border-radius);
     }
+
     .layHeader {
-        max-width: 460px;
+        max-width: 360px;
         width: 100%;
         padding-right: 20px;
         padding-left: 20px;
-        margin-top: 5px;
+        margin-top: 25px;
         display: grid;
         grid-template-columns: 1fr auto; 
         align-items: start; 
@@ -134,12 +140,15 @@
     }
 
     .titleR p {
-        padding-right: 20px;
         word-break:keep-all;
         margin: 0;
         font-size: var(--font-size-small);
         color: var(--main-text-color);
         font-weight: var(--main-font-weight);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 200px; 
     }
 
     .bookmarkButton {
@@ -150,13 +159,13 @@
     }
 
     .bookmarkButton .BMicon {
-        width: 40px;
-        height: 40px;
+        width: 45px;
+        height: 45px;
         margin-top: 5px;
     }
 
     .bookmarkButton:hover .BMicon{
-        content: url(assets/Icon/bookmark-fill.png);
+        content: url(<?php echo base_url('assets/Icon/bookmark-fill.png')?>);
     }
 
     .layPrice{
@@ -164,12 +173,11 @@
         padding-left: 20px;
 
     }
-    .layPrice h6{
+    .layPrice h5{
         margin: 0;
-        font-weight: 700;
     }
     .layPrice p{
-        padding-right: 20px;
+        padding-right: 80px;
         word-break:break-all;
         margin: 0;
         font-size: var(--font-size-small);
@@ -178,8 +186,10 @@
     }
 
     .layFooter{
-        margin-top: 20px;
+        max-width: 460px;
+        width: 100%;
         padding-right: 20px;
+        padding-left: 20px;
         padding-left: 20px;
         display: grid;
         grid-template-columns: 1fr auto; 
@@ -187,14 +197,13 @@
         column-gap: 20px;
     }
 
-    .layFooter h4{
+    .layFooter h5{
         margin: 0;
         margin-top: 10px;
-        font-weight: 700;
     }
 
     .layFooter p{
-        padding-right: 20px;
+        padding-right: 80px;
         word-break:break-all;
         margin: 0;
         font-size: var(--font-size-small);
@@ -203,24 +212,23 @@
     }
 
     .arrowrightButton {
-        margin-top: 10px;
         background: none;
         border: none;
-        cursor: button;
+        cursor: pointer;
         padding: 0;
     }
 
     .arrowrightButton .ARicon{
-        width: 40px;
-        height: 40px;
+        width: 55px;
+        height: 55px;
         transition: var(--transition-speed) ease-in-out;
     }
 
     .arrowrightButton:hover .ARicon{
-        content: url('assets/Icon/arrow-right-square-fill.png');
+        content: url(<?php echo base_url('assets/Icon/arrow-right-square-fill.png')?>);
         transition: var(--transition-speed) ease-in-out;
     }
-    
+
     /*Universal*/
     .link{
         text-decoration: none;
@@ -274,7 +282,7 @@
                         </form>
                     </div>
                     <div class="layPrice">
-                        <h6 class="textPrice">Rp.<?= number_format($item['Harga'], 0, ',', '.'); ?></h6>
+                        <h5 class="textPrice">Rp.<?= number_format($item['Harga'], 0, ',', '.'); ?></h5>
                         <p>Starting Price</p>
                     </div>
                     <div class="layFooter">

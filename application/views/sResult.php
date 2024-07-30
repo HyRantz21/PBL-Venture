@@ -292,7 +292,7 @@
                         <div class="wrapExplore" data-package-name="<?php echo strtolower($key['Nama_Paket']); ?>">
                         <div class="wrapImg">
                             <figure class="img">
-                                <img src="<?php echo base_url('assets/Image/ea545f3990f88524a9472220454ab63bedc0b6aa.jpg'); ?>" alt="" class="imgR">
+                            <img src="<?php echo base_url($key['gambar_1']); ?>" alt="" class="imgR">
                             </figure>
                         </div>
                         <div class="layHeader">
@@ -311,10 +311,10 @@
                         </div>
                         <div class="layFooter">
                             <footer class="textFooter">
-                                <h5><?php echo $key['Waktu_Tour'];?>Days</h5>
+                                <h5><?php echo $key['Waktu_Tour'];?> Days</h5>
                                 <p><?php echo $key['Kategori'];?></p>
                             </footer>
-                            <a href="<?php echo base_url('main/viewContent'); ?>" class="arrowrightButton">
+                            <a href="<?php echo base_url('ContentCon/detail/' .$key['ID_Paket']); ?>" class="arrowrightButton">
                                 <img src="<?php echo base_url('assets/Icon/arrow-right-square.png'); ?>" alt="" class="ARicon">
                             </a>
                         </div>
