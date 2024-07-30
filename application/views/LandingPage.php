@@ -97,6 +97,11 @@
         margin-top: 25px;
     }
 
+    .layCategory{
+        display: flex;
+        justify-content: space-evenly;
+    }
+
     .wrapCategory {
         border: none;
         border-radius: var(--border-radius);
@@ -543,39 +548,39 @@
                 </header>
                 <div class="layPlace">
                     <a href="#" class="wrapPlace" data-Place="Kabupaten Badung">
-                        <div class="text">Kabupaten Badung</div>
+                        <div class="text">Badung</div>
                         <img src="<?php echo base_url('assets/Image/village.jpg'); ?>" alt="" class="imgC">
                     </a>
                     <a href="#" class="wrapPlace" data-Place="Kabupaten Bangli">
-                        <div class="text">Kabupaten Bangli</div>
+                        <div class="text">Bangli</div>
                         <img src="<?php echo base_url('assets/Image/village.jpg'); ?>" alt="" class="imgC">
                     </a>
                     <a href="#" class="wrapPlace" data-Place="Kabupaten Buleleng">
-                        <div class="text">Kabupaten Buleleng</div>
+                        <div class="text">Buleleng</div>
                         <img src="<?php echo base_url('assets/Image/village.jpg'); ?>" alt="" class="imgC">
                     </a>
                     <a href="#" class="wrapPlace" data-Place="Kabupaten Gianyar">
-                        <div class="text">Kabupaten Gianyar</div>
+                        <div class="text">Gianyar</div>
                         <img src="<?php echo base_url('assets/Image/village.jpg'); ?>" alt="" class="imgC">
                     </a>
                     <a href="#" class="wrapPlace" data-Place="Kabupaten Jembrana">
-                        <div class="text">Kabupaten Jembrana</div>
+                        <div class="text">Jembrana</div>
                         <img src="<?php echo base_url('assets/Image/village.jpg'); ?>" alt="" class="imgC">
                     </a>
                     <a href="#" class="wrapPlace" data-Place="Kabupaten Karangasem">
-                        <div class="text">Kabupaten Karangasem</div>
+                        <div class="text">Karangasem</div>
                         <img src="<?php echo base_url('assets/Image/village.jpg'); ?>" alt="" class="imgC">
                     </a>
                     <a href="#" class="wrapPlace" data-Place="Kabupaten Klungkung">
-                        <div class="text">Kabupaten Klungkung</div>
+                        <div class="text">Klungkung</div>
                         <img src="<?php echo base_url('assets/Image/village.jpg'); ?>" alt="" class="imgC">
                     </a>
                     <a href="#" class="wrapPlace" data-Place="Kabupaten Tabanan">
-                        <div class="text">Kabupaten Tabanan</div>
+                        <div class="text">Tabanan</div>
                         <img src="<?php echo base_url('assets/Image/village.jpg'); ?>" alt="" class="imgC">
                     </a>
                     <a href="#" class="wrapPlace" data-Place="Kota Denpasar">
-                        <div class="text">Kota Denpasar</div>
+                        <div class="text">Denpasar</div>
                         <img src="<?php echo base_url('assets/Image/village.jpg'); ?>" alt="" class="imgC">
                     </a>
                 </div>
@@ -598,15 +603,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
-
-        document.addEventListener('DOMContentLoaded', () => {
-            const layCategory = document.querySelector('.layCategory');
-
-            layCategory.addEventListener('wheel', (event) => {
-                event.preventDefault();
-                layCategory.scrollLeft += event.deltaY; 
-            });
-        });
 
         document.addEventListener('DOMContentLoaded', () => {
             const layCategory = document.querySelector('.layPlace');
