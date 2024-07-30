@@ -229,7 +229,7 @@
     .text-kosong{
         display: flex; 
         justify-content: center;
-        align-items: center;
+        top: 50%;
         position: absolute;
     }
 
@@ -258,11 +258,7 @@
                 <div class="wrapRecomended">
                     <div class="wrapImg">
                         <figure class="img">
-<<<<<<< Updated upstream
-                            <img src="<?php echo base_url($item['gambar_1']); ?>" alt="" class="imgR">
-=======
                             <img src="<?php echo base_url($item['gambar_1']); ?>" alt="" class="imgR">                        
->>>>>>> Stashed changes
                         </figure>
                     </div>
                     <div class="layHeader">
