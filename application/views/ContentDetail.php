@@ -326,7 +326,6 @@
                     <h2>Price</h2>
                     <h3 id="pricePerAdult">Rp.<?= $detail->Harga ?></h3>
                 </div>
-                
                 <div class="formwrap">
                     <div class="max">
                         <p>Maximum: <?= $detail->max ?></p>
@@ -339,9 +338,7 @@
                         <img src="assets/Icon/calendar3.png" alt="" class="calendar">
                         <input type="date" id="date">
                     </div>
-                    
                 </div>
-
                 <div class="laybtn">
                     <button class="order" onclick="displayTotal()">Check Reservation</button>
                 </div>
@@ -363,7 +360,7 @@
                         <button type="submit" class="pay">Confirm</button>
                     </form>
                 </div>
-            </div>
+            </div>        
         </section>
     </main>
     <script>
@@ -411,7 +408,7 @@
             const numberOfAdults = adultInput.value;
 
             const totalPrice = numberOfAdults * pricePerAdult;
-            document.getElementById('totalPrice').textContent = Rp. ${totalPrice.toLocaleString('id-ID')};
+            document.getElementById('totalPrice').textContent = `Rp. ${totalPrice.toLocaleString('id-ID')}`;
         }
 
         function displayTotal() {
@@ -427,9 +424,9 @@
             const orderTotalPrice = document.getElementById('orderTotalPrice');
             const orderDate = document.getElementById('orderDate');
 
-            orderAdults.textContent = Number of Adults: ${numberOfAdults};
-            orderTotalPrice.textContent = Total Price: Rp. ${totalPrice.toLocaleString('id-ID')};
-            orderDate.textContent = Reservation Date: ${selectedDate};
+            orderAdults.textContent = `Number of Adults: ${numberOfAdults}`;
+            orderTotalPrice.textContent = `Total Price: Rp. ${totalPrice.toLocaleString('id-ID')}`;
+            orderDate.textContent = `Reservation Date: ${selectedDate}`;
             orderPanel.style.display = 'block';
         }
 
