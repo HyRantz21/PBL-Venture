@@ -16,6 +16,13 @@ class M_paket_wisata extends CI_Model {
         $query = $this->db->get('paket_wisata');
         return $query->result_array();
     }
+    
+    public function getPaketByPlace($Lokasi)
+    {
+        $this->db->where('Lokasi', $Lokasi);
+        $query = $this->db->get('paket_wisata');
+        return $query->result_array();
+    }
 
     public function getPaket()
     {

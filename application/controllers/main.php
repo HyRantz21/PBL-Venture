@@ -25,6 +25,14 @@ class main extends CI_Controller {
         $data['paket_wisata'] = $this->M_paket_wisata->getPaketByCategory($category);
         echo json_encode($data['paket_wisata']);
     }
+
+    public function getPaketByPlace() {
+        $Place = $this->input->post('Place');
+        $this->load->model('M_paket_wisata');
+        $data['paket_wisata'] = $this->M_paket_wisata->getPaketByPlace($Place);
+        
+        echo json_encode($data['paket_wisata']);
+    }
     
     public function viewContent()
     {
