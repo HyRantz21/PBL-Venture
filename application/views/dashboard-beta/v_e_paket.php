@@ -81,6 +81,17 @@
             <input type="hidden" name="ID_Paket" value="<?php echo $paket['ID_Paket']; ?>"> <!-- Hidden field for ID_Paket -->
             <input type="hidden" name="existing_image" value="<?php echo $paket['gambar_1']; ?>"> <!-- Hidden field for existing image -->
             <tr>
+                <td><?php echo form_error('max') ?></td>
+            </tr>
+            <tr>
+                <td>Harga</td>
+                <td>:</td>
+                <td><input type="number" name="max" value="<?php echo $paket['max']; ?>"></td>
+            </tr>
+            <tr>
+                <td><?php echo form_error('Lokasi') ?></td>
+            </tr>
+            <tr>
                 <td><?php echo form_error('gambar_1') ?></td>
             </tr>
             <tr>

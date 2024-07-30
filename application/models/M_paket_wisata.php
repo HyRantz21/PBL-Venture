@@ -60,6 +60,7 @@ class M_paket_wisata extends CI_Model {
             'Lokasi' => $this->input->post('Lokasi'),
             'Deskripsi' => $this->input->post('Deskripsi'),
             'Waktu_Tour' => $this->input->post('Waktu_Tour'),
+            'max' => $this->input->post('max'),
             'gambar_1' => $path, // Simpan path gambar
         );
 
@@ -119,6 +120,7 @@ class M_paket_wisata extends CI_Model {
             'Lokasi' => $this->input->post('Lokasi'),
             'Deskripsi' => $this->input->post('Deskripsi'),
             'Waktu_Tour' => $this->input->post('Waktu_Tour'),
+            'max' => $this->input->post('max'),
             'gambar_1' => $image_path, // Path gambar yang diupdate atau gambar yang ada
         );
 

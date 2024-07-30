@@ -240,6 +240,7 @@
                                         <td>Lokasi</td>
                                         <td>Deskripsi</td>
                                         <td>Waktu Tour</td>
+                                        <td>Pengunjung Maks</td>
                                         <td>Gambar 1</td>
                                         <td>Aksi</td>
                                     </tr>
@@ -257,6 +258,7 @@
                                         <td><?php echo $key['Lokasi']; ?></td>
                                         <td><?php echo $key['Deskripsi']; ?></td>
                                         <td><?php echo $key['Waktu_Tour']; ?></td>
+                                        <td><?php echo $key['max']; ?></td>
                                         <td>
                                             <?php if (!empty($key['gambar_1']) || file_exists('C:/xampp/htdocs/PBL-Venture/assets/Image' . $key['gambar_1'])): ?>
                                                 <!-- Display uploaded image -->
@@ -308,6 +310,7 @@
                                         <td><?php echo htmlspecialchars($key['Deskripsi']); ?></td>
                                         <td>
                                             <a href="<?php echo base_url('dashboard/confirmReservation/'.$key['ID_Reservasi']); ?>" class="btn btn-success">Confirm</a>
+                                            <a href="<?php echo base_url('dashboard/deleteReservation/'.$key['ID_Reservasi']); ?>" class="btn btn-danger">Denied</a>
                                         </td>
                                     </tr>
                                     <?php 
