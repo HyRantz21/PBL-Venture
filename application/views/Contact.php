@@ -127,7 +127,7 @@
     <div class="m1 container">
         <main>
             <div class="section">
-                <img class="img" src="<?php echo base_url('assets/Image/contact_us.jpg'); ?>" alt="Contact Us">
+            <img src="<?php echo base_url('assets/Image/contact_us.jpg'); ?>" alt="Contact Us">
                 <h1>Contact Us</h1>
                 <div class="contact-info">
                     <i class="fas fa-envelope"></i>
