@@ -53,5 +53,6 @@ $route['default_controller'] = 'auth/login'; //controller untuk landing page
 $route['dashboard'] = 'dashboard';
 $route['dashboard/reservations'] = 'dashboard/reservations';
 $route['dashboard/confirmReservation/(:num)'] = 'dashboard/confirmReservation/$1';
+$route['search'] = 'SearchController/index';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
