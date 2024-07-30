@@ -97,24 +97,45 @@
         margin-top: 25px;
     }
 
-    .layCategory {
-        overflow: auto;
-        white-space: nowrap;
-        scrollbar-width: none;
-        -ms-overflow-style: none;
-    }
-
-    .layCategory::-webkit-scrollbar {
-        display: none;
-    }
-
     .wrapCategory {
+        border: none;
         border-radius: var(--border-radius);
         display: inline-block;
         width: 300px;
         height: 200px;
-        margin: 10px;
         box-shadow: 1px 1px 5px 0px rgba(0, 0, 0, 0.5);
+        position: relative;
+        overflow: hidden; 
+        padding: 0;
+        margin: 5px;
+    }
+
+    .imgC {
+        object-fit: cover;
+        height: 100%;
+        width: 100%;
+        border-radius: var(--border-radius);
+    }
+
+    .wrapCategory .text {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: white;
+        font-weight:700;
+        font-size: 30px; 
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); 
+        z-index: 1;
+    }
+    
+    .wrapCategory .imgR {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        position: absolute;
+        top: 0;
+        left: 0;
     }
 
     /*Explore*/
@@ -333,7 +354,6 @@
     .time{
         display: flex;
     }
-
 </style>
 
 <body>
@@ -358,13 +378,13 @@
                 <form class="searchbar" id="searchForm">
                     <input class="bar" type="search" id="searchBar" placeholder="Search" aria-label="Search">
                 </form>
-                <div class="carousel-item active" data-bs-interval="10000">
+                <div class="carousel-item active" data-bs-interval="1000">
                     <a href="#"><img src="<?php echo base_url('assets/Image/31d037cebdaf4a318b586751e3dc1d397482fd3f.jpg'); ?>" class="cImg d-block w-100" alt="..."></a>
                 </div>
-                <div class="carousel-item" data-bs-interval="2000">
+                <div class="carousel-item" data-bs-interval="5000">
                     <img src="<?php echo base_url('assets/Image/6435b6b4474dcbc990237c91c45f8d90868948c4.jpg'); ?>" class="cImg d-block w-100" alt="...">
                 </div>
-                <div class="carousel-item">
+                <div class="carousel-item" data-bs-interval="10000">
                     <img src="<?php echo base_url('assets/Image/8c0b5f0914c97c30c94a9cbe3d257f2e3583fc6c.jpg'); ?>" class="cImg d-block w-100" alt="...">
                 </div>
             </div>
@@ -385,7 +405,6 @@
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
             </header>
             <div class="layCategory">
-<<<<<<< HEAD
                 <a href="#" class="wrapCategory" data-category="Culture">
                     <div class="text">Culture</div>                               
                     <img src="<?php echo base_url('assets/Image/village.jpg'); ?>" alt="" class="imgC">
@@ -402,20 +421,6 @@
                     <div class="text">Nature</div>
                     <img src="<?php echo base_url('assets/Image/village.jpg'); ?>" alt="" class="imgC">
                 </a>
-=======
-                <a href="#" class="wrapCategory">                                
-                <img src="<?php echo base_url('assets/Image/village.jpg'); ?>" alt="" class="imgR">
-                Culture</a>
-                <a href="#" class="wrapCategory">
-                <img src="<?php echo base_url('assets/Image/village.jpg'); ?>" alt="" class="imgR">
-                Sport</a>
-                <a href="#" class="wrapCategory">
-                <img src="<?php echo base_url('assets/Image/village.jpg'); ?>" alt="" class="imgR">
-                Food</a>
-                <a href="#" class="wrapCategory">
-                <img src="<?php echo base_url('assets/Image/village.jpg'); ?>" alt="" class="imgR">
-                Nature</a>
->>>>>>> 4101a4b1028ed23e921259c42b89ad4a700c61ce
             </div>
         </article>
             
@@ -448,7 +453,7 @@
                         </div>
                         <div class="layFooter">
                             <footer class="textFooter">
-                                <h5><?php echo $key['Waktu_Tour'];?> Days</h5>
+                                <h5><?php echo $key['Waktu_Tour'];?>Days</h5>
                                 <p><?php echo $key['Kategori'];?></p>
                             </footer>
                             <a href="<?php echo base_url('ContentCon'); ?>" class="arrowrightButton">
@@ -489,7 +494,8 @@
                         <div class="layFooter">
                             <footer class="textFooter">
                                 <div class="time">
-                                    <h5><?php echo $key['Waktu_Tour'];?> Days</h5>
+                                    <h5><?php echo $key['Waktu_Tour'];?></h5>
+                                    <h5 class="dtxt">Days</h5>
                                 </div>
                                 <p><?php echo $key['Kategori']; ?></p>
                             </footer>
@@ -585,48 +591,52 @@
                 type: 'POST',
                 data: { category: category },
                 success: function(response) {
-                    const paketWisata = JSON.parse(response);
-                    const recomendedContainer = document.querySelector('.LayRecomended');
-                    recomendedContainer.innerHTML = '';
+                    try {
+                        const paketWisata = JSON.parse(response);
+                        const recomendedContainer = document.querySelector('.LayRecomended');
+                        recomendedContainer.innerHTML = '';
 
-                    paketWisata.forEach(function(paket) {
-                        const paketHtml = `
-                            <div class="wrapRecomended" data-package-name="${paket.Nama_Paket.toLowerCase()}">
-                                <div class="wrapImg">
-                                    <figure class="img">
-                                        <img src="<?php echo base_url('assets/Image/ea545f3990f88524a9472220454ab63bedc0b6aa.jpg'); ?>" alt="" class="imgR">
-                                    </figure>
-                                </div>
-                                <div class="layHeader">
-                                    <header class="titleR">
-                                        <h3>${paket.Nama_Paket}</h3>
-                                        <p>${paket.Lokasi}</p>
-                                        <p>${paket.Deskripsi}</p>
-                                    </header>
-                                    <button class="bookmarkButton" id="addWishlistButton${paket.ID_Paket}" onclick="addToWishlist('${paket.Nama_Paket}', 'addWishlistButton${paket.ID_Paket}')">
-                                        <img src="<?php echo base_url('assets/Icon/bookmark.png'); ?>" alt="Bookmark" class="BMicon">
-                                    </button>
-                                </div>
-                                <div class="layPrice">
-                                    <h5 class="textPrice">Rp.${parseInt(paket.Harga).toLocaleString('id-ID', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</h5>
-                                    <p>Starting Price</p>
-                                </div>
-                                <div class="layFooter">
-                                    <footer class="textFooter">
-                                        <div class="time">
-                                            <h5>${paket.Waktu_Tour}</h5>
-                                            <h5 class="dtxt">Days</h5>
-                                        </div>
-                                        <p>${paket.Kategori}</p>
-                                    </footer>
-                                    <a href="<?php echo base_url('main/viewContent'); ?>" class="arrowrightButton">
-                                        <img src="<?php echo base_url('assets/Icon/arrow-right-square.png'); ?>" alt="" class="ARicon">
-                                    </a>
-                                </div>
-                            </div>
-                        `;
-                        recomendedContainer.innerHTML += paketHtml;
-                    });
+                        paketWisata.forEach(function(paket) {
+                            const paketHtml = `
+                                <div class="wrapRecomended" data-package-name="${paket.Nama_Paket.toLowerCase()}">
+                                    <div class="wrapImg">
+                                        <figure class="img">
+                                            <img src="<?php echo base_url('assets/Image/ea545f3990f88524a9472220454ab63bedc0b6aa.jpg'); ?>" alt="" class="imgR">
+                                        </figure>
+                                    </div>
+                                    <div class="layHeader">
+                                        <header class="titleR">
+                                            <h3>${paket.Nama_Paket}</h3>
+                                            <p>${paket.Lokasi}</p>
+                                            <p>${paket.Deskripsi}</p>
+                                        </header>
+                                        <button class="bookmarkButton" id="addWishlistButton${paket.ID_Paket}" onclick="addToWishlist('${paket.Nama_Paket}', 'addWishlistButton${paket.ID_Paket}')">
+                                            <img src="<?php echo base_url('assets/Icon/bookmark.png'); ?>" alt="Bookmark" class="BMicon">
+                                        </button>
+                                    </div>
+                                    <div class="layPrice">
+                                        <h5 class="textPrice">Rp.${parseInt(paket.Harga).toLocaleString('id-ID', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</h5>
+                                        <p>Starting Price</p>
+                                    </div>
+                                    <div class="layFooter">
+                                        <footer class="textFooter">
+                                            <div class="time">
+                                                <h5>${paket.Waktu_Tour}</h5>
+                                                <h5 class="dtxt">Days</h5>
+                                            </div>
+                                            <p>${paket.Kategori}</p>
+                                        </footer>
+                                        <a href="<?php echo base_url('main/viewContent'); ?>" class="arrowrightButton">
+                                            <img src="<?php echo base_url('assets/Icon/arrow-right-square.png'); ?>" alt="" class="ARicon">
+                                        </a>
+                                    </div>
+                                </div>`;
+                            recomendedContainer.innerHTML += paketHtml;
+                        });
+                    } catch (error) {
+                        console.error('Error parsing JSON:', error);
+                        alert('Error loading packages');
+                    }
                 },
                 error: function() {
                     alert('Error loading packages');
@@ -641,6 +651,7 @@
                 loadPaketByCategory(category);
             });
         });
+
     </script>
 </body>
 </html>
