@@ -17,14 +17,24 @@ class WishlistCon extends CI_Controller {
 
     public function add() {
         $userID = $this->session->userdata('ID_User'); // Assuming you store the user ID in session
-        $packageName = $this->input->post('Nama_Paket');
+        $packageName = $this->input->post('ID_Paket');
+        
+        if (!$userID || !$packageName) {
+            echo 'User ID or Package Name is missing';
+            return;
+        }
+        
         $packageID = $this->Wishlist_model->get_package_id($packageName);
-
+    
         if ($packageID) {
-            $this->Wishlist_model->add_to_wishlist($userID, $packageID);
-            echo 'Produk berhasil ditambahkan ke wishlist';
+            $added = $this->Wishlist_model->add_to_wishlist($userID, $packageID);
+            if ($added) {
+                echo 'Produk berhasil ditambahkan ke wishlist';
+            } else {
+                echo 'Error menambahkan produk ke wishlist';
+            }
         } else {
-            echo 'Error menambahkan produk ke wishlist';
+            echo 'Package ID not found';
         }
     }
 
