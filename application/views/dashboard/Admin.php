@@ -289,39 +289,32 @@
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                    <thead>
+                                <thead>
                                     <tr>
-                                        <td>No</td>
-                                        <td>Nama User</td>
-                                        <td>Nama Paket</td>
-                                        <td>Banyak Pengunjung</td>
-                                        <td>total Harga</td>
-                                        <td>Aksi</td>
+                                        <th>No</th>
+                                        <th>User Name</th>
+                                        <th>Package Name</th>
+                                        <th>Action</th>
                                     </tr>
                                     </thead>
-                                    <tfoot>
-                                    </tfoot>
                                     <tbody>
                                     <?php 
-                                        $no = 1; // Initialize the counter
-                                        foreach ($user as $key): 
+                                        $no = 1;
+                                        foreach ($reservasi as $key): 
                                     ?>
                                     <tr>
-                                        <td><?php echo $no; ?></td> <!-- Display the counter -->
+                                        <td><?php echo $no; ?></td>
                                         <td><?php echo htmlspecialchars($key['Full_Name']); ?></td>
-                                        <td><?php echo htmlspecialchars($key['Nama_Paket']); ?></td>
-                                        <td><?php echo htmlspecialchars($key['Banyak_Pengunjung']); ?></td>
-                                        <td><?php echo htmlspecialchars($key['Total_Harga']); ?></td>
+                                        <td><?php echo htmlspecialchars($key['Deskripsi']); ?></td>
                                         <td>
-                                            <a href="<?php echo base_url(''.$key['ID_User']); ?>">Confirm</a>
-                                            <a href="<?php echo base_url(''.$key['ID_User']); ?>">Denied</a>
+                                            <a href="<?php echo base_url('dashboard/confirmReservation/'.$key['ID_Reservasi']); ?>" class="btn btn-success">Confirm</a>
                                         </td>
                                     </tr>
                                     <?php 
-                                        $no++; // Increment the counter
+                                        $no++;
                                         endforeach;
                                     ?>
-                            </tbody>
+                                    </tbody>
                                 </table>
                             </div>
                         </div>
@@ -335,10 +328,14 @@
                         <div class="card-body">
                             <div class="table-responsive">
                                 <h1>Tambah Paket Wisata</h1>
-                                <form action="<?php echo base_url('dashboard/aksiTambahPaket') ?>" method="post">
-                                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                <form action="<?php echo base_url('dashboard/aksiTambahPaket') ?>" method="post" enctype="multipart/form-data">
+                                    <table>
+                                        <tr>
+                                            <td><?php echo form_error('Nama_Paket') ?></td>
+                                        </tr>
                                         <tr>
                                             <td>Nama Paket</td>
+                                            <td>:</td>
                                             <td><input type="text" name="Nama_Paket"></td>
                                         </tr>
                                         <tr>
@@ -346,13 +343,22 @@
                                         </tr>
                                         <tr>
                                             <td>Kategori</td>
-                                            <td><input type="text" name="Kategori"></td>
+                                            <td>:</td>
+                                            <td>
+                                                <select name="Kategori">
+                                                    <option value="entertainment">Entertainment</option>
+                                                    <option value="food">Food</option>
+                                                    <option value="culture">Culture</option>
+                                                    <option value="nature">Nature</option>
+                                                </select>
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td><?php echo form_error('Harga') ?></td>
                                         </tr>
                                         <tr>
                                             <td>Harga</td>
+                                            <td>:</td>
                                             <td><input type="number" name="Harga"></td>
                                         </tr>
                                         <tr>
@@ -360,13 +366,27 @@
                                         </tr>
                                         <tr>
                                             <td>Lokasi</td>
-                                            <td><input type="text" name="Lokasi"></td>
+                                            <td>:</td>
+                                            <td>
+                                                <select name="Lokasi">
+                                                    <option value="Badung">Kabupaten Badung</option>
+                                                    <option value="Bangli">Kabupaten Bangli</option>
+                                                    <option value="Buleleng">Kabupaten Buleleng</option>
+                                                    <option value="Gianyar">Kabupaten Gianyar</option>
+                                                    <option value="Jembrana">Kabupaten Jembrana</option>
+                                                    <option value="Karangasem">Kabupaten Karangasem</option>
+                                                    <option value="Klungkung">Kabupaten Klungkung</option>
+                                                    <option value="Tabanan">Kabupaten Tabanan</option>
+                                                    <option value="Denpasar">Kota Denpasar</option>
+                                                </select>
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td><?php echo form_error('Deskripsi') ?></td>
                                         </tr>
                                         <tr>
                                             <td>Deskripsi</td>
+                                            <td>:</td>
                                             <td><textarea name="Deskripsi"></textarea></td>
                                         </tr>
                                         <tr>
@@ -374,30 +394,24 @@
                                         </tr>
                                         <tr>
                                             <td>Waktu Tour</td>
+                                            <td>:</td>
                                             <td><input type="text" name="Waktu_Tour"></td>
                                         </tr>
                                         <tr>
-                                            <td><?php echo form_error('QR_Code') ?></td>
+                                            <td>Pengunjung Maskimal</td>
+                                            <td>:</td>
+                                            <td><input type="number" name="max"></td>
                                         </tr>
                                         <tr>
-                                            <td>Gambar</td>
-                                            <td><input type="text" name="QR_Code"></td>
+                                            <td><?php echo form_error('gambar_1') ?></td>
                                         </tr>
                                         <tr>
-                                            <td><?php echo form_error('ID_Perusahaan') ?></td>
+                                            <td>Upload Gambar</td>
+                                            <td>:</td>
+                                            <td><input type="file" name="gambar_1"></td>
                                         </tr>
                                         <tr>
-                                            <td>Penyedia</td>
-                                            <td>
-                                                <select name="ID_Perusahaan">
-                                                    <?php foreach ($perusahaan as $row): ?>
-                                                        <option value="<?php echo $row['ID_Perusahaan']; ?>"><?php echo $row['Nama_Perusahaan']; ?></option>
-                                                    <?php endforeach; ?>
-                                                </select>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td><button type="submit" class="btn-primary p-2">Simpan</button></td>
+                                            <td><button type="submit">Simpan</button></td>
                                         </tr>
                                     </table>
                                 </form>
