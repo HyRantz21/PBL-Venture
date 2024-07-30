@@ -33,8 +33,13 @@ class Wishlist_model extends CI_Model {
             'ID_User' => $userID,
             'ID_Paket' => $packageID
         );
-
-        return $this->db->insert('wishlist', $data);
+    
+        if ($this->db->insert('wishlist', $data)) {
+            return true;
+        } else {
+            log_message('error', 'Error inserting data into wishlist: ' . $this->db->_error_message());
+            return false;
+        }
     }
 
     public function remove_from_wishlist($userID, $packageID) {
