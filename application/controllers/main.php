@@ -51,7 +51,7 @@ class main extends CI_Controller {
 
     public function viewContact()
     {
-        $this->load->view('Wishlist.php');
+        $this->load->view('Contact.php');
     }
 
     public function viewHistory()
