@@ -84,7 +84,7 @@
                 <td><?php echo form_error('max') ?></td>
             </tr>
             <tr>
-                <td>Harga</td>
+                <td>Maksimal Pengunjung</td>
                 <td>:</td>
                 <td><input type="number" name="max" value="<?php echo $paket['max']; ?>"></td>
             </tr>
