@@ -414,7 +414,7 @@
                     <img src="<?php echo base_url('assets/Image/village.jpg'); ?>" alt="" class="imgC">
                 </a>
                 <a href="#" class="wrapCategory" data-category="Food">
-                    <div class="text">Food</div>
+                    <div class="text">Food</div>    
                     <img src="<?php echo base_url('assets/Image/village.jpg'); ?>" alt="" class="imgC">
                 </a>
                 <a href="#" class="wrapCategory" data-category="Nature">
