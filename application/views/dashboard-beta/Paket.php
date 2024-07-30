@@ -64,17 +64,17 @@
                     <span>Components</span>
                 </a>
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
+                    <div class="bg-white py-2 ">
                         <a href="<?php echo base_url('dashboard/reservations'); ?>">Reservasi</a>
                     </div>
                 </div>
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
+                    <div class="bg-white py-2 ">
                         <a href="<?php echo base_url('dashboard/viewUser'); ?>">User</a>
                     </div>
                 </div>
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
+                    <div class="bg-white py-2 ">
                         <a href="<?php echo base_url('dashboard/viewUser'); ?>">History</a>
                     </div>
                 </div>

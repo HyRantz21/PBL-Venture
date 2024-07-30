@@ -326,7 +326,6 @@
                     <h2>Price</h2>
                     <h3 id="pricePerAdult">Rp.<?= $detail ? $detail['Harga'] : '0' ?></h3>
                 </div>
-
                 <div class="formwrap">
                     <div class="People">
                         <img src="assets/Icon/person-fill.png" alt="" class="person">
@@ -339,9 +338,7 @@
                         <img src="assets/Icon/calendar3.png" alt="" class="calendar">
                         <input type="date" id="date">
                     </div>
-
                 </div>
-
                 <div class="laybtn">
     <button class="order" onclick="displayTotal()">Check Reservation</button>
 </div>

@@ -35,7 +35,7 @@ class dashboard extends CI_Controller {
     {
         $result = $this->M_paket_wisata->inputPaket();
         if ($result) {
-            redirect('dashboard/viewPaket');
+            redirect('dashboard/');
         } else {
             echo "Gagal menambahkan paket wisata";
         }
@@ -65,7 +65,7 @@ class dashboard extends CI_Controller {
         // Load model and update data
         $result = $this->M_paket_wisata->updateDataPaket();
         if ($result) {
-            redirect('dashboard/viewPaket');
+            redirect('dashboard/');
         } else {
             echo "Gagal memperbarui paket wisata";
         }
@@ -75,7 +75,7 @@ class dashboard extends CI_Controller {
     {
         $result = $this->M_user->updateUser();
         if ($result) {
-            redirect('dashboard/viewUser');
+            redirect('dashboard/');
         } else {
             echo "Failed to update user. Please make sure all fields are filled.";
         }
@@ -85,7 +85,7 @@ class dashboard extends CI_Controller {
     {
         $result = $this->M_paket_wisata->deleteDataPaket($id);
         if ($result) {
-            redirect('dashboard/viewPaket');
+            redirect('dashboard/');
         } else {
             echo "Failed to delete paket_wisata.";
         }
@@ -95,7 +95,7 @@ class dashboard extends CI_Controller {
     {
         $result = $this->M_user->deleteUser($id);
         if ($result) {
-            redirect('dashboard/viewUser');
+            redirect('dashboard/');
         } else {
             echo "Failed to delete user.";
         }
@@ -103,7 +103,7 @@ class dashboard extends CI_Controller {
 
     public function reservations() {
         $data['reservations'] = $this->ReservationModel->get_reservations();
-        $this->load->view('dashboard-beta/Reservasi', $data);
+        $this->load->view('dashboard/', $data);
     }
 
     public function confirmReservation($ID_Reservasi) {
@@ -119,6 +119,11 @@ class dashboard extends CI_Controller {
         }
 
         // Redirect to the reservations dashboard
-        redirect('dashboard/reservations');
+        redirect('dashboard/');
+    }
+
+    public function deleteReservation($ID_Reservasi) {
+        $this->ReservationModel->delete_reservation($ID_Reservasi);
+        redirect('dashboard');
     }
 }
