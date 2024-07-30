@@ -306,10 +306,17 @@
     <main class="m1 container mb-4">
         <section class="">
             <div class="section1">
-                <button onclick="openModal('assets/Image/31d037cebdaf4a318b586751e3dc1d397482fd3f.jpg')"><img src=<?php echo base_url("assets/Image/".$detail['gambar_1']); ?> alt="" class="tImg1"></button>
-                <button onclick="openModal('assets/Image/8c0b5f0914c97c30c94a9cbe3d257f2e3583fc6c.jpg')"><img src=<?php echo base_url("assets/Image/".$detail['gambar_2']); ?> alt="" class="tImg2"></button>
-                <button onclick="openModal('assets/Image/e742e0ad10409b7065e565dfb95a9046e55205c0.jpg')"><img src=<?php echo base_url("assets/Image/".$detail['gambar_3']); ?> alt="" class="tImg3"></button>
+                <button onclick="openModal('<?php echo base_url($detail['gambar_1']); ?>')">
+                    <img src="<?php echo base_url($detail['gambar_1']); ?>" alt="" class="tImg1">
+                </button>
+                <button onclick="openModal('<?php echo base_url($detail['gambar_2']); ?>')">
+                    <img src="<?php echo base_url($detail['gambar_2']); ?>" alt="" class="tImg2">
+                </button>
+                <button onclick="openModal('<?php echo base_url($detail['gambar_3']); ?>')">
+                    <img src="<?php echo base_url($detail['gambar_3']); ?>" alt="" class="tImg3">
+                </button>
             </div>
+
         </section>
         <section class="layOverview">
             <div class="overview">
@@ -327,12 +334,12 @@
                     <h3 id="pricePerAdult">Rp.<?= $detail ? $detail['Harga'] : '0' ?></h3>
                 </div>
                 <div class="formwrap">
-                    <div class="People">
-                        <img src="assets/Icon/person-fill.png" alt="" class="person">
-                        <input type="number" id="adult" name="adult" min="0" max="<?= $detail ? $detail['max'] : '0' ?>" value="0" oninput="calculateTotal()">
-                    </div>
                     <div class="max">
                         <p>Maximum: <?= $detail ? $detail['max'] : '0' ?></p>
+                    </div>
+                    <div class="People">
+                        <img src="<?php echo base_url('assets/Icon/person-fill.png'); ?>" alt="" class="person">
+                        <input type="number" id="adult" name="adult" min="0" max="<?= $detail ? $detail['max'] : '0' ?>" value="0" oninput="calculateTotal()">
                     </div>
                     <div class="date">
                         <img src="assets/Icon/calendar3.png" alt="" class="calendar">

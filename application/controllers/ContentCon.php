@@ -9,9 +9,9 @@ class ContentCon extends CI_Controller {
         $this->load->view('ContentDetail', $data);
     }
 
-    public function detail($id_paket) {
+    public function detail($ID_Paket) {
         $this->load->model('ContentModel');
-        $data['detail'] = $this->ContentModel->getPaketById($id_paket);
+        $data['detail'] = $this->ContentModel->getPaketById($ID_Paket);
         
         if (empty($data['detail'])) {
             show_404();
