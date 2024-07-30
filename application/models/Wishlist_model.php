@@ -20,13 +20,13 @@ class Wishlist_model extends CI_Model {
         $this->db->from('paket_wisata');
         $this->db->where('Nama_Paket', $packageName);
         $query = $this->db->get();
-
+    
         if ($query->num_rows() > 0) {
             return $query->row()->ID_Paket;
         } else {
             return false;
         }
-    }
+    }    
 
     public function add_to_wishlist($userID, $packageID) {
         $data = array(
@@ -37,10 +37,13 @@ class Wishlist_model extends CI_Model {
         if ($this->db->insert('wishlist', $data)) {
             return true;
         } else {
-            log_message('error', 'Error inserting data into wishlist: ' . $this->db->_error_message());
+            log_message('error', 'Error inserting data into wishlist: ' . $this->db->error()['message']);
             return false;
         }
     }
+    
+    
+    
 
     public function remove_from_wishlist($userID, $packageID) {
         $this->db->where(['ID_User' => $userID, 'ID_Paket'=> $packageID]);
