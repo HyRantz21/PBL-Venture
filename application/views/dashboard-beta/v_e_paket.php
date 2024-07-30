@@ -23,8 +23,16 @@
             <tr>
                 <td>Kategori</td>
                 <td>:</td>
-                <td><input type="text" name="Kategori" value="<?php echo $paket['Kategori']; ?>"></td>
+                <td>
+                    <select name="Kategori">
+                        <option value="entertainment" <?php echo $paket['Kategori'] == 'entertainment' ? 'selected' : ''; ?>>Entertainment</option>
+                        <option value="food" <?php echo $paket['Kategori'] == 'food' ? 'selected' : ''; ?>>Food</option>
+                        <option value="culture" <?php echo $paket['Kategori'] == 'culture' ? 'selected' : ''; ?>>Culture</option>
+                        <option value="nature" <?php echo $paket['Kategori'] == 'nature' ? 'selected' : ''; ?>>Nature</option>
+                    </select>
+                </td>
             </tr>
+
             <tr>
                 <td><?php echo form_error('Harga') ?></td>
             </tr>
@@ -39,8 +47,21 @@
             <tr>
                 <td>Lokasi</td>
                 <td>:</td>
-                <td><input type="text" name="Lokasi" value="<?php echo $paket['Lokasi']; ?>"></td>
+                <td>
+                    <select name="Lokasi">
+                        <option value="Badung" <?php echo $paket['Lokasi'] == 'Badung' ? 'selected' : ''; ?>>Kabupaten Badung</option>
+                        <option value="Bangli" <?php echo $paket['Lokasi'] == 'Bangli' ? 'selected' : ''; ?>>Kabupaten Bangli</option>
+                        <option value="Buleleng" <?php echo $paket['Lokasi'] == 'Buleleng' ? 'selected' : ''; ?>>Kabupaten Buleleng</option>
+                        <option value="Gianyar" <?php echo $paket['Lokasi'] == 'Gianyar' ? 'selected' : ''; ?>>Kabupaten Gianyar</option>
+                        <option value="Jembrana" <?php echo $paket['Lokasi'] == 'Jembrana' ? 'selected' : ''; ?>>Kabupaten Jembrana</option>
+                        <option value="Karangasem" <?php echo $paket['Lokasi'] == 'Karangasem' ? 'selected' : ''; ?>>Kabupaten Karangasem</option>
+                        <option value="Klungkung" <?php echo $paket['Lokasi'] == 'Klungkung' ? 'selected' : ''; ?>>Kabupaten Klungkung</option>
+                        <option value="Tabanan" <?php echo $paket['Lokasi'] == 'Tabanan' ? 'selected' : ''; ?>>Kabupaten Tabanan</option>
+                        <option value="Denpasar" <?php echo $paket['Lokasi'] == 'Denpasar' ? 'selected' : ''; ?>>Kota Denpasar</option>
+                    </select>
+                </td>
             </tr>
+
             <tr>
                 <td><?php echo form_error('Deskripsi') ?></td>
             </tr>
