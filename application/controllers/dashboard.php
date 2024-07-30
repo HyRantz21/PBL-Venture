@@ -15,7 +15,9 @@ class dashboard extends CI_Controller {
     public function index()
     {
         $data['paket_wisata'] = $this->M_paket_wisata->getPaket();
-        $this->load->view('dashboard-beta/paket', $data);
+        $data['user'] = $this->M_user->getUser();
+        $data['reservasi'] = $this->ReservationModel->get_reservations();
+        $this->load->view('dashboard/Admin', $data);
     }
 
     public function viewPaket()

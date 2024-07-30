@@ -190,7 +190,7 @@
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                            <table border="1px black">
+                            <table border="1px black" class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                 <tr>
                                     <td>No</td>
                                     <td>ID User</td>
@@ -210,8 +210,8 @@
                                     <td><?php echo $key['Email']; ?></td>
                                     <td><?php echo $key['Password']; ?></td>
                                     <td>
-                                        <a href="<?php echo base_url('dashboard/editUser/'.$key['ID_User']); ?>">Edit</a>
-                                        <a href="<?php echo base_url('dashboard/hapusUser/'.$key['ID_User']); ?>">Delete</a>
+                                        <a href="<?php echo base_url('dashboard/editUser/'.$key['ID_User']); ?>" class="btn-primary p-2">Edit</a>
+                                        <a href="<?php echo base_url('dashboard/hapusUser/'.$key['ID_User']); ?>" class="btn-danger p-2">Delete</a>
                                     </td>
                                 </tr>
                                 <?php 
@@ -267,8 +267,8 @@
                                             <?php endif; ?>
                                         </td>
                                         <td>
-                                            <a href="<?php echo base_url('dashboard/editPaket/'.$key['ID_Paket']); ?>">Edit</a>
-                                            <a href="<?php echo base_url('dashboard/HapusPaket/'.$key['ID_Paket']); ?>">Delete</a>
+                                            <a href="<?php echo base_url('dashboard/editPaket/'.$key['ID_Paket']); ?>" class="btn-primary p-2">Edit</a>
+                                            <a href="<?php echo base_url('dashboard/HapusPaket/'.$key['ID_Paket']); ?>" class="btn-danger p-2">Delete</a>
                                         </td>
                                     </tr>
                                     <?php 
@@ -325,89 +325,85 @@
                                 </table>
                             </div>
                         </div>
-                        </div>
+                    </div>
                     
 
-
-                    <h1>Tambah Paket Wisata</h1>
-                    <form action="<?php echo base_url('dashboard/aksiTambahPaket') ?>" method="post">
-                        <table>
-                            <tr>
-                                <td><?php echo form_error('Nama_Paket') ?></td>
-                            </tr>
-                            <tr>
-                                <td>Nama Paket</td>
-                                <td>:</td>
-                                <td><input type="text" name="Nama_Paket"></td>
-                            </tr>
-                            <tr>
-                                <td><?php echo form_error('Kategori') ?></td>
-                            </tr>
-                            <tr>
-                                <td>Kategori</td>
-                                <td>:</td>
-                                <td><input type="text" name="Kategori"></td>
-                            </tr>
-                            <tr>
-                                <td><?php echo form_error('Harga') ?></td>
-                            </tr>
-                            <tr>
-                                <td>Harga</td>
-                                <td>:</td>
-                                <td><input type="number" name="Harga"></td>
-                            </tr>
-                            <tr>
-                                <td><?php echo form_error('Lokasi') ?></td>
-                            </tr>
-                            <tr>
-                                <td>Lokasi</td>
-                                <td>:</td>
-                                <td><input type="text" name="Lokasi"></td>
-                            </tr>
-                            <tr>
-                                <td><?php echo form_error('Deskripsi') ?></td>
-                            </tr>
-                            <tr>
-                                <td>Deskripsi</td>
-                                <td>:</td>
-                                <td><textarea name="Deskripsi"></textarea></td>
-                            </tr>
-                            <tr>
-                                <td><?php echo form_error('Waktu_Tour') ?></td>
-                            </tr>
-                            <tr>
-                                <td>Waktu Tour</td>
-                                <td>:</td>
-                                <td><input type="text" name="Waktu_Tour"></td>
-                            </tr>
-                            <tr>
-                                <td><?php echo form_error('QR_Code') ?></td>
-                            </tr>
-                            <tr>
-                                <td>QR Code</td>
-                                <td>:</td>
-                                <td><input type="text" name="QR_Code"></td>
-                            </tr>
-                            <tr>
-                                <td><?php echo form_error('ID_Perusahaan') ?></td>
-                            </tr>
-                            <tr>
-                                <td>Penyedia</td>
-                                <td>:</td>
-                                <td>
-                                    <select name="ID_Perusahaan">
-                                        <?php foreach ($perusahaan as $row): ?>
-                                            <option value="<?php echo $row['ID_Perusahaan']; ?>"><?php echo $row['Nama_Perusahaan']; ?></option>
-                                        <?php endforeach; ?>
-                                    </select>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><button type="submit">Simpan</button></td>
-                            </tr>
-                        </table>
-                    </form>
-
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">Tabel Loker User</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <h1>Tambah Paket Wisata</h1>
+                                <form action="<?php echo base_url('dashboard/aksiTambahPaket') ?>" method="post">
+                                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                        <tr>
+                                            <td>Nama Paket</td>
+                                            <td><input type="text" name="Nama_Paket"></td>
+                                        </tr>
+                                        <tr>
+                                            <td><?php echo form_error('Kategori') ?></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Kategori</td>
+                                            <td><input type="text" name="Kategori"></td>
+                                        </tr>
+                                        <tr>
+                                            <td><?php echo form_error('Harga') ?></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Harga</td>
+                                            <td><input type="number" name="Harga"></td>
+                                        </tr>
+                                        <tr>
+                                            <td><?php echo form_error('Lokasi') ?></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Lokasi</td>
+                                            <td><input type="text" name="Lokasi"></td>
+                                        </tr>
+                                        <tr>
+                                            <td><?php echo form_error('Deskripsi') ?></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Deskripsi</td>
+                                            <td><textarea name="Deskripsi"></textarea></td>
+                                        </tr>
+                                        <tr>
+                                            <td><?php echo form_error('Waktu_Tour') ?></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Waktu Tour</td>
+                                            <td><input type="text" name="Waktu_Tour"></td>
+                                        </tr>
+                                        <tr>
+                                            <td><?php echo form_error('QR_Code') ?></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Gambar</td>
+                                            <td><input type="text" name="QR_Code"></td>
+                                        </tr>
+                                        <tr>
+                                            <td><?php echo form_error('ID_Perusahaan') ?></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Penyedia</td>
+                                            <td>
+                                                <select name="ID_Perusahaan">
+                                                    <?php foreach ($perusahaan as $row): ?>
+                                                        <option value="<?php echo $row['ID_Perusahaan']; ?>"><?php echo $row['Nama_Perusahaan']; ?></option>
+                                                    <?php endforeach; ?>
+                                                </select>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><button type="submit" class="btn-primary p-2">Simpan</button></td>
+                                        </tr>
+                                    </table>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <!-- /.container-fluid -->
 
