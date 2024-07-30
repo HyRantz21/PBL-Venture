@@ -65,7 +65,7 @@
                 </a>
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a href="<?php echo base_url('dashboard/viewUser'); ?>">Reservasi</a>
+                        <a href="<?php echo base_url('dashboard/reservations'); ?>">Reservasi</a>
                     </div>
                 </div>
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
@@ -206,7 +206,7 @@
                         <div class="card-header py-3">
                             <h6 class="m-0 font-weight-bold text-primary">Tabel Paket Wisata</h6>
                         </div>
-                        <a href="<?php echo base_url('dashboard/tambahPaket/'); ?>">Tambah Paket</a>
+                        <a href="<?php echo base_url('dashboard/tambahPaket/'); ?>" class="m-0 font-weight-bold text-primary">Tambah Paket</a>
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">

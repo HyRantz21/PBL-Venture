@@ -5,7 +5,12 @@ class ReservationModel extends CI_Model {
     }
 
     public function get_reservations() {
-        $query = $this->db->get('reservasi');
+        $this->db->select('reservasi.ID_Reservasi, reservasi.ID_User, user.Full_Name, paket_wisata.Deskripsi');
+        $this->db->from('reservasi');
+        $this->db->join('user', 'reservasi.ID_User = user.ID_User');
+        $this->db->join('paket_wisata', 'reservasi.ID_Paket = paket_wisata.ID_Paket');
+        $query = $this->db->get();
+
         return $query->result_array();
     }
 
@@ -23,4 +28,5 @@ class ReservationModel extends CI_Model {
         return $this->db->delete('reservasi');
     }
 }
+
 ?>

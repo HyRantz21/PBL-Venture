@@ -13,7 +13,7 @@
         width: 100%;
     }
 
-    /*NavBar*/
+    /NavBar/
     .Brand{
         font-weight: 700; 
         font-size: 50px;
@@ -94,7 +94,7 @@
         transition: transform 0.3s ease-in-out; 
     }
 
-    /*Overview*/
+    /Overview/
     .layOverview{
         margin: 10px 0px 10px 0px;
         width: 100%;
@@ -249,7 +249,7 @@
         color: #000000;
     }
 
-    /*Universal*/
+    /Universal/
     container{
         box-shadow: 1px 1px 5px 0px rgba(0, 0, 0, 0.5);
         padding: 10px;
@@ -264,7 +264,7 @@
         font-weight: 500;
     }
 
-    /*Responsive*/
+    /Responsive/
     @media (max-width: 770px) {
         .section1{
             width: 100%;
@@ -403,7 +403,7 @@
             const numberOfAdults = adultInput.value;
 
             const totalPrice = numberOfAdults * pricePerAdult;
-            document.getElementById('totalPrice').textContent = `Rp. ${totalPrice.toLocaleString('id-ID')}`;
+            document.getElementById('totalPrice').textContent = Rp. ${totalPrice.toLocaleString('id-ID')};
         }
 
         function displayTotal() {
@@ -419,9 +419,9 @@
             const orderTotalPrice = document.getElementById('orderTotalPrice');
             const orderDate = document.getElementById('orderDate');
 
-            orderAdults.textContent = `Number of Adults: ${numberOfAdults}`;
-            orderTotalPrice.textContent = `Total Price: Rp. ${totalPrice.toLocaleString('id-ID')}`;
-            orderDate.textContent = `Reservation Date: ${selectedDate}`;
+            orderAdults.textContent = Number of Adults: ${numberOfAdults};
+            orderTotalPrice.textContent = Total Price: Rp. ${totalPrice.toLocaleString('id-ID')};
+            orderDate.textContent = Reservation Date: ${selectedDate};
             orderPanel.style.display = 'block';
         }
 
@@ -432,3 +432,4 @@
     </script>
 </body>
 </html>
+view
