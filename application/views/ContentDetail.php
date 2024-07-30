@@ -124,6 +124,7 @@
         word-break: break-all;
         padding-right: 30px;
     }
+
     .panel{
         max-width: 470px;
         border-radius: 20px;
@@ -131,7 +132,7 @@
         background-color: rgb(255, 255, 255);
         box-shadow: 1px 1px 5px 0px rgba(0, 0, 0, 0.5);
         display: grid;
-        grid-template-rows: 30% 50% 10%;
+        grid-template-rows: 30% 40% 20%;
     }
 
     .price{
@@ -151,9 +152,12 @@
     }
     
     .max p{
+        color: grey;
+        font-weight: 600;
         display: flex;
-        margin: 0;
-        padding-right: 50px;;
+        margin-top: 10px;
+        margin-bottom:-10px;
+        padding-right: 50px;
         justify-content: end;
     }
 
@@ -171,6 +175,7 @@
     }
     
     .laybtn{
+        margin-top: 20px;
         display: flex;
         justify-content: end;
         padding: 10px;
@@ -250,8 +255,7 @@
     }
 
     /*Universal*/
-    container{
-        box-shadow: 1px 1px 5px 0px rgba(0, 0, 0, 0.5);
+    .container{
         padding: 10px;
     }
 
@@ -262,6 +266,10 @@
     .p{
         color: gray;
         font-weight: 500;
+    }
+
+    .m1{
+        margin-top:-20px;
     }
 
     /*Responsive*/
@@ -299,7 +307,7 @@
             </div>
         </nav>
     </header>
-    <main class="container mb-4">
+    <main class="m1 container mb-4">
         <section class="">
             <div class="section1">
                 <button onclick="openModal('assets/Image/31d037cebdaf4a318b586751e3dc1d397482fd3f.jpg')"><img src="assets/Image/31d037cebdaf4a318b586751e3dc1d397482fd3f.jpg" alt="" class="tImg1"></button>
@@ -318,14 +326,14 @@
                     <h2>Price</h2>
                     <h3 id="pricePerAdult">Rp.<?= $detail->Harga ?></h3>
                 </div>
-
+                
                 <div class="formwrap">
+                    <div class="max">
+                        <p>Maximum: <?= $detail->max ?></p>
+                    </div>
                     <div class="People">
                         <img src="assets/Icon/person-fill.png" alt="" class="person">
                         <input type="number" id="adult" name="adult" min="0" max="<?= $detail->max ?>" value="0" oninput="calculateTotal()">
-                    </div>
-                    <div class="max">
-                        <p>Maximum: <?= $detail->max ?></p>
                     </div>
                     <div class="date">
                         <img src="assets/Icon/calendar3.png" alt="" class="calendar">
@@ -403,7 +411,7 @@
             const numberOfAdults = adultInput.value;
 
             const totalPrice = numberOfAdults * pricePerAdult;
-            document.getElementById('totalPrice').textContent = `Rp. ${totalPrice.toLocaleString('id-ID')}`;
+            document.getElementById('totalPrice').textContent = Rp. ${totalPrice.toLocaleString('id-ID')};
         }
 
         function displayTotal() {
@@ -419,9 +427,9 @@
             const orderTotalPrice = document.getElementById('orderTotalPrice');
             const orderDate = document.getElementById('orderDate');
 
-            orderAdults.textContent = `Number of Adults: ${numberOfAdults}`;
-            orderTotalPrice.textContent = `Total Price: Rp. ${totalPrice.toLocaleString('id-ID')}`;
-            orderDate.textContent = `Reservation Date: ${selectedDate}`;
+            orderAdults.textContent = Number of Adults: ${numberOfAdults};
+            orderTotalPrice.textContent = Total Price: Rp. ${totalPrice.toLocaleString('id-ID')};
+            orderDate.textContent = Reservation Date: ${selectedDate};
             orderPanel.style.display = 'block';
         }
 

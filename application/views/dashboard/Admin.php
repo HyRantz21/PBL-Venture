@@ -40,29 +40,22 @@
             <!-- Divider -->
             <hr class="sidebar-divider my-0">
 
-            <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
-                <a class="nav-link" href="index.html">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Dashboard</span>
-                </a>
-            </li>
-            <li class="nav-item active">
-                <a class="nav-link" href="v_user.php">
+                <a class="nav-link" href="v_user">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>View User</span>
                 </a>
             </li>
             <li class="nav-item active">
-                <a class="nav-link" href="v_perusahaan.html">
+                <a class="nav-link" href="v_reservasi">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>View Perusahaan</span>
+                    <span>View Reservasi</span>
                 </a>
             </li>
             <li class="nav-item active">
-                <a class="nav-link" href="v_t_perusahaan.html">
+                <a class="nav-link" href="t_paket">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Tambah Perusahaan</span>
+                    <span>Tambah Paket</span>
                 </a>
             </li>
             <!-- Divider -->
@@ -191,8 +184,226 @@
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid" id="container-fluid">
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">Tabel Loker User</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                            <table border="1px black" class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                <tr>
+                                    <td>No</td>
+                                    <td>ID User</td>
+                                    <td>Full Name</td>
+                                    <td>Email</td>
+                                    <td>Password</td>
+                                    <td>Aksi</td>
+                                </tr>
+                                <?php 
+                                    $no = 1; // Initialize the counter
+                                    foreach ($user as $key): 
+                                ?>
+                                <tr>
+                                    <td><?php echo $no; ?></td> <!-- Display the counter -->
+                                    <td><?php echo $key['ID_User']; ?></td>
+                                    <td><?php echo $key['Full_Name']; ?></td>
+                                    <td><?php echo $key['Email']; ?></td>
+                                    <td><?php echo $key['Password']; ?></td>
+                                    <td>
+                                        <a href="<?php echo base_url('dashboard/editUser/'.$key['ID_User']); ?>" class="btn-primary p-2">Edit</a>
+                                        <a href="<?php echo base_url('dashboard/hapusUser/'.$key['ID_User']); ?>" class="btn-danger p-2">Delete</a>
+                                    </td>
+                                </tr>
+                                <?php 
+                                    $no++; // Increment the counter
+                                    endforeach;
+                                ?>
+                            </table>
+                            </div>
+                        </div>
+                    </div>
 
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">Tabel Paket Wisata</h6>
+                        </div>
+                        <a href="<?php echo base_url('dashboard/tambahPaket/'); ?>">Tambah Paket</a>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                    <tr>
+                                        <td>No</td>
+                                        <td>Nama Paket</td>
+                                        <td>Kategori</td>
+                                        <td>Harga</td>
+                                        <td>Lokasi</td>
+                                        <td>Deskripsi</td>
+                                        <td>Waktu Tour</td>
+                                        <td>Gambar 1</td>
+                                        <td>Aksi</td>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <?php 
+                                        $no = 1; // Initialize the counter
+                                        foreach ($paket_wisata as $key): 
+                                    ?>
+                                    <tr>
+                                        <td><?php echo $no; ?></td> <!-- Display the counter -->
+                                        <td><?php echo $key['Nama_Paket']; ?></td>
+                                        <td><?php echo $key['Kategori']; ?></td>
+                                        <td><?php echo $key['Harga']; ?></td>
+                                        <td><?php echo $key['Lokasi']; ?></td>
+                                        <td><?php echo $key['Deskripsi']; ?></td>
+                                        <td><?php echo $key['Waktu_Tour']; ?></td>
+                                        <td>
+                                            <?php if (!empty($key['gambar_1']) || file_exists('C:/xampp/htdocs/PBL-Venture/assets/Image' . $key['gambar_1'])): ?>
+                                                <!-- Display uploaded image -->
+                                                <img src="<?php echo base_url($key['gambar_1']); ?>" alt="Image" style="width:100px; height:auto;">
+                                            <?php else: ?>
+                                                <!-- Display default image if no image exists -->
+                                                <img src="<?php echo base_url('assets/Image/default_image.jpg'); ?>" alt="No Image" style="width:100px; height:auto;">
+                                            <?php endif; ?>
+                                        </td>
+                                        <td>
+                                            <a href="<?php echo base_url('dashboard/editPaket/'.$key['ID_Paket']); ?>" class="btn-primary p-2">Edit</a>
+                                            <a href="<?php echo base_url('dashboard/HapusPaket/'.$key['ID_Paket']); ?>" class="btn-danger p-2">Delete</a>
+                                        </td>
+                                    </tr>
+                                    <?php 
+                                        $no++; // Increment the counter
+                                        endforeach;
+                                    ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                
+                   
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">Tabel Loker User</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                    <tr>
+                                        <td>No</td>
+                                        <td>Nama User</td>
+                                        <td>Nama Paket</td>
+                                        <td>Banyak Pengunjung</td>
+                                        <td>total Harga</td>
+                                        <td>Aksi</td>
+                                    </tr>
+                                    </thead>
+                                    <tfoot>
+                                    </tfoot>
+                                    <tbody>
+                                    <?php 
+                                        $no = 1; // Initialize the counter
+                                        foreach ($user as $key): 
+                                    ?>
+                                    <tr>
+                                        <td><?php echo $no; ?></td> <!-- Display the counter -->
+                                        <td><?php echo htmlspecialchars($key['Full_Name']); ?></td>
+                                        <td><?php echo htmlspecialchars($key['Nama_Paket']); ?></td>
+                                        <td><?php echo htmlspecialchars($key['Banyak_Pengunjung']); ?></td>
+                                        <td><?php echo htmlspecialchars($key['Total_Harga']); ?></td>
+                                        <td>
+                                            <a href="<?php echo base_url(''.$key['ID_User']); ?>">Confirm</a>
+                                            <a href="<?php echo base_url(''.$key['ID_User']); ?>">Denied</a>
+                                        </td>
+                                    </tr>
+                                    <?php 
+                                        $no++; // Increment the counter
+                                        endforeach;
+                                    ?>
+                            </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    
 
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">Tabel Loker User</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <h1>Tambah Paket Wisata</h1>
+                                <form action="<?php echo base_url('dashboard/aksiTambahPaket') ?>" method="post">
+                                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                        <tr>
+                                            <td>Nama Paket</td>
+                                            <td><input type="text" name="Nama_Paket"></td>
+                                        </tr>
+                                        <tr>
+                                            <td><?php echo form_error('Kategori') ?></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Kategori</td>
+                                            <td><input type="text" name="Kategori"></td>
+                                        </tr>
+                                        <tr>
+                                            <td><?php echo form_error('Harga') ?></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Harga</td>
+                                            <td><input type="number" name="Harga"></td>
+                                        </tr>
+                                        <tr>
+                                            <td><?php echo form_error('Lokasi') ?></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Lokasi</td>
+                                            <td><input type="text" name="Lokasi"></td>
+                                        </tr>
+                                        <tr>
+                                            <td><?php echo form_error('Deskripsi') ?></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Deskripsi</td>
+                                            <td><textarea name="Deskripsi"></textarea></td>
+                                        </tr>
+                                        <tr>
+                                            <td><?php echo form_error('Waktu_Tour') ?></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Waktu Tour</td>
+                                            <td><input type="text" name="Waktu_Tour"></td>
+                                        </tr>
+                                        <tr>
+                                            <td><?php echo form_error('QR_Code') ?></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Gambar</td>
+                                            <td><input type="text" name="QR_Code"></td>
+                                        </tr>
+                                        <tr>
+                                            <td><?php echo form_error('ID_Perusahaan') ?></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Penyedia</td>
+                                            <td>
+                                                <select name="ID_Perusahaan">
+                                                    <?php foreach ($perusahaan as $row): ?>
+                                                        <option value="<?php echo $row['ID_Perusahaan']; ?>"><?php echo $row['Nama_Perusahaan']; ?></option>
+                                                    <?php endforeach; ?>
+                                                </select>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><button type="submit" class="btn-primary p-2">Simpan</button></td>
+                                        </tr>
+                                    </table>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <!-- /.container-fluid -->
 

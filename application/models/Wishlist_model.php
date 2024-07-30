@@ -46,4 +46,12 @@ class Wishlist_model extends CI_Model {
         $this->db->where(['ID_User' => $userID, 'ID_Paket'=> $packageID]);
         return $this->db->delete('wishlist');
     }
+
+    public function is_in_wishlist($userID, $packageID) {
+        $this->db->where(['ID_User' => $userID, 'ID_Paket' => $packageID]);
+        $query = $this->db->get('wishlist');
+        
+        return $query->num_rows() > 0;
+    }
+    
 }

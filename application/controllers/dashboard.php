@@ -8,12 +8,16 @@ class dashboard extends CI_Controller {
         parent::__construct();
         $this->load->model('M_paket_wisata');
         $this->load->model('M_user'); // Ensure model name is correct
+        $this->load->model('ReservationModel');
+        $this->load->model('HistoryModel');
     }
 
     public function index()
     {
         $data['paket_wisata'] = $this->M_paket_wisata->getPaket();
-        $this->load->view('dashboard-beta/paket', $data);
+        $data['user'] = $this->M_user->getUser();
+        $data['reservasi'] = $this->ReservationModel->get_reservations();
+        $this->load->view('dashboard/Admin', $data);
     }
 
     public function viewPaket()
@@ -97,9 +101,24 @@ class dashboard extends CI_Controller {
         }
     }
 
-    public function test_gambar()
-    {
-        $this->load->view('test_gambar');
-        
+    public function reservations() {
+        $data['reservations'] = $this->ReservationModel->get_reservations();
+        $this->load->view('dashboard-beta/Reservasi', $data);
+    }
+
+    public function confirmReservation($ID_Reservasi) {
+        // Get the reservation details
+        $reservation = $this->db->get_where('reservasi', array('ID_Reservasi' => $ID_Reservasi))->row_array();
+
+        if ($reservation) {
+            // Add to transaction history
+            $this->HistoryModel->add_transaction($reservation['ID_User'], $reservation['ID_Paket']);
+
+            // Delete the reservation
+            $this->ReservationModel->delete_reservation($ID_Reservasi);
+        }
+
+        // Redirect to the reservations dashboard
+        redirect('dashboard/reservations');
     }
 }
