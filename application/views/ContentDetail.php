@@ -348,105 +348,112 @@
                 </div>
 
                 <div class="laybtn">
-    <button class="order" onclick="displayTotal()">Check Reservation</button>
-</div>
-<div id="orderPanel" class="order-panel" style="display: none;">
-    <button class="close-btn" onclick="closeOrderPanel()">X</button>
-    <h2>Your Order</h2>
-    <div class="wrapOutput">
-        <div class="Name"><?= $detail['Nama_Paket'] ?></div>
-        <div id="orderDate"></div>
-        <div id="orderAdults"></div>
-        <div id="orderTotalPrice"></div>
-    </div>
-    <img src="" alt="" class="QRcode">
-    <form action="<?php echo site_url('ContentCon/reserve'); ?>" method="post">
-        <input type="hidden" name="ID_Paket" value="<?= $detail['ID_Paket']; ?>">
-        <input type="hidden" name="Full_Name" value="<?= $this->session->userdata('Full_Name'); ?>">
-        <input type="hidden" name="Deskripsi" value="<?= $detail['Deskripsi']; ?>">
-        <!-- Anda dapat menambahkan input lain sesuai kebutuhan -->
-        <button type="submit" class="pay">Confirm</button>
-    </form>
-</div>
-</section>
-</main>
-<script>
-    function openModal(imageSrc) {
-        let modal = document.getElementById('imageModal');
-        if (!modal) {
-            modal = document.createElement('div');
-            modal.id = 'imageModal';
-            modal.style.position = 'fixed';
-            modal.style.left = '0';
-            modal.style.top = '0';
-            modal.style.width = '100%';
-            modal.style.height = '100%';
-            modal.style.backgroundColor = 'rgba(0,0,0,0.8)';
-            modal.style.display = 'flex';
-            modal.style.justifyContent = 'center';
-            modal.style.alignItems = 'center';
-            modal.style.zIndex = '1000';
-            modal.style.cursor = 'pointer';
+                    <button class="order" onclick="displayTotal()">Check Reservation</button>
+                </div>
+                <div id="orderPanel" class="order-panel" style="display: none;">
+                    <button class="close-btn" onclick="closeOrderPanel()">X</button>
+                    <h2>Your Order</h2>
+                    <div class="wrapOutput">
+                        <div class="Name"><?= $detail['Nama_Paket'] ?></div>
+                        <div id="orderDate"></div>
+                        <div id="orderAdults"></div>
+                        <div id="orderTotalPrice"></div>
+                    </div>
+                    <img src="" alt="" class="QRcode">
+                    <form action="<?php echo site_url('ContentCon/reserve'); ?>" method="post">
+                        <input type="hidden" name="ID_Paket" value="<?= $detail['ID_Paket']; ?>">
+                        <input type="hidden" name="Full_Name" value="<?= $this->session->userdata('Full_Name'); ?>">
+                        <input type="hidden" name="Deskripsi" value="<?= $detail['Deskripsi']; ?>">
+                        <input type="hidden" id="hiddenTotalAdult" name="total_adult" value="1">
+                        <input type="hidden" id="hiddenTotalPrice" name="total_harga" value="<?= $detail['Harga']; ?>">
+                        <button type="submit" class="pay">Confirm</button>
+                    </form>
+                </div>
+            </section>
+        </main>
+    <script>
+        function openModal(imageSrc) {
+            let modal = document.getElementById('imageModal');
+            if (!modal) {
+                modal = document.createElement('div');
+                modal.id = 'imageModal';
+                modal.style.position = 'fixed';
+                modal.style.left = '0';
+                modal.style.top = '0';
+                modal.style.width = '100%';
+                modal.style.height = '100%';
+                modal.style.backgroundColor = 'rgba(0,0,0,0.8)';
+                modal.style.display = 'flex';
+                modal.style.justifyContent = 'center';
+                modal.style.alignItems = 'center';
+                modal.style.zIndex = '1000';
+                modal.style.cursor = 'pointer';
 
-            const img = document.createElement('img');
-            img.id = 'modalImage';
-            img.style.maxWidth = '90%';
-            img.style.maxHeight = '90%';
-            modal.appendChild(img);
+                const img = document.createElement('img');
+                img.id = 'modalImage';
+                img.style.maxWidth = '90%';
+                img.style.maxHeight = '90%';
+                modal.appendChild(img);
 
-            modal.onclick = function() {
-                modal.style.display = 'none';
+                modal.onclick = function() {
+                    modal.style.display = 'none';
+                }
+
+                document.body.appendChild(modal);
             }
 
-            document.body.appendChild(modal);
+            document.getElementById('modalImage').src = imageSrc;
+            modal.style.display = 'flex';
         }
 
-        document.getElementById('modalImage').src = imageSrc;
-        modal.style.display = 'flex';
+        const pricePerAdult = <?= $detail['Harga'] ?>;
+const maxPeople = <?= $detail['max'] ?>;
+
+function calculateTotal() {
+    const adultInput = document.getElementById('adult');
+    let numberOfAdults = adultInput.value;
+    if (numberOfAdults > maxPeople) {
+        numberOfAdults = maxPeople;
+        adultInput.value = maxPeople;
+        alert('The number of people cannot exceed the maximum limit.');
     }
+    const totalPrice = numberOfAdults * pricePerAdult;
+    document.getElementById('orderTotalPrice').textContent = 'Rp. ' + totalPrice.toLocaleString('id-ID');
+    document.getElementById('hiddenTotalAdult').value = numberOfAdults;
+    document.getElementById('hiddenTotalPrice').value = totalPrice;
+}
 
-    let pricePerAdult = <?= $detail['Harga'] ?>; // Set harga dari server
+function displayTotal() {
+    calculateTotal(); // Ensure the total is calculated correctly
+    const adultInput = document.getElementById('adult');
+    const numberOfAdults = adultInput.value;
+    const dateInput = document.getElementById('date');
+    const selectedDate = dateInput.value;
+    const totalPrice = numberOfAdults * pricePerAdult;
 
-    function calculateTotal() {
-        const adultInput = document.getElementById('adult');
-        const numberOfAdults = adultInput.value;
-        const totalPrice = numberOfAdults * pricePerAdult;
-        document.getElementById('totalPrice').textContent = 'Rp. ' + totalPrice.toLocaleString('id-ID');
-    }
+    const orderPanel = document.getElementById('orderPanel');
+    const orderAdults = document.getElementById('orderAdults');
+    const orderTotalPrice = document.getElementById('orderTotalPrice');
+    const orderDate = document.getElementById('orderDate');
 
-    function displayTotal() {
-        const adultInput = document.getElementById('adult');
-        const numberOfAdults = adultInput.value;
-        const dateInput = document.getElementById('date');
-        const selectedDate = dateInput.value;
-        const totalPrice = numberOfAdults * pricePerAdult;
-
-        const orderPanel = document.getElementById('orderPanel');
-        const orderAdults = document.getElementById('orderAdults');
-        const orderTotalPrice = document.getElementById('orderTotalPrice');
-        const orderDate = document.getElementById('orderDate');
-
-        orderAdults.textContent = 'Number of Adults: ' + numberOfAdults;
-        orderTotalPrice.textContent = 'Total Price: Rp. ' + totalPrice.toLocaleString('id-ID');
-        orderDate.textContent = 'Reservation Date: ' + selectedDate;
-        orderPanel.style.display = 'block';
-    }
+    orderAdults.textContent = 'Number of Adults: ' + numberOfAdults;
+    orderTotalPrice.textContent = 'Total Price: Rp. ' + totalPrice.toLocaleString('id-ID');
+    orderDate.textContent = 'Reservation Date: ' + selectedDate;
+    orderPanel.style.display = 'block';
+}
 
     function closeOrderPanel() {
-        const orderPanel = document.getElementById('orderPanel');
-        orderPanel.style.display = 'none';
-    }
+        document.getElementById('orderPanel').style.display = 'none';
+    }   
 
-    function checkMax() {
-        const max = <?= $detail ? $detail['max'] : 0 ?>;
-        const input = document.getElementById('adult');
-        if (input.value > max) {
-            input.value = max;
-            alert('The number of people cannot exceed the maximum limit.');
+        function checkMax() {
+            const max = <?= $detail ? $detail['max'] : 0 ?>;
+            const input = document.getElementById('adult');
+            if (input.value > max) {
+                input.value = max;
+                alert('The number of people cannot exceed the maximum limit.');
+            }
         }
-    }
-
-
-</script>
+    </script>
 </body>
 </html>

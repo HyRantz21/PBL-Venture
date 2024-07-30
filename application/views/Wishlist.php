@@ -250,7 +250,7 @@
                 <div class="wrapRecomended">
                     <div class="wrapImg">
                         <figure class="img">
-                            <img src="assets/Image/ea545f3990f88524a9472220454ab63bedc0b6aa.jpg<?= $item['QR_Code']; ?>" alt="" class="imgR">
+                            <img src="<?php echo base_url($item['gambar_1']); ?>" alt="" class="imgR">
                         </figure>
                     </div>
                     <div class="layHeader">

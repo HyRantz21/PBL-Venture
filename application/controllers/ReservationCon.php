@@ -13,9 +13,13 @@ class ReservationCon extends CI_Controller {
     public function add() {
         $ID_User = $this->input->post('ID_User');
         $ID_Paket = $this->input->post('ID_Paket');
-        $this->ReservationModel->add_reservation($ID_User, $ID_Paket);
+        $total_adult = $this->input->post('total_adult');
+        $total_harga = $this->input->post('total_harga');
+    
+        $this->ReservationModel->add_reservation($ID_User, $ID_Paket, $total_adult, $total_harga);
         redirect('ReservationCon');
     }
+    
 
     public function delete($ID_Reservasi) {
         $this->ReservationModel->delete_reservation($ID_Reservasi);

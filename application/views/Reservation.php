@@ -316,55 +316,60 @@
     </header>
     <main class="container d-flex justify-content-center">
         <div class="LayRecomended">
-            <?php foreach ($reservations as $reservation): ?>
+        <?php foreach ($reservations as $reservation): ?>
             <div class="panel">
-                <div class="wrapRecomended">
-                    <div class="wrapImg">
-                        <figure class="img">
-                            <img src="assets/Image/ea545f3990f88524a9472220454ab63bedc0b6aa.jpg" alt="" class="imgR">
-                        </figure>
-                    </div>
-                    <div class="layHeader">
-                        <header class="titleR">
-                            <h3>Paket <?php echo $reservation['Nama_Paket']; ?></h3>
-                            <p><?php echo $reservation['Deskripsi']; ?></p>
-                            <p>Rp<?php echo $reservation['Harga']; ?></p>
-                        </header>
-                    </div>
-                </div>
-                <div class="detail">
-                    <div class="row1">
-                        <img src="assets/Icon/check-circle-fill.png" alt="" class="iChecklist">
-                    </div>
-                    <div class="row2">
-                        <h3>Status</h3>
-                    </div>
-                    <div class="row3">
-                        <div class="idT">ID Transaksi</div>
-                        <div class="ID"><?php echo $reservation['ID_Reservasi']; ?></div>
-                    </div>
-                    <div class="row4">
-                        <div class="tNama">ID User</div>
-                        <div class="Nama"><?php echo $reservation['ID_User']; ?></div>
-                    </div>
-                    <div class="row4">
-                        <div class="tNama">Nama</div>
-                        <div class="Nama"><?php echo $reservation['Full_Name']; ?></div>
-                    </div> 
-                    <div class="row4">
-                        <form action="<?php echo site_url('ReservationCon/delete/' . $reservation['ID_Reservasi']); ?>" method="post">
-                            <button type="submit" class="btn btn-danger">Delete</button>
-                        </form>
-                    </div>  
-                </div>
+    <div class="wrapRecomended">
+        <div class="wrapImg">
+            <figure class="img">
+                <img src="assets/Image/ea545f3990f88524a9472220454ab63bedc0b6aa.jpg" alt="" class="imgR">
+            </figure>
+        </div>
+        <div class="layHeader">
+            <header class="titleR">
+                <h3><?php echo $reservation['Nama_Paket']; ?></h3>
+                <p><?php echo $reservation['Deskripsi']; ?></p>
+                <p>Rp<?php echo $reservation['Harga']; ?></p>
+            </header>
+        </div>
+    </div>
+    <div class="detail">
+        <div class="row1">
+            <img src="assets/Icon/check-circle-fill.png" alt="" class="iChecklist">
+        </div>
+        <div class="row2">
+            <h3>Status</h3>
+        </div>
+        <div class="row3">
+            <div class="idT">ID Transaksi</div>
+            <div class="ID"><?php echo $reservation['ID_Reservasi']; ?></div>
+        </div>
+        <div class="row4">
+            <div class="tNama">ID User</div>
+            <div class="Nama"><?php echo $reservation['ID_User']; ?></div>
+        </div>
+        <div class="row4">
+            <div class="tNama">Nama</div>
+            <div class="Nama"><?php echo $reservation['Full_Name']; ?></div>
+        </div> 
+        <div class="row4">
+            <div class="tNama">Total Harga</div>
+            <div class="Harga">Rp<?php echo $reservation['total_harga']; ?></div>
+        </div> 
+        <div class="row4">
+            <div class="tNama">Total Adult</div>
+            <div class="Adult"><?php echo $reservation['total_adult']; ?></div>
+        </div>
+        <div class="row4">
+            <form action="<?php echo site_url('ReservationCon/delete/' . $reservation['ID_Reservasi']); ?>" method="post">
+                <button type="submit" class="btn btn-danger">Delete</button>
+            </form>
+        </div>  
+    </div>
             </div>
-            <?php endforeach; ?>
+        <?php endforeach; ?>
         </div>
     </main>
     <script>
-        function addToWishlist(packageName, buttonId) {
-            // Add to wishlist logic
-        }
     </script>
 </body>
 </html>

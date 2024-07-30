@@ -24,17 +24,23 @@ class ContentCon extends CI_Controller {
         $this->load->model('ContentModel');
         $id_paket = $this->input->post('ID_Paket');
         $id_user = $this->session->userdata('ID_User');
+        $total_adult = $this->input->post('total_adult');
+        
         $paket = $this->ContentModel->getPaketById($id_paket);
         $user = $this->ContentModel->getUserById($id_user);
-
+    
         if ($paket && $user) {
+            $total_harga = $paket['Harga'] * $total_adult;
+    
             $data = array(
                 'ID_User' => $id_user,
                 'ID_Paket' => $id_paket,
                 'Full_Name' => $user->Full_Name,
-                'Deskripsi' => $paket['Deskripsi']
+                'Deskripsi' => $paket['Deskripsi'],
+                'total_harga' => $total_harga,
+                'total_adult' => $total_adult
             );
-
+    
             $this->ContentModel->saveReservation($data);
             redirect('ReservationCon');
         } else {
@@ -42,5 +48,7 @@ class ContentCon extends CI_Controller {
             show_error('Invalid Package or User', 500);
         }
     }
+    
+    
 }
 ?>
