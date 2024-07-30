@@ -346,6 +346,7 @@
                 <div class="LayoutItem">  
                 <a class="nav-item" href="<?php echo base_url('WishlistCon') ?>"><img src="" alt="">Wishlist</a>      
                     <a class="nav-item" href="<?php echo base_url('HistoryCon') ?>"><img src="" alt="">History</a>
+                    <a class="nav-item" href="<?php echo base_url('ReservationCon'); ?>"><img src="" alt="">Reservation</a>
                     <a class="nav-item" href="<?php echo base_url('main/viewContact') ?>"><img src="" alt="">Contact Us</a>
                     <a class="nav-item" href="<?php echo base_url('Profile') ?>"><img src="" alt="">Profile</a>
                 </div>
@@ -417,7 +418,7 @@
                             <header class="titleR">
                                 <h3><?php echo $key['Nama_Paket']; ?></h3>
                                 <p><?php echo $key['Lokasi']; ?></p>
-                                <p><?php echo $key['Deskripsi']?></p>
+                                <p><?php echo $key['Deskripsi'];?></p>
                             </header>
                             <button class="bookmarkButton" id="addWishlistButton<?php echo $key['ID_Paket']; ?>" onclick="addToWishlist('<?php echo $key['Nama_Paket']; ?>', 'addWishlistButton<?php echo $key['ID_Paket']; ?>')">
                                 <img src="<?php echo base_url('assets/Icon/bookmark.png'); ?>" alt="Bookmark" class="BMicon">
@@ -432,7 +433,7 @@
                                 <h5><?php echo $key['Waktu_Tour'];?> Days</h5>
                                 <p><?php echo $key['Kategori'];?></p>
                             </footer>
-                            <a href="<?php echo base_url('ContentCon'); ?>" class="arrowrightButton">
+                            <a href="<?php echo base_url('ContentCon/index/' .$key['ID_Paket']); ?>" class="arrowrightButton">
                                 <img src="<?php echo base_url('assets/Icon/arrow-right-square.png'); ?>" alt="" class="ARicon">
                             </a>
                         </div>
@@ -458,7 +459,7 @@
                             <header class="titleR">
                                 <h3><?php echo $key['Nama_Paket']; ?></h3>
                                 <p><?php echo $key['Lokasi']; ?></p>
-                                <p><?php echo $key['Deskripsi']?></p>
+                                <p><?php echo $key['Deskripsi']; ?></p>
                             </header>
                             <button class="bookmarkButton" id="addWishlistButton<?php echo $key['ID_Paket']; ?>" onclick="addToWishlist('<?php echo $key['Nama_Paket']; ?>', 'addWishlistButton<?php echo $key['ID_Paket']; ?>')">
                                 <img src="<?php echo base_url('assets/Icon/bookmark.png'); ?>" alt="Bookmark" class="BMicon">
@@ -471,7 +472,7 @@
                         <div class="layFooter">
                             <footer class="textFooter">
                                 <div class="time">
-                                    <h5><?php echo $key['Waktu_Tour'];?> Days</h5>
+                                    <h5><?php echo $key['Waktu_Tour']; ?> Days</h5>
                                 </div>
                                 <p><?php echo $key['Kategori']; ?></p>
                             </footer>

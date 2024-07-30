@@ -7,13 +7,12 @@
     <link rel="stylesheet" href="asset/bootstrap-5.3.3-dist/css/bootstrap.css">
     <title>Content Detail</title>
 </head>
-<style>
+    <style>
     body {
         height: 100%;
         width: 100%;
     }
 
-    /*NavBar*/
     .Brand{
         font-weight: 700; 
         font-size: 50px;
@@ -94,7 +93,6 @@
         transition: transform 0.3s ease-in-out; 
     }
 
-    /*Overview*/
     .layOverview{
         margin: 10px 0px 10px 0px;
         width: 100%;
@@ -254,7 +252,6 @@
         color: #000000;
     }
 
-    /*Universal*/
     .container{
         padding: 10px;
     }
@@ -272,7 +269,6 @@
         margin-top:-20px;
     }
 
-    /*Responsive*/
     @media (max-width: 770px) {
         .section1{
             width: 100%;
@@ -310,133 +306,131 @@
     <main class="m1 container mb-4">
         <section class="">
             <div class="section1">
-                <button onclick="openModal('assets/Image/31d037cebdaf4a318b586751e3dc1d397482fd3f.jpg')"><img src="assets/Image/31d037cebdaf4a318b586751e3dc1d397482fd3f.jpg" alt="" class="tImg1"></button>
-                <button onclick="openModal('assets/Image/8c0b5f0914c97c30c94a9cbe3d257f2e3583fc6c.jpg')"><img src="assets/Image/8c0b5f0914c97c30c94a9cbe3d257f2e3583fc6c.jpg" alt="" class="tImg2"></button>
-                <button onclick="openModal('assets/Image/e742e0ad10409b7065e565dfb95a9046e55205c0.jpg')"><img src="assets/Image/e742e0ad10409b7065e565dfb95a9046e55205c0.jpg" alt="" class="tImg3"></button>
+                <button onclick="openModal('assets/Image/31d037cebdaf4a318b586751e3dc1d397482fd3f.jpg')"><img src=<?php echo base_url("assets/Image/".$detail['gambar_1']); ?> alt="" class="tImg1"></button>
+                <button onclick="openModal('assets/Image/8c0b5f0914c97c30c94a9cbe3d257f2e3583fc6c.jpg')"><img src=<?php echo base_url("assets/Image/".$detail['gambar_2']); ?> alt="" class="tImg2"></button>
+                <button onclick="openModal('assets/Image/e742e0ad10409b7065e565dfb95a9046e55205c0.jpg')"><img src=<?php echo base_url("assets/Image/".$detail['gambar_3']); ?> alt="" class="tImg3"></button>
             </div>
         </section>
         <section class="layOverview">
             <div class="overview">
-                <h2><?= $detail->Nama_Paket ?></h2>
-                <h6><?= $detail->Lokasi ?></h6>
-                <p class="p"><?= $detail->Deskripsi ?></p>
+                <?php if ($detail): ?>
+                    <h2><?= $detail['Nama_Paket']?></h2>
+                    <h6><?= $detail['Lokasi'] ?></h6>
+                    <p class="p"><?= $detail['Deskripsi'] ?></p>
+                <?php else: ?>
+                    <h2>Paket tidak ditemukan</h2>
+                <?php endif; ?>
             </div>
             <div class="panel">
                 <div class="price">
                     <h2>Price</h2>
-                    <h3 id="pricePerAdult">Rp.<?= $detail->Harga ?></h3>
+                    <h3 id="pricePerAdult">Rp.<?= $detail ? $detail['Harga'] : '0' ?></h3>
                 </div>
-                
+
                 <div class="formwrap">
-                    <div class="max">
-                        <p>Maximum: <?= $detail->max ?></p>
-                    </div>
                     <div class="People">
                         <img src="assets/Icon/person-fill.png" alt="" class="person">
-                        <input type="number" id="adult" name="adult" min="0" max="<?= $detail->max ?>" value="0" oninput="calculateTotal()">
+                        <input type="number" id="adult" name="adult" min="0" max="<?= $detail ? $detail['max'] : '0' ?>" value="0" oninput="calculateTotal()">
+                    </div>
+                    <div class="max">
+                        <p>Maximum: <?= $detail ? $detail['max'] : '0' ?></p>
                     </div>
                     <div class="date">
                         <img src="assets/Icon/calendar3.png" alt="" class="calendar">
                         <input type="date" id="date">
                     </div>
-                    
+
                 </div>
 
                 <div class="laybtn">
-                    <button class="order" onclick="displayTotal()">Check Reservation</button>
-                </div>
-                <div id="orderPanel" class="order-panel" style="display: none;">
-                    <button class="close-btn" onclick="closeOrderPanel()">X</button>
-                    <h2>Your Order</h2>
-                    <div class="wrapOutput">
-                        <div class="Name"><?= $detail->Nama_Paket ?></div>
-                        <div id="orderDate"></div>
-                        <div id="orderAdults"></div>
-                        <div id="orderTotalPrice"></div>
-                    </div>
-                    <img src="" alt="" class="QRcode">
-                    <form action="<?php echo site_url('ContentCon/reserve'); ?>" method="post">
-                        <input type="hidden" name="ID_Paket" value="<?php echo $detail->ID_Paket; ?>">
-                        <input type="hidden" name="Full_Name" value="<?php echo $this->session->userdata('Full_Name'); ?>">
-                        <input type="hidden" name="Deskripsi" value="<?php echo $detail->Deskripsi; ?>">
-                        <!-- Anda dapat menambahkan input lain sesuai kebutuhan -->
-                        <button type="submit" class="pay">Confirm</button>
-                    </form>
-                </div>
-            </div>
-        </section>
-    </main>
-    <script>
-        // Fungsi untuk membuka gambar dalam modal
-        function openModal(imageSrc) {
-            // Membuat elemen modal jika belum ada
-            let modal = document.getElementById('imageModal');
-            if (!modal) {
-                modal = document.createElement('div');
-                modal.id = 'imageModal';
-                modal.style.position = 'fixed';
-                modal.style.left = '0';
-                modal.style.top = '0';
-                modal.style.width = '100%';
-                modal.style.height = '100%';
-                modal.style.backgroundColor = 'rgba(0,0,0,0.8)';
-                modal.style.display = 'flex';
-                modal.style.justifyContent = 'center';
-                modal.style.alignItems = 'center';
-                modal.style.zIndex = '1000';
-                modal.style.cursor = 'pointer';
+    <button class="order" onclick="displayTotal()">Check Reservation</button>
+</div>
+<div id="orderPanel" class="order-panel" style="display: none;">
+    <button class="close-btn" onclick="closeOrderPanel()">X</button>
+    <h2>Your Order</h2>
+    <div class="wrapOutput">
+        <div class="Name"><?= $detail['Nama_Paket'] ?></div>
+        <div id="orderDate"></div>
+        <div id="orderAdults"></div>
+        <div id="orderTotalPrice"></div>
+    </div>
+    <img src="" alt="" class="QRcode">
+    <form action="<?php echo site_url('ContentCon/reserve'); ?>" method="post">
+        <input type="hidden" name="ID_Paket" value="<?= $detail['ID_Paket']; ?>">
+        <input type="hidden" name="Full_Name" value="<?= $this->session->userdata('Full_Name'); ?>">
+        <input type="hidden" name="Deskripsi" value="<?= $detail['Deskripsi']; ?>">
+        <!-- Anda dapat menambahkan input lain sesuai kebutuhan -->
+        <button type="submit" class="pay">Confirm</button>
+    </form>
+</div>
+</section>
+</main>
+<script>
+    function openModal(imageSrc) {
+        let modal = document.getElementById('imageModal');
+        if (!modal) {
+            modal = document.createElement('div');
+            modal.id = 'imageModal';
+            modal.style.position = 'fixed';
+            modal.style.left = '0';
+            modal.style.top = '0';
+            modal.style.width = '100%';
+            modal.style.height = '100%';
+            modal.style.backgroundColor = 'rgba(0,0,0,0.8)';
+            modal.style.display = 'flex';
+            modal.style.justifyContent = 'center';
+            modal.style.alignItems = 'center';
+            modal.style.zIndex = '1000';
+            modal.style.cursor = 'pointer';
 
-                const img = document.createElement('img');
-                img.id = 'modalImage';
-                img.style.maxWidth = '90%';
-                img.style.maxHeight = '90%';
-                modal.appendChild(img);
+            const img = document.createElement('img');
+            img.id = 'modalImage';
+            img.style.maxWidth = '90%';
+            img.style.maxHeight = '90%';
+            modal.appendChild(img);
 
-                modal.onclick = function() {
-                    modal.style.display = 'none';
-                }
-
-                document.body.appendChild(modal);
+            modal.onclick = function() {
+                modal.style.display = 'none';
             }
 
-            // Mengatur sumber gambar dan menampilkan modal
-            document.getElementById('modalImage').src = imageSrc;
-            modal.style.display = 'flex';
+            document.body.appendChild(modal);
         }
 
-        let pricePerAdult = <?= $detail->Harga ?>; // Set harga dari server
+        document.getElementById('modalImage').src = imageSrc;
+        modal.style.display = 'flex';
+    }
 
-        function calculateTotal() {
-            const adultInput = document.getElementById('adult');
-            const numberOfAdults = adultInput.value;
+    let pricePerAdult = <?= $detail['Harga'] ?>; // Set harga dari server
 
-            const totalPrice = numberOfAdults * pricePerAdult;
-            document.getElementById('totalPrice').textContent = Rp. ${totalPrice.toLocaleString('id-ID')};
-        }
+    function calculateTotal() {
+        const adultInput = document.getElementById('adult');
+        const numberOfAdults = adultInput.value;
+        const totalPrice = numberOfAdults * pricePerAdult;
+        document.getElementById('totalPrice').textContent = 'Rp. ' + totalPrice.toLocaleString('id-ID');
+    }
 
-        function displayTotal() {
-            const adultInput = document.getElementById('adult');
-            const numberOfAdults = adultInput.value;
-            const dateInput = document.getElementById('date');
-            const selectedDate = dateInput.value;
+    function displayTotal() {
+        const adultInput = document.getElementById('adult');
+        const numberOfAdults = adultInput.value;
+        const dateInput = document.getElementById('date');
+        const selectedDate = dateInput.value;
+        const totalPrice = numberOfAdults * pricePerAdult;
 
-            const totalPrice = numberOfAdults * pricePerAdult;
+        const orderPanel = document.getElementById('orderPanel');
+        const orderAdults = document.getElementById('orderAdults');
+        const orderTotalPrice = document.getElementById('orderTotalPrice');
+        const orderDate = document.getElementById('orderDate');
 
-            const orderPanel = document.getElementById('orderPanel');
-            const orderAdults = document.getElementById('orderAdults');
-            const orderTotalPrice = document.getElementById('orderTotalPrice');
-            const orderDate = document.getElementById('orderDate');
+        orderAdults.textContent = 'Number of Adults: ' + numberOfAdults;
+        orderTotalPrice.textContent = 'Total Price: Rp. ' + totalPrice.toLocaleString('id-ID');
+        orderDate.textContent = 'Reservation Date: ' + selectedDate;
+        orderPanel.style.display = 'block';
+    }
 
-            orderAdults.textContent = Number of Adults: ${numberOfAdults};
-            orderTotalPrice.textContent = Total Price: Rp. ${totalPrice.toLocaleString('id-ID')};
-            orderDate.textContent = Reservation Date: ${selectedDate};
-            orderPanel.style.display = 'block';
-        }
-
-        function closeOrderPanel() {
-            const orderPanel = document.getElementById('orderPanel');
-            orderPanel.style.display = 'none';
-        }
-    </script>
+    function closeOrderPanel() {
+        const orderPanel = document.getElementById('orderPanel');
+        orderPanel.style.display = 'none';
+    }
+</script>
 </body>
 </html>

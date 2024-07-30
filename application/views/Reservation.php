@@ -326,7 +326,7 @@
                     </div>
                     <div class="layHeader">
                         <header class="titleR">
-                            <h3><?php echo $reservation['ID_Paket']; ?></h3>
+                            <h3>Paket <?php echo $reservation['ID_Paket']; ?></h3>
                             <p><?php echo $reservation['Deskripsi']; ?></p>
                         </header>
                     </div>
