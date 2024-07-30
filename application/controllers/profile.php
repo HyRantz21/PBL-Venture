@@ -46,7 +46,7 @@ class Profile extends CI_Controller {
 
                 // Jika update berhasil
                 $this->session->set_flashdata('message', 'Profile updated successfully');
-                redirect('profile/viewprofile'); // Redirect setelah update
+                redirect('main'); // Redirect setelah update
             } else {
                 // Jika update gagal
                 $this->session->set_flashdata('message', 'Profile update failed');

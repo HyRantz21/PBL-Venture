@@ -210,7 +210,7 @@
                                     <td><?php echo $key['Email']; ?></td>
                                     <td><?php echo $key['Password']; ?></td>
                                     <td>
-                                        <a href="<?php echo base_url('dashboard/editUser/'.$key['ID_User']); ?>" class="btn-primary p-2">Edit</a>
+                                        <!-- <a href="<?php echo base_url('dashboard/editUser/'.$key['ID_User']); ?>" class="btn-primary p-2">Edit</a> -->
                                         <a href="<?php echo base_url('dashboard/hapusUser/'.$key['ID_User']); ?>" class="btn-danger p-2">Delete</a>
                                     </td>
                                 </tr>
@@ -227,7 +227,7 @@
                         <div class="card-header py-3">
                             <h6 class="m-0 font-weight-bold text-primary">Tabel Paket Wisata</h6>
                         </div>
-                        <a href="<?php echo base_url('dashboard/tambahPaket/'); ?>">Tambah Paket</a>
+                        <!-- <a href="<?php echo base_url('dashboard/tambahPaket/'); ?>">Tambah Paket</a> -->
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
