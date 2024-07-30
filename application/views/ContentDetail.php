@@ -339,13 +339,14 @@
                     </div>
                     <div class="People">
                         <img src="<?php echo base_url('assets/Icon/person-fill.png'); ?>" alt="" class="person">
-                        <input type="number" id="adult" name="adult" min="0" max="<?= $detail ? $detail['max'] : '0' ?>" value="0" oninput="calculateTotal()">
+                        <input type="number" id="adult" name="adult" min="0" max="<?= $detail ? $detail['max'] : '0' ?>" value="0" oninput="checkMax()">
                     </div>
                     <div class="date">
                         <img src="assets/Icon/calendar3.png" alt="" class="calendar">
                         <input type="date" id="date">
                     </div>
                 </div>
+
                 <div class="laybtn">
     <button class="order" onclick="displayTotal()">Check Reservation</button>
 </div>
@@ -435,6 +436,17 @@
         const orderPanel = document.getElementById('orderPanel');
         orderPanel.style.display = 'none';
     }
+
+    function checkMax() {
+        const max = <?= $detail ? $detail['max'] : 0 ?>;
+        const input = document.getElementById('adult');
+        if (input.value > max) {
+            input.value = max;
+            alert('The number of people cannot exceed the maximum limit.');
+        }
+    }
+
+
 </script>
 </body>
 </html>
