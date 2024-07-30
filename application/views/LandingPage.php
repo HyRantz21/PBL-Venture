@@ -115,6 +115,12 @@
         height: 100%;
         width: 100%;
         border-radius: var(--border-radius);
+        transition: transform 0.3s ease-in-out;
+    }
+
+    .imgC:hover{
+        transform: scale(1.1); 
+        transition: transform 0.3s ease-in-out; 
     }
 
     .wrapCategory .text {
@@ -145,7 +151,7 @@
 
     .LayExplore{
         display: grid;
-        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-columns: 25% 25% 25% 25% ;
         gap: 10px 10px;
     }
     .wrapExplore{
@@ -176,6 +182,7 @@
         width: 100%;
         border-radius: var(--border-radius);
     }
+
     .layHeader {
         max-width: 360px;
         width: 100%;
@@ -295,7 +302,7 @@
 
     .LayRecomended{
         display: grid;
-        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-columns: 25% 25% 25% 25% ;
         gap: 10px 10px;
     }
     .wrapRecomended{
@@ -308,30 +315,51 @@
     }
 
     /*rPlace styles*/
-    .rPlace {
+    .Place {
         margin-top: 25px;
     }
 
-    .layrPlace {
+    .layPlace {
         overflow: auto;
         white-space: nowrap;
         scrollbar-width: none;
         -ms-overflow-style: none;
     }
 
-    .layrPlace::-webkit-scrollbar {
+    .layPlace::-webkit-scrollbar {
         display: none;
     }
 
-    .wraprPlace {
+    .wrapPlace {
         border-radius: var(--border-radius);
         display: inline-block;
         width: 191px;
         height: 250px;
         margin: 10px;
         box-shadow: 1px 1px 5px 0px rgba(0, 0, 0, 0.5);
+        position: relative;
+        overflow: hidden; 
+        padding: 0;
+        margin: 5px;
+    }
+
+    .wrapPlace .text {
+        position: absolute;
+        top: 70%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: white;
+        font-weight:700;
+        font-size: 30px; 
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); 
+        z-index: 1;
     }
     
+    .result{
+        display: grid;
+        grid-template-columns: 25% 25% 25% 25% ;
+        gap: 10px 10px;
+    }
     
     /*Universal*/
     .section p{
@@ -508,21 +536,53 @@
                 </div>
             </article>
 
-            <article class="rPlace">
+            <article class="Place">
                 <header>
                     <h1 class="txtrPlace">Discover Place</h1>
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
                 </header>
-                <div class="layrPlace">
-                    <a href="" class="wraprPlace"></a>
-                    <a href="" class="wraprPlace"></a>
-                    <a href="" class="wraprPlace"></a>
-                    <a href="" class="wraprPlace"></a>
-                    <a href="" class="wraprPlace"></a>
-                    <a href="" class="wraprPlace"></a>
+                <div class="layPlace">
+                    <a href="#" class="wrapPlace" data-Place="Kabupaten Badung">
+                        <div class="text">Kabupaten Badung</div>
+                        <img src="<?php echo base_url('assets/Image/village.jpg'); ?>" alt="" class="imgC">
+                    </a>
+                    <a href="#" class="wrapPlace" data-Place="Kabupaten Bangli">
+                        <div class="text">Kabupaten Bangli</div>
+                        <img src="<?php echo base_url('assets/Image/village.jpg'); ?>" alt="" class="imgC">
+                    </a>
+                    <a href="#" class="wrapPlace" data-Place="Kabupaten Buleleng">
+                        <div class="text">Kabupaten Buleleng</div>
+                        <img src="<?php echo base_url('assets/Image/village.jpg'); ?>" alt="" class="imgC">
+                    </a>
+                    <a href="#" class="wrapPlace" data-Place="Kabupaten Gianyar">
+                        <div class="text">Kabupaten Gianyar</div>
+                        <img src="<?php echo base_url('assets/Image/village.jpg'); ?>" alt="" class="imgC">
+                    </a>
+                    <a href="#" class="wrapPlace" data-Place="Kabupaten Jembrana">
+                        <div class="text">Kabupaten Jembrana</div>
+                        <img src="<?php echo base_url('assets/Image/village.jpg'); ?>" alt="" class="imgC">
+                    </a>
+                    <a href="#" class="wrapPlace" data-Place="Kabupaten Karangasem">
+                        <div class="text">Kabupaten Karangasem</div>
+                        <img src="<?php echo base_url('assets/Image/village.jpg'); ?>" alt="" class="imgC">
+                    </a>
+                    <a href="#" class="wrapPlace" data-Place="Kabupaten Klungkung">
+                        <div class="text">Kabupaten Klungkung</div>
+                        <img src="<?php echo base_url('assets/Image/village.jpg'); ?>" alt="" class="imgC">
+                    </a>
+                    <a href="#" class="wrapPlace" data-Place="Kabupaten Tabanan">
+                        <div class="text">Kabupaten Tabanan</div>
+                        <img src="<?php echo base_url('assets/Image/village.jpg'); ?>" alt="" class="imgC">
+                    </a>
+                    <a href="#" class="wrapPlace" data-Place="Kota Denpasar">
+                        <div class="text">Kota Denpasar</div>
+                        <img src="<?php echo base_url('assets/Image/village.jpg'); ?>" alt="" class="imgC">
+                    </a>
+                </div>
+                <div class="Result">
+                    
                 </div>
             </article>
-
         </section>
         <div id="searchOverlay" class="search-overlay">
         <div id="searchResults" class="results"></div>
@@ -541,6 +601,15 @@
 
         document.addEventListener('DOMContentLoaded', () => {
             const layCategory = document.querySelector('.layCategory');
+
+            layCategory.addEventListener('wheel', (event) => {
+                event.preventDefault();
+                layCategory.scrollLeft += event.deltaY; 
+            });
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const layCategory = document.querySelector('.layPlace');
 
             layCategory.addEventListener('wheel', (event) => {
                 event.preventDefault();
@@ -649,7 +718,74 @@
                 loadPaketByCategory(category);
             });
         });
+    </script>
+    <script>
+        function loadPaketByPlace(Place) {
+            $.ajax({
+                url: '<?php echo base_url('main/getPaketByPlace'); ?>',
+                type: 'POST',
+                data: { Place: Place },
+                success: function(response) {
+                    try {
+                        const paketWisata = JSON.parse(response);
+                        const recomendedContainer = document.querySelector('.Result');
+                        recomendedContainer.innerHTML = '';
 
+                        paketWisata.forEach(function(paket) {
+                            const paketHtml = `
+                                <div class="wrapRecomended" data-package-name="${paket.Nama_Paket.toLowerCase()}">
+                                    <div class="wrapImg">
+                                        <figure class="img">
+                                            <img src="${paket.gambar_1}" alt="" class="imgR">
+                                        </figure>
+                                    </div>
+                                    <div class="layHeader">
+                                        <header class="titleR">
+                                            <h3>${paket.Nama_Paket}</h3>
+                                            <p>${paket.Lokasi}</p>
+                                            <p>${paket.Deskripsi}</p>
+                                        </header>
+                                        <button class="bookmarkButton" id="addWishlistButton${paket.ID_Paket}" onclick="addToWishlist('${paket.Nama_Paket}', 'addWishlistButton${paket.ID_Paket}')">
+                                            <img src="<?php echo base_url('assets/Icon/bookmark.png'); ?>" alt="Bookmark" class="BMicon">
+                                        </button>
+                                    </div>
+                                    <div class="layPrice">
+                                        <h5 class="textPrice">Rp.${parseInt(paket.Harga).toLocaleString('id-ID', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</h5>
+                                        <p>Starting Price</p>
+                                    </div>
+                                    <div class="layFooter">
+                                        <footer class="textFooter">
+                                            <div class="time">
+                                                <h5>${paket.Waktu_Tour}</h5>
+                                                <h5 class="dtxt">Days</h5>
+                                            </div>
+                                            <p>${paket.Kategori}</p>
+                                        </footer>
+                                        <a href="<?php echo base_url('main/viewContent'); ?>" class="arrowrightButton">
+                                            <img src="<?php echo base_url('assets/Icon/arrow-right-square.png'); ?>" alt="" class="ARicon">
+                                        </a>
+                                    </div>
+                                </div>`;
+                            recomendedContainer.innerHTML += paketHtml;
+                        });
+                    } catch (error) {
+                        console.error('Error parsing JSON:', error);
+                        alert('Error loading packages');
+                    }
+                },
+                error: function() {
+                    alert('Error loading packages');
+                }
+            });
+        }
+
+        document.querySelectorAll('.wrapPlace').forEach(function(placeLink) {
+            placeLink.addEventListener('click', function(event) {
+                event.preventDefault();
+                const place = this.getAttribute('data-place');
+                loadPaketByPlace(place);
+            });
+        });
     </script>
 </body>
 </html>
