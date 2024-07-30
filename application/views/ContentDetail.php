@@ -269,6 +269,44 @@
         margin-top:-20px;
     }
 
+    .custom-alert {
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        padding: 20px 30px;
+        background-color: #f8f9fa;
+        border: 1px solid #ced4da;
+        border-radius: 15px;
+        z-index: 1000;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+        text-align: center;
+    }
+
+    .custom-alert p {
+        margin: 0;
+        font-size: 16px;
+        color: #343a40;
+    }
+
+    .custom-alert button {
+        margin-top: 15px;
+        padding: 10px 20px;
+        background-color: black;
+        border: none;
+        border-radius: 15px;
+        color: white;
+        font-size: 14px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .custom-alert button:hover {
+        background-color: white;
+        color: black;
+    }
+
     @media (max-width: 770px) {
         .section1{
             width: 100%;
@@ -407,53 +445,72 @@
         }
 
         const pricePerAdult = <?= $detail['Harga'] ?>;
-const maxPeople = <?= $detail['max'] ?>;
+        const maxPeople = <?= $detail['max'] ?>;
 
-function calculateTotal() {
-    const adultInput = document.getElementById('adult');
-    let numberOfAdults = adultInput.value;
-    if (numberOfAdults > maxPeople) {
-        numberOfAdults = maxPeople;
-        adultInput.value = maxPeople;
-        alert('The number of people cannot exceed the maximum limit.');
-    }
-    const totalPrice = numberOfAdults * pricePerAdult;
-    document.getElementById('orderTotalPrice').textContent = 'Rp. ' + totalPrice.toLocaleString('id-ID');
-    document.getElementById('hiddenTotalAdult').value = numberOfAdults;
-    document.getElementById('hiddenTotalPrice').value = totalPrice;
-}
+        function calculateTotal() {
+            const adultInput = document.getElementById('adult');
+            let numberOfAdults = adultInput.value;
+            if (numberOfAdults > maxPeople) {
+                numberOfAdults = maxPeople;
+                adultInput.value = maxPeople;
+                showCustomAlert('The number of people cannot exceed the maximum limit.');
+            }
+            const totalPrice = numberOfAdults * pricePerAdult;
+            document.getElementById('orderTotalPrice').textContent = 'Rp. ' + totalPrice.toLocaleString('id-ID');
+            document.getElementById('hiddenTotalAdult').value = numberOfAdults;
+            document.getElementById('hiddenTotalPrice').value = totalPrice;
+        }
 
-function displayTotal() {
-    calculateTotal(); // Ensure the total is calculated correctly
-    const adultInput = document.getElementById('adult');
-    const numberOfAdults = adultInput.value;
-    const dateInput = document.getElementById('date');
-    const selectedDate = dateInput.value;
-    const totalPrice = numberOfAdults * pricePerAdult;
+        function displayTotal() {
+            const adultInput = document.getElementById('adult');
+            const numberOfAdults = adultInput.value;
+            if (numberOfAdults == 0) {
+                showCustomAlert('The number of adults cannot be zero.');
+                return;
+            }
+            calculateTotal(); // Ensure the total is calculated correctly
+            const dateInput = document.getElementById('date');
+            const selectedDate = dateInput.value;
+            const totalPrice = numberOfAdults * pricePerAdult;
 
-    const orderPanel = document.getElementById('orderPanel');
-    const orderAdults = document.getElementById('orderAdults');
-    const orderTotalPrice = document.getElementById('orderTotalPrice');
-    const orderDate = document.getElementById('orderDate');
+            const orderPanel = document.getElementById('orderPanel');
+            const orderAdults = document.getElementById('orderAdults');
+            const orderTotalPrice = document.getElementById('orderTotalPrice');
+            const orderDate = document.getElementById('orderDate');
 
-    orderAdults.textContent = 'Number of Adults: ' + numberOfAdults;
-    orderTotalPrice.textContent = 'Total Price: Rp. ' + totalPrice.toLocaleString('id-ID');
-    orderDate.textContent = 'Reservation Date: ' + selectedDate;
-    orderPanel.style.display = 'block';
-}
+            orderAdults.textContent = 'Number of Adults: ' + numberOfAdults;
+            orderTotalPrice.textContent = 'Total Price: Rp. ' + totalPrice.toLocaleString('id-ID');
+            orderDate.textContent = 'Reservation Date: ' + selectedDate;
+            orderPanel.style.display = 'block';
+        }
 
-    function closeOrderPanel() {
-        document.getElementById('orderPanel').style.display = 'none';
-    }   
+        function closeOrderPanel() {
+            document.getElementById('orderPanel').style.display = 'none';
+        }
 
         function checkMax() {
             const max = <?= $detail ? $detail['max'] : 0 ?>;
             const input = document.getElementById('adult');
             if (input.value > max) {
                 input.value = max;
-                alert('The number of people cannot exceed the maximum limit.');
+                showCustomAlert('The number of people cannot exceed the maximum limit.');
             }
         }
-    </script>
+
+        function showCustomAlert(message) {
+            const customAlert = document.getElementById('customAlert');
+            const alertMessage = document.getElementById('alertMessage');
+            alertMessage.textContent = message;
+            customAlert.style.display = 'block';
+        }
+
+        function closeCustomAlert() {
+            const customAlert = document.getElementById('customAlert');
+            customAlert.style.display = 'none';
+}    </script>
+    <div id="customAlert" class="custom-alert">
+        <p id="alertMessage"></p>
+        <button onclick="closeCustomAlert()">OK</button>
+    </div>
 </body>
 </html>

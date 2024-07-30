@@ -197,7 +197,7 @@
         column-gap: 20px;
     }
 
-    .layFooter h5{
+    .layFooter h4{
         margin: 0;
         margin-top: 10px;
     }
@@ -240,6 +240,29 @@
         top: 50%;
         position: absolute;
     }
+    @media screen and (max-width: 1150px) {
+        .LayRecomended{
+            display: grid;
+            justify-content: center;
+            grid-template-columns: 33% 33% 33%;
+            gap: 10px 10px;
+        }
+    }
+    @media screen and (max-width: 850px) {
+        .LayRecomended{
+            display: grid;
+            justify-content: center;
+            grid-template-columns: 50% 50%;
+            gap: 10px 10px;
+        }
+    }
+    @media screen and (max-width: 650px) {
+        .LayRecomended{
+            display: grid;
+            justify-content: center;
+            grid-template-columns: 100%;
+        }
+    }
 
 </style>
 <body>
@@ -277,7 +300,7 @@
                         <form action="http://localhost/PBL-Venture/WishlistCon/remove" method="post">
                             <input type="hidden" name="ID_Paket" value="<?= $item['ID_Paket']; ?>">
                             <button type="submit" class="bookmarkButton">
-                                <img src="assets/Icon/bookmark-fill.png" alt="Bookmark" class="BMicon">
+                                <img src="<?php echo base_url("assets/Icon/bookmark-fill.png")?>" alt="Bookmark" class="BMicon">
                             </button>
                         </form>
                     </div>

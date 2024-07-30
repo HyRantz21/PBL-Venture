@@ -99,10 +99,16 @@
         margin-right: 10px;
         margin-bottom: 20px;
     }
+    .img{
+        width: 10px;
+    }
+    .m1{
+        margin-top:20px
+    }
 </style>
 </head>
 <body>
-<header>
+    <header>
         <nav class="navbar navbar-expand-lg mb-2">
             <div class="container">
                 <div class="wrapper">
@@ -116,12 +122,12 @@
                     <a class="nav-item" href="<?php echo base_url('Profile') ?>"><img src="" alt="">Profile</a>
                 </div>
             </div>
-        </nav>
+        </nav>`
     </header>
-    <div class="container">
+    <div class="m1 container">
         <main>
             <div class="section">
-            <img src="<?php echo base_url('assets/Image/contact_us.jpg'); ?>" alt="Contact Us">
+                <img class="img" src="<?php echo base_url('assets/Image/contact_us.jpg'); ?>" alt="Contact Us">
                 <h1>Contact Us</h1>
                 <div class="contact-info">
                     <i class="fas fa-envelope"></i>

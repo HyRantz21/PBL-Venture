@@ -387,6 +387,67 @@
     .time{
         display: flex;
     }
+
+    @media screen and (max-width: 900px) {
+        .LayExplore{
+            display: grid;
+            justify-content: center;
+            grid-template-columns: 50% 50%;
+            gap: 10px 10px;
+        }
+        .LayRecomended{
+            display: grid;
+            justify-content: center;
+            grid-template-columns: 50% 50%;
+            gap: 10px 10px;
+        }
+        .Result{
+            display: grid;
+            justify-content: center;
+            grid-template-columns: 50% 50%;
+            gap: 10px 10px;
+        }
+    }
+    @media screen and (max-width: 1150px) {
+        .LayExplore{
+            display: grid;
+            justify-content: center;
+            grid-template-columns: 33% 33% 33%;
+            gap: 10px 10px;
+        }
+        .LayRecomended{
+            display: grid;
+            justify-content: center;
+            grid-template-columns: 33% 33% 33%;
+            gap: 10px 10px;
+        }
+        .Result{
+            display: grid;
+            justify-content: center;
+            grid-template-columns: 33% 33% 33%;
+            gap: 10px 10px;
+        }
+    }
+    @media screen and (max-width: 850px) {
+        .LayExplore{
+            display: grid;
+            justify-content: center;
+            grid-template-columns: 50% 50%;
+            gap: 10px 10px;
+        }
+        .LayRecomended{
+            display: grid;
+            justify-content: center;
+            grid-template-columns: 50% 50%;
+            gap: 10px 10px;
+        }
+        .Result{
+            display: grid;
+            justify-content: center;
+            grid-template-columns: 50% 50%;
+            gap: 10px 10px;
+        }
+    }
 </style>
 
 <body>
@@ -409,9 +470,9 @@
     <main>
         <section id="carouselExampleInterval" class="container carousel slide" data-bs-ride="carousel">
             <div class="wrapC carousel-inner" style="border-radius: var(--border-radius);">
-            <form class="searchbar" id="searchForm">
-                <input class="bar" type="search" id="searchBar" placeholder="Search" aria-label="Search">
-            </form>
+                <form class="searchbar" id="searchForm">
+                    <input class="bar" type="search" id="searchBar" placeholder="Search" aria-label="Search">
+                </form>
 
             <div id="sResult"></div> <!-- View untuk menampilkan hasil pencarian -->
 
@@ -550,39 +611,39 @@
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
                 </header>
                 <div class="layPlace">
-                    <a href="#" class="wrapPlace" data-Place="Kabupaten Badung">
+                    <a href="#" class="wrapPlace" data-Place="Badung">
                         <div class="text">Badung</div>
                         <img src="<?php echo base_url('assets/Image/village.jpg'); ?>" alt="" class="imgC">
                     </a>
-                    <a href="#" class="wrapPlace" data-Place="Kabupaten Bangli">
+                    <a href="#" class="wrapPlace" data-Place="Bangli">
                         <div class="text">Bangli</div>
                         <img src="<?php echo base_url('assets/Image/village.jpg'); ?>" alt="" class="imgC">
                     </a>
-                    <a href="#" class="wrapPlace" data-Place="Kabupaten Buleleng">
+                    <a href="#" class="wrapPlace" data-Place="Buleleng">
                         <div class="text">Buleleng</div>
                         <img src="<?php echo base_url('assets/Image/village.jpg'); ?>" alt="" class="imgC">
                     </a>
-                    <a href="#" class="wrapPlace" data-Place="Kabupaten Gianyar">
+                    <a href="#" class="wrapPlace" data-Place="Gianyar">
                         <div class="text">Gianyar</div>
                         <img src="<?php echo base_url('assets/Image/village.jpg'); ?>" alt="" class="imgC">
                     </a>
-                    <a href="#" class="wrapPlace" data-Place="Kabupaten Jembrana">
+                    <a href="#" class="wrapPlace" data-Place="Jembrana">
                         <div class="text">Jembrana</div>
                         <img src="<?php echo base_url('assets/Image/village.jpg'); ?>" alt="" class="imgC">
                     </a>
-                    <a href="#" class="wrapPlace" data-Place="Kabupaten Karangasem">
+                    <a href="#" class="wrapPlace" data-Place="Karangasem">
                         <div class="text">Karangasem</div>
                         <img src="<?php echo base_url('assets/Image/village.jpg'); ?>" alt="" class="imgC">
                     </a>
-                    <a href="#" class="wrapPlace" data-Place="Kabupaten Klungkung">
+                    <a href="#" class="wrapPlace" data-Place="Klungkung">
                         <div class="text">Klungkung</div>
                         <img src="<?php echo base_url('assets/Image/village.jpg'); ?>" alt="" class="imgC">
                     </a>
-                    <a href="#" class="wrapPlace" data-Place="Kabupaten Tabanan">
+                    <a href="#" class="wrapPlace" data-Place="Tabanan">
                         <div class="text">Tabanan</div>
                         <img src="<?php echo base_url('assets/Image/village.jpg'); ?>" alt="" class="imgC">
                     </a>
-                    <a href="#" class="wrapPlace" data-Place="Kota Denpasar">
+                    <a href="#" class="wrapPlace" data-Place="Denpasar">
                         <div class="text">Denpasar</div>
                         <img src="<?php echo base_url('assets/Image/village.jpg'); ?>" alt="" class="imgC">
                     </a>
@@ -632,17 +693,17 @@
             });
         }
         document.getElementById('searchForm').addEventListener('submit', function(event) {
-        event.preventDefault();
-        const query = document.getElementById('searchBar').value.toLowerCase();
+            event.preventDefault();
+            const query = document.getElementById('searchBar').value.toLowerCase();
         const url = '<?php echo base_url('main/viewResult'); ?>' + '?query=' + encodeURIComponent(query);
         window.location.href = url;
-    });
+        });
 
-    document.getElementById('searchOverlay').addEventListener('click', function(event) {
-        if (event.target.id === 'searchOverlay') {
-            this.style.display = 'none';
-        }
-    });
+        document.getElementById('searchOverlay').addEventListener('click', function(event) {
+            if (event.target.id === 'searchOverlay') {
+                this.style.display = 'none';
+            }
+        });
     </script>
     <script>
         function loadPaketByCategory(category) {
@@ -709,7 +770,7 @@
                 loadPaketByCategory(category);
             });
         });
-    </scrip>
+    </script>
     <script>
         function loadPaketByPlace(Place) {
             $.ajax({
