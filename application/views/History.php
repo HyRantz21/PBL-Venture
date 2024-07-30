@@ -326,6 +326,7 @@
                         <div class="layHeader">
                             <header class="titleR">
                                 <h3>Paket <?= $transaction->ID_Paket ?></h3>
+                                <h6>Deskripsi:</h6>
                                 <p><?= $transaction->Catatan ?></p>
                             </header>
                         </div>
