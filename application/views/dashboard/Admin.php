@@ -297,6 +297,8 @@
                                         <th>No</th>
                                         <th>User Name</th>
                                         <th>Package Name</th>
+                                        <th>Total Harga</th>
+                                        <th>Total Pengunjung</th>
                                         <th>Action</th>
                                     </tr>
                                     </thead>
@@ -309,6 +311,8 @@
                                         <td><?php echo $no; ?></td>
                                         <td><?php echo htmlspecialchars($key['Full_Name']); ?></td>
                                         <td><?php echo htmlspecialchars($key['Deskripsi']); ?></td>
+                                        <td><?php echo htmlspecialchars($key['total_harga']); ?></td>
+                                        <td><?php echo htmlspecialchars($key['total_adult']); ?></td>
                                         <td>
                                             <a href="<?php echo base_url('dashboard/confirmReservation/'.$key['ID_Reservasi']); ?>" class="btn btn-success">Confirm</a>
                                             <a href="<?php echo base_url('dashboard/deleteReservation/'.$key['ID_Reservasi']); ?>" class="btn btn-danger">Denied</a>
@@ -350,6 +354,7 @@
                                             <td>:</td>
                                             <td>
                                                 <select name="Kategori">
+                                                    <option value="" disabled selected>Silahkan Pilih :</option>
                                                     <option value="entertainment">Entertainment</option>
                                                     <option value="food">Food</option>
                                                     <option value="culture">Culture</option>
