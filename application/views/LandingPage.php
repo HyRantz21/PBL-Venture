@@ -416,22 +416,22 @@
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
             </header>
             <div class="layCategory">
-                <button href="#" class="wrapCategory"> 
+                <a href="#" class="wrapCategory" data-category="Culture">
                     <div class="text">Culture</div>                               
                     <img src="<?php echo base_url('assets/Image/village.jpg'); ?>" alt="" class="imgC">
-                </button>
-                <button href="#" class="wrapCategory">
-                    <div class="text">Sport</div>
+                </a>
+                <a href="#" class="wrapCategory" data-category="Entertainment">
+                    <div class="text">Entertainment</div>
                     <img src="<?php echo base_url('assets/Image/village.jpg'); ?>" alt="" class="imgC">
-                </button>
-                <button href="#" class="wrapCategory">
+                </a>
+                <a href="#" class="wrapCategory" data-category="Food">
                     <div class="text">Food</div>
                     <img src="<?php echo base_url('assets/Image/village.jpg'); ?>" alt="" class="imgC">
-                </button>
-                <button href="#" class="wrapCategory">
+                </a>
+                <a href="#" class="wrapCategory" data-category="Nature">
                     <div class="text">Nature</div>
                     <img src="<?php echo base_url('assets/Image/village.jpg'); ?>" alt="" class="imgC">
-                </button>
+                </a>
             </div>
         </article>
             
@@ -483,10 +483,9 @@
                 </header>
                 <div class="LayRecomended">
                     <?php foreach ($paket_wisata as $key): ?>
-                        <div class="wrapRecomended" data-package-name="<?php echo strtolower($key['Nama_Paket']); ?>">
-                        <div class="wrapImg">
+                        <div class="wrapRecomended" data-package-name="<?php echo strtolower($key['Nama_Paket']); ?>">                        <div class="wrapImg">
                             <figure class="img">
-                                <img src="<?php echo base_url('assets/Image/ea545f3990f88524a9472220454ab63bedc0b6aa.jpg'); ?>" alt="" class="imgR">
+                                <img src="<?php echo $key['gambar_1']; ?>" alt="" class="imgR">
                             </figure>
                         </div>
                         <div class="layHeader">
@@ -597,68 +596,68 @@
         });
     </script>
     <script>
-    function loadPaketByCategory(category) {
-        $.ajax({
-            url: '<?php echo base_url('main/getPaketByCategory'); ?>',
-            type: 'POST',
-            data: { category: category },
-            success: function(response) {
-                const paketWisata = JSON.parse(response);
-                const recomendedContainer = document.querySelector('.LayRecomended');
-                recomendedContainer.innerHTML = '';
+        function loadPaketByCategory(category) {
+            $.ajax({
+                url: '<?php echo base_url('main/getPaketByCategory'); ?>',
+                type: 'POST',
+                data: { category: category },
+                success: function(response) {
+                    const paketWisata = JSON.parse(response);
+                    const recomendedContainer = document.querySelector('.LayRecomended');
+                    recomendedContainer.innerHTML = '';
 
-                paketWisata.forEach(function(paket) {
-                    const paketHtml = `
-                        <div class="wrapRecomended" data-package-name="${paket.Nama_Paket.toLowerCase()}">
-                            <div class="wrapImg">
-                                <figure class="img">
-                                    <img src="<?php echo base_url('assets/Image/ea545f3990f88524a9472220454ab63bedc0b6aa.jpg'); ?>" alt="" class="imgR">
-                                </figure>
+                    paketWisata.forEach(function(paket) {
+                        const paketHtml = `
+                            <div class="wrapRecomended" data-package-name="${paket.Nama_Paket.toLowerCase()}">
+                                <div class="wrapImg">
+                                    <figure class="img">
+                                        <img src="<?php echo base_url('assets/Image/ea545f3990f88524a9472220454ab63bedc0b6aa.jpg'); ?>" alt="" class="imgR">
+                                    </figure>
+                                </div>
+                                <div class="layHeader">
+                                    <header class="titleR">
+                                        <h3>${paket.Nama_Paket}</h3>
+                                        <p>${paket.Lokasi}</p>
+                                        <p>${paket.Deskripsi}</p>
+                                    </header>
+                                    <button class="bookmarkButton" id="addWishlistButton${paket.ID_Paket}" onclick="addToWishlist('${paket.Nama_Paket}', 'addWishlistButton${paket.ID_Paket}')">
+                                        <img src="<?php echo base_url('assets/Icon/bookmark.png'); ?>" alt="Bookmark" class="BMicon">
+                                    </button>
+                                </div>
+                                <div class="layPrice">
+                                    <h5 class="textPrice">Rp.${parseInt(paket.Harga).toLocaleString('id-ID', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</h5>
+                                    <p>Starting Price</p>
+                                </div>
+                                <div class="layFooter">
+                                    <footer class="textFooter">
+                                        <div class="time">
+                                            <h5>${paket.Waktu_Tour}</h5>
+                                            <h5 class="dtxt">Days</h5>
+                                        </div>
+                                        <p>${paket.Kategori}</p>
+                                    </footer>
+                                    <a href="<?php echo base_url('main/viewContent'); ?>" class="arrowrightButton">
+                                        <img src="<?php echo base_url('assets/Icon/arrow-right-square.png'); ?>" alt="" class="ARicon">
+                                    </a>
+                                </div>
                             </div>
-                            <div class="layHeader">
-                                <header class="titleR">
-                                    <h3>${paket.Nama_Paket}</h3>
-                                    <p>${paket.Lokasi}</p>
-                                    <p>${paket.Deskripsi}</p>
-                                </header>
-                                <button class="bookmarkButton" id="addWishlistButton${paket.ID_Paket}" onclick="addToWishlist('${paket.Nama_Paket}', 'addWishlistButton${paket.ID_Paket}')">
-                                    <img src="<?php echo base_url('assets/Icon/bookmark.png'); ?>" alt="Bookmark" class="BMicon">
-                                </button>
-                            </div>
-                            <div class="layPrice">
-                                <h5 class="textPrice">Rp.${parseInt(paket.Harga).toLocaleString('id-ID', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</h5>
-                                <p>Starting Price</p>
-                            </div>
-                            <div class="layFooter">
-                                <footer class="textFooter">
-                                    <div class="time">
-                                        <h5>${paket.Waktu_Tour}</h5>
-                                        <h5 class="dtxt">Days</h5>
-                                    </div>
-                                    <p>${paket.Kategori}</p>
-                                </footer>
-                                <a href="<?php echo base_url('main/viewContent'); ?>" class="arrowrightButton">
-                                    <img src="<?php echo base_url('assets/Icon/arrow-right-square.png'); ?>" alt="" class="ARicon">
-                                </a>
-                            </div>
-                        </div>
-                    `;
-                    recomendedContainer.innerHTML += paketHtml;
-                });
-            },
-            error: function() {
-                alert('Error loading packages');
-            }
-        });
-    }
+                        `;
+                        recomendedContainer.innerHTML += paketHtml;
+                    });
+                },
+                error: function() {
+                    alert('Error loading packages');
+                }
+            });
+        }
 
-    document.querySelectorAll('.wrapCategory').forEach(function(categoryLink) {
-        categoryLink.addEventListener('click', function(event) {
-            event.preventDefault();
-            const category = event.target.innerText.trim();
-            loadPaketByCategory(category);
+        document.querySelectorAll('.wrapCategory').forEach(function(categoryLink) {
+            categoryLink.addEventListener('click', function(event) {
+                event.preventDefault();
+                const category = this.getAttribute('data-category');
+                loadPaketByCategory(category);
+            });
         });
-    });
-</script>
+    </script>
 </body>
 </html>
