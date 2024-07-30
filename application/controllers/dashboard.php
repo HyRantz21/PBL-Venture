@@ -121,4 +121,9 @@ class dashboard extends CI_Controller {
         // Redirect to the reservations dashboard
         redirect('dashboard/');
     }
+
+    public function deleteReservation($ID_Reservasi) {
+        $this->ReservationModel->delete_reservation($ID_Reservasi);
+        redirect('dashboard');
+    }
 }
