@@ -95,9 +95,19 @@
                 <td><?php echo form_error('gambar_1') ?></td>
             </tr>
             <tr>
-                <td>Upload Gambar</td>
+                <td>Upload Gambar 1</td>
                 <td>:</td>
                 <td><input type="file" name="gambar_1"></td>
+            </tr>
+            <tr>
+                <td>Upload Gambar 2</td>
+                <td>:</td>
+                <td><input type="file" name="gambar_2"></td>
+            </tr>
+            <tr>
+                <td>Upload Gambar 3</td>
+                <td>:</td>
+                <td><input type="file" name="gambar_3"></td>
             </tr>
             <tr>
                 <td><button type="submit">Update</button></td>

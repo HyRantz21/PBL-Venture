@@ -30,43 +30,62 @@ class M_paket_wisata extends CI_Model {
     }
 
     public function inputPaket()
-    {
-        // Konfigurasi untuk upload gambar
-        $config['upload_path'] = './assets/Image';
-        $config['allowed_types'] = 'jpg|jpeg|png';
-        $config['max_size'] = 3072; // 3MB ukuran maksimum dalam kilobyte
+{
+    // Konfigurasi untuk upload gambar
+    $config['upload_path'] = './assets/Image';
+    $config['allowed_types'] = 'jpg|jpeg|png';
+    $config['max_size'] = 3072; // 3MB ukuran maksimum dalam kilobyte
 
-        $this->upload->initialize($config);
+    $this->upload->initialize($config);
+
+    // Inisialisasi array untuk menyimpan path gambar
+    $gambar_paths = array();
+
+    // Fungsi untuk mengupload gambar
+    function upload_image($gambar_name, &$gambar_paths)
+    {
+        $CI =& get_instance(); // Mendapatkan instance CI
 
         // Cek max size
-        if ($_FILES['gambar_1']['size'] >= $config['max_size'] * 1024) {
-            echo "Size lebih dari 3 MB";
+        if ($_FILES[$gambar_name]['size'] >= $CI->upload->max_size * 1024) {
+            echo "Size " . $gambar_name . " lebih dari 3 MB";
             return false; // Hentikan eksekusi jika ukuran file lebih dari 3 MB
         }
 
-        if ($this->upload->do_upload('gambar_1')) {
-            $upload_data = $this->upload->data();
-            $path = 'assets/Image/' . $upload_data['file_name'];
+        if ($CI->upload->do_upload($gambar_name)) {
+            $upload_data = $CI->upload->data();
+            $gambar_paths[$gambar_name] = 'assets/Image/' . $upload_data['file_name'];
         } else {
-            echo "GAGAL UPLOAD: " . $this->upload->display_errors();
+            echo "GAGAL UPLOAD " . $gambar_name . ": " . $CI->upload->display_errors();
             return false; // Hentikan eksekusi jika upload gagal
         }
 
-        // Data yang akan dimasukkan ke database
-        $data = array(
-            'Nama_Paket' => $this->input->post('Nama_Paket'),
-            'Kategori' => $this->input->post('Kategori'),
-            'Harga' => $this->input->post('Harga'),
-            'Lokasi' => $this->input->post('Lokasi'),
-            'Deskripsi' => $this->input->post('Deskripsi'),
-            'Waktu_Tour' => $this->input->post('Waktu_Tour'),
-            'max' => $this->input->post('max'),
-            'gambar_1' => $path, // Simpan path gambar
-        );
-
-        // Masukkan data ke database
-        return $this->db->insert('paket_wisata', $data);
+        return true;
     }
+
+    // Upload semua gambar
+    if (!upload_image('gambar_1', $gambar_paths) || !upload_image('gambar_2', $gambar_paths) || !upload_image('gambar_3', $gambar_paths)) {
+        return false; // Hentikan eksekusi jika salah satu upload gagal
+    }
+
+    // Data yang akan dimasukkan ke database
+    $data = array(
+        'Nama_Paket' => $this->input->post('Nama_Paket'),
+        'Kategori' => $this->input->post('Kategori'),
+        'Harga' => $this->input->post('Harga'),
+        'Lokasi' => $this->input->post('Lokasi'),
+        'Deskripsi' => $this->input->post('Deskripsi'),
+        'Waktu_Tour' => $this->input->post('Waktu_Tour'),
+        'max' => $this->input->post('max'),
+        'gambar_1' => $gambar_paths['gambar_1'], // Simpan path gambar 1
+        'gambar_2' => $gambar_paths['gambar_2'], // Simpan path gambar 2
+        'gambar_3' => $gambar_paths['gambar_3'], // Simpan path gambar 3
+    );
+
+    // Masukkan data ke database
+    return $this->db->insert('paket_wisata', $data);
+}
+
 
     public function savefilename($gambar)
     {
@@ -98,18 +117,26 @@ class M_paket_wisata extends CI_Model {
         $config['max_size'] = 3072; // 3MB ukuran maksimum dalam kilobyte
         $this->upload->initialize($config);
 
-        // Cek jika gambar baru diupload
-        if (!empty($_FILES['gambar_1']['name'])) {
-            if ($this->upload->do_upload('gambar_1')) {
-                $upload_data = $this->upload->data();
-                $image_path = 'assets/Image/' . $upload_data['file_name'];
+        // Array untuk menyimpan path gambar
+        $image_paths = array();
+
+        // List nama file gambar
+        $gambar_names = array('gambar_1', 'gambar_2', 'gambar_3');
+
+        // Loop untuk setiap gambar
+        foreach ($gambar_names as $gambar_name) {
+            if (!empty($_FILES[$gambar_name]['name'])) {
+                if ($this->upload->do_upload($gambar_name)) {
+                    $upload_data = $this->upload->data();
+                    $image_paths[$gambar_name] = 'assets/Image/' . $upload_data['file_name'];
+                } else {
+                    echo "GAGAL UPLOAD $gambar_name: " . $this->upload->display_errors();
+                    return false; // Hentikan eksekusi jika upload gagal
+                }
             } else {
-                echo "GAGAL UPLOAD: " . $this->upload->display_errors();
-                return false; // Hentikan eksekusi jika upload gagal
+                // Jika tidak ada gambar baru, gunakan gambar yang ada
+                $image_paths[$gambar_name] = $this->input->post('existing_' . $gambar_name);
             }
-        } else {
-            // Jika tidak ada gambar baru, gunakan gambar yang ada
-            $image_path = $this->input->post('existing_image');
         }
 
         // Data yang akan diperbarui
@@ -121,7 +148,9 @@ class M_paket_wisata extends CI_Model {
             'Deskripsi' => $this->input->post('Deskripsi'),
             'Waktu_Tour' => $this->input->post('Waktu_Tour'),
             'max' => $this->input->post('max'),
-            'gambar_1' => $image_path, // Path gambar yang diupdate atau gambar yang ada
+            'gambar_1' => $image_paths['gambar_1'], // Path gambar yang diupdate atau gambar yang ada
+            'gambar_2' => $image_paths['gambar_2'], // Path gambar yang diupdate atau gambar yang ada
+            'gambar_3' => $image_paths['gambar_3'], // Path gambar yang diupdate atau gambar yang ada
         );
 
         // Update data di database

@@ -267,6 +267,20 @@
                                                 <!-- Display default image if no image exists -->
                                                 <img src="<?php echo base_url('assets/Image/default_image.jpg'); ?>" alt="No Image" style="width:100px; height:auto;">
                                             <?php endif; ?>
+                                            <?php if (!empty($key['gambar_2']) || file_exists('C:/xampp/htdocs/PBL-Venture/assets/Image' . $key['gambar_1'])): ?>
+                                                <!-- Display uploaded image -->
+                                                <img src="<?php echo base_url($key['gambar_2']); ?>" alt="Image" style="width:100px; height:auto;">
+                                            <?php else: ?>
+                                                <!-- Display default image if no image exists -->
+                                                <img src="<?php echo base_url('assets/Image/default_image.jpg'); ?>" alt="No Image" style="width:100px; height:auto;">
+                                            <?php endif; ?>
+                                            <?php if (!empty($key['gambar_3']) || file_exists('C:/xampp/htdocs/PBL-Venture/assets/Image' . $key['gambar_1'])): ?>
+                                                <!-- Display uploaded image -->
+                                                <img src="<?php echo base_url($key['gambar_3']); ?>" alt="Image" style="width:100px; height:auto;">
+                                            <?php else: ?>
+                                                <!-- Display default image if no image exists -->
+                                                <img src="<?php echo base_url('assets/Image/default_image.jpg'); ?>" alt="No Image" style="width:100px; height:auto;">
+                                            <?php endif; ?>
                                         </td>
                                         <td>
                                             <a href="<?php echo base_url('dashboard/editPaket/'.$key['ID_Paket']); ?>" class="btn-primary p-2">Edit</a>
@@ -409,9 +423,19 @@
                                             <td><?php echo form_error('gambar_1') ?></td>
                                         </tr>
                                         <tr>
-                                            <td>Upload Gambar</td>
+                                            <td>Upload Gambar 1</td>
                                             <td>:</td>
                                             <td><input type="file" name="gambar_1"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Upload Gambar 2</td>
+                                            <td>:</td>
+                                            <td><input type="file" name="gambar_2"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Upload Gambar 3</td>
+                                            <td>:</td>
+                                            <td><input type="file" name="gambar_3"></td>
                                         </tr>
                                         <tr>
                                             <td><button type="submit">Simpan</button></td>
