@@ -17,12 +17,15 @@ class WishlistCon extends CI_Controller {
 
     public function add() {
         $userID = $this->session->userdata('ID_User'); // Assuming you store the user ID in session
-        $packageName = $this->input->post('ID_Paket');
+        $packageName = $this->input->post('productName'); // Sesuaikan nama parameter dengan JavaScript
         
         if (!$userID || !$packageName) {
             echo 'User ID or Package Name is missing';
             return;
         }
+    
+        log_message('debug', 'User ID: ' . $userID);
+        log_message('debug', 'Package Name: ' . $packageName);
         
         $packageID = $this->Wishlist_model->get_package_id($packageName);
     
@@ -37,6 +40,7 @@ class WishlistCon extends CI_Controller {
             echo 'Package ID not found';
         }
     }
+    
 
     public function remove() {
         $userID = $this->session->userdata('ID_User'); // Assuming you store the user ID in session
