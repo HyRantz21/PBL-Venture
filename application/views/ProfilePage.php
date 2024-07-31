@@ -62,6 +62,8 @@
             background-color: rgba(75, 75, 75, 25);
             box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
             padding: 50px;
+            border-top-left-radius: 15px;
+            border-bottom-left-radius: 15px;
         }
 
         .profile {
@@ -72,6 +74,8 @@
         .main-content {
             padding: 40px;
             background-color: #fff;
+            border-top-right-radius: 15px;
+            border-bottom-right-radius: 15px;
         }
 
         .form-group {
@@ -148,6 +152,7 @@
             color: gray;
             font-weight: 500;
         }
+
     </style>
 </head>
 <body>
@@ -163,7 +168,7 @@
             </div>
         </div>
     </nav>
-    <div class="container">
+    <div class="m1 container">
         <div class="sidebar">
             <div class="profile">
                 <h2><?php echo $this->session->userdata('Full_Name'); ?></h2>

@@ -340,15 +340,8 @@
         document.getElementById('searchForm').addEventListener('submit', function(event) {
             event.preventDefault();
             const query = document.getElementById('searchBar').value.toLowerCase();
-            const results = [];
-            document.querySelectorAll('.wrapRecomended').forEach(function(packageDiv) {
-                if (packageDiv.dataset.packageName.includes(query)) {
-                    results.push(packageDiv.outerHTML);
-                }
-            });
-
-            document.getElementById('searchResults').innerHTML = results.join('');
-            document.getElementById('searchOverlay').style.display = 'flex';
+        const url = '<?php echo base_url('main/viewResult'); ?>' + '?query=' + encodeURIComponent(query);
+        window.location.href = url;
         });
 
         document.getElementById('searchOverlay').addEventListener('click', function(event) {

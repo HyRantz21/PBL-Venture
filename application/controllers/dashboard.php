@@ -111,8 +111,16 @@ class dashboard extends CI_Controller {
         $reservation = $this->db->get_where('reservasi', array('ID_Reservasi' => $ID_Reservasi))->row_array();
 
         if ($reservation) {
-            // Add to transaction history
-            $this->HistoryModel->add_transaction($reservation['ID_User'], $reservation['ID_Paket']);
+            // Add to transaction history with total_harga and total_adult
+            $this->HistoryModel->add_transaction(
+                $reservation['ID_User'],
+                $reservation['ID_Paket'],
+                $reservation['total_harga'], // Pass total_harga
+                $reservation['total_adult'], // Pass total_adult
+                'Confirmed', // Assuming status is 'Confirmed'
+                '', // Assuming no catatan is provided
+                $reservation['Tanggal_Reservasi'],
+            );
 
             // Delete the reservation
             $this->ReservationModel->delete_reservation($ID_Reservasi);

@@ -256,6 +256,7 @@
                                         <th>Package Name</th>
                                         <th>Total Harga</th>
                                         <th>Total Pengunjung</th>
+                                        <th>Tanggal Reservasi</th>
                                         <th>Action</th>
                                     </tr>
                                     </thead>
@@ -270,6 +271,7 @@
                                         <td><?php echo htmlspecialchars($key['Deskripsi']); ?></td>
                                         <td><?php echo htmlspecialchars($key['total_harga']); ?></td>
                                         <td><?php echo htmlspecialchars($key['total_adult']); ?></td>
+                                        <td><?php echo htmlspecialchars($key['Tanggal_Reservasi']); ?></td>
                                         <td>
                                             <a href="<?php echo base_url('dashboard/confirmReservation/'.$key['ID_Reservasi']); ?>" class="btn btn-success">Confirm</a>
                                             <a href="<?php echo base_url('dashboard/deleteReservation/'.$key['ID_Reservasi']); ?>" class="btn btn-danger">Denied</a>

@@ -381,7 +381,7 @@
                     </div>
                     <div class="date">
                         <img src="assets/Icon/calendar3.png" alt="" class="calendar">
-                        <input type="date" id="date">
+                        <input type="date" id="date" name="Tanggal_Reservasi">
                     </div>
                 </div>
 
@@ -404,6 +404,7 @@
                         <input type="hidden" name="Deskripsi" value="<?= $detail['Deskripsi']; ?>">
                         <input type="hidden" id="hiddenTotalAdult" name="total_adult" value="1">
                         <input type="hidden" id="hiddenTotalPrice" name="total_harga" value="<?= $detail['Harga']; ?>">
+                        <input type="hidden" id="hiddenDate" name="Tanggal_Reservasi">
                         <button type="submit" class="pay">Confirm</button>
                     </form>
                 </div>
@@ -444,6 +445,7 @@
             modal.style.display = 'flex';
         }
 
+        
         const pricePerAdult = <?= $detail['Harga'] ?>;
         const maxPeople = <?= $detail['max'] ?>;
 
@@ -453,30 +455,42 @@
             if (numberOfAdults > maxPeople) {
                 numberOfAdults = maxPeople;
                 adultInput.value = maxPeople;
-                showCustomAlert('The number of people cannot exceed the maximum limit.');
+                showCustomAlert('The number of people cannot exceed the maximum limit.', 'error');
             }
             const totalPrice = numberOfAdults * pricePerAdult;
             document.getElementById('orderTotalPrice').textContent = 'Rp. ' + totalPrice.toLocaleString('id-ID');
             document.getElementById('hiddenTotalAdult').value = numberOfAdults;
+            document.getElementById('hiddenTotalPrice').value = totalPrice;
             document.getElementById('hiddenTotalPrice').value = totalPrice;
         }
 
         function displayTotal() {
             const adultInput = document.getElementById('adult');
             const numberOfAdults = adultInput.value;
-            if (numberOfAdults == 0) {
-                showCustomAlert('The number of adults cannot be zero.');
-                return;
-            }
-            calculateTotal(); // Ensure the total is calculated correctly
             const dateInput = document.getElementById('date');
             const selectedDate = dateInput.value;
+
+            if (numberOfAdults == 0) {
+                showCustomAlert('The number of adults cannot be zero.', 'error');
+                return;
+            }
+
+            if (!selectedDate) {
+                showCustomAlert('The reservation date cannot be empty.', 'error');
+                return;
+            }
+
+            calculateTotal(); // Ensure the total is calculated correctly
             const totalPrice = numberOfAdults * pricePerAdult;
 
             const orderPanel = document.getElementById('orderPanel');
             const orderAdults = document.getElementById('orderAdults');
             const orderTotalPrice = document.getElementById('orderTotalPrice');
             const orderDate = document.getElementById('orderDate');
+
+            const date = document.getElementById('hiddenDate');
+
+            date.value = selectedDate;
 
             orderAdults.textContent = 'Number of Adults: ' + numberOfAdults;
             orderTotalPrice.textContent = 'Total Price: Rp. ' + totalPrice.toLocaleString('id-ID');
@@ -493,21 +507,32 @@
             const input = document.getElementById('adult');
             if (input.value > max) {
                 input.value = max;
-                showCustomAlert('The number of people cannot exceed the maximum limit.');
+                showCustomAlert('The number of people cannot exceed the maximum limit.', 'error');
             }
         }
 
-        function showCustomAlert(message) {
+        function showCustomAlert(message, type) {
             const customAlert = document.getElementById('customAlert');
             const alertMessage = document.getElementById('alertMessage');
+
             alertMessage.textContent = message;
+            customAlert.className = 'custom-alert'; // Reset classes
+
+            if (type === 'success') {
+                customAlert.classList.add('success');
+            } else if (type === 'error') {
+                customAlert.classList.add('error');
+            }
+
             customAlert.style.display = 'block';
         }
 
         function closeCustomAlert() {
             const customAlert = document.getElementById('customAlert');
             customAlert.style.display = 'none';
-}    </script>
+        }
+
+    </script>
     <div id="customAlert" class="custom-alert">
         <p id="alertMessage"></p>
         <button onclick="closeCustomAlert()">OK</button>

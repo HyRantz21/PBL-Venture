@@ -240,27 +240,33 @@
         top: 50%;
         position: absolute;
     }
-    @media screen and (max-width: 1150px) {
+    @media screen and (max-width: 1400px) {
         .LayRecomended{
             display: grid;
-            justify-content: center;
             grid-template-columns: 33% 33% 33%;
             gap: 10px 10px;
         }
+        .main{
+            justify-content: center;
+        }
     }
-    @media screen and (max-width: 850px) {
+    @media screen and (max-width: 1000px) {
         .LayRecomended{
             display: grid;
-            justify-content: center;
             grid-template-columns: 50% 50%;
             gap: 10px 10px;
+        }
+        .main{
+            justify-content: center;
         }
     }
     @media screen and (max-width: 650px) {
         .LayRecomended{
             display: grid;
-            justify-content: center;
             grid-template-columns: 100%;
+        }
+        .main{
+            justify-content: center;
         }
     }
 
@@ -283,7 +289,7 @@
         </nav>
     </header>
         <?php if (!empty($wishlist)): ?>
-    <main class="container">
+    <main class="main container">
         <div class="LayRecomended">
             <?php foreach ($wishlist as $item): ?>
                 <div class="wrapRecomended">

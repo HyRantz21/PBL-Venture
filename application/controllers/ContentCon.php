@@ -25,6 +25,10 @@ class ContentCon extends CI_Controller {
         $id_paket = $this->input->post('ID_Paket');
         $id_user = $this->session->userdata('ID_User');
         $total_adult = $this->input->post('total_adult');
+        $Tanggal_Reservasi = $this->input->post('Tanggal_Reservasi');
+
+        // var_dump($Tanggal_Reservasi);
+        // die();
         
         $paket = $this->ContentModel->getPaketById($id_paket);
         $user = $this->ContentModel->getUserById($id_user);
@@ -38,7 +42,8 @@ class ContentCon extends CI_Controller {
                 'Full_Name' => $user->Full_Name,
                 'Deskripsi' => $paket['Deskripsi'],
                 'total_harga' => $total_harga,
-                'total_adult' => $total_adult
+                'total_adult' => $total_adult,
+                'Tanggal_Reservasi' => $Tanggal_Reservasi,
             );
     
             $this->ContentModel->saveReservation($data);

@@ -89,6 +89,7 @@
     /*History*/
     .LayRecomended{
         display: grid;
+        grid-template-columns: 50% 50%;
         gap: 10px 10px;
     }
 
@@ -282,7 +283,6 @@
         text-decoration: none;
     }
 
-
     /*Reponsive*/
     @media screen and (max-width: 500px) {
         .panel{
@@ -292,6 +292,13 @@
         .detail{
             padding-left: 10px;
             padding-right: 10px;
+        }
+    }
+    @media screen and (max-width: 1000px) {
+        .LayRecomended{
+            display: grid;
+            justify-content: center;
+            grid-template-columns: 100%;
         }
     }
 
@@ -313,14 +320,14 @@
             </div>
         </nav>
     </header>
-    <main class="container d-flex justify-content-center">
+    <main class="main container">
         <div class="LayRecomended">
             <?php foreach ($transactions as $transaction): ?>
                 <div class="panel">
                     <div class="wrapRecomended">
                         <div class="wrapImg">
                             <figure class="img">
-                                <img src="assets/Image/ea545f3990f88524a9472220454ab63bedc0b6aa.jpg" alt="" class="imgR">
+                                <img src="<?php echo base_url($transaction->gambar_1); ?>" alt="" class="imgR">                        
                             </figure>
                         </div>
                         <div class="layHeader">
@@ -330,9 +337,13 @@
                                 <p><?= $transaction->Catatan ?></p>
                             </header>
                         </div>
+                        <div class="layPrice">
+                            <h5 class="textPrice">Rp.<?php echo number_format($transaction->Harga, 2, ',', '.'); ?></h5>
+                            <p>Starting Price</p>
+                        </div>
                         <div class="layFooter">
                             <footer class="textFooter">
-                                <h5><?= $transaction->Tanggal_Update ?></h5>
+                                <h5><?= $transaction->Catatan ?></h5>
                                 <p>Tanggal Update</p>
                             </footer>
                         </div>
@@ -360,12 +371,14 @@
                         <div class="row6">
                             <div class="tTotal">Waktu</div>
                             <div class="Total"><?= date('H:i', strtotime($transaction->Tanggal_Transaksi)) ?></div>
-                        </div>        
-                           
-                        <div class="row8">
-                            <div class="tCatatan">Catatan</div>
-                            <p class="Catatan"><?= $transaction->Catatan ?></p>
-                        </div>           
+                        </div>          
+                        <div class="layTotalPrice">
+                            <h5 class="textTotalPrice">Total Price: Rp.<?php echo number_format($transaction->total_harga, 2, ',', '.'); ?></h5>
+                        </div>
+                        <div class="layTotalAdult">
+                            <h5 class="textTotalAdult">Total Adults: <?php echo $transaction->total_adult; ?></h5>
+                        </div>
+                        
                     </div>
                 </div>
             <?php endforeach; ?>

@@ -251,11 +251,7 @@
         color: var(--main-text-color);
         font-weight: var(--main-font-weight);
     }
-
-    .dtxt{
-        margin-left: 10px;
-    }   
-
+    
     .layFooter{
         max-width: 460px;
         width: 100%;
@@ -730,7 +726,7 @@
                                     <p>${paket.Lokasi}</p>
                                     <p>${paket.Deskripsi}</p>
                                 </header>
-                                <button class="bookmarkButton" id="addWishlistButton${paket.ID_Paket}" onclick="addToWishlist('${paket.Nama_Paket}', 'addWishlistButton${paket.ID_Paket}')">
+                                <button class="bookmarkButton" id="addWishlistButton<?php echo $key['ID_Paket']; ?>" onclick="addToWishlist('<?php echo $key['Nama_Paket']; ?>', 'addWishlistButton<?php echo $key['ID_Paket']; ?>')">
                                     <img src="<?php echo base_url('assets/Icon/bookmark.png'); ?>" alt="Bookmark" class="BMicon">
                                 </button>
                             </div>
@@ -741,12 +737,11 @@
                             <div class="layFooter">
                                 <footer class="textFooter">
                                     <div class="time">
-                                        <h5>${paket.Waktu_Tour}</h5>
-                                        <h5 class="dtxt">Days</h5>
+                                        <h5>${paket.Waktu_Tour} Days</h5>
                                     </div>
                                     <p>${paket.Kategori}</p>
                                 </footer>
-                                <a href="<?php echo base_url('main/viewContent'); ?>" class="arrowrightButton">
+                                <a href="<?php echo base_url('ContentCon/detail/' .$key['ID_Paket']); ?>" class="arrowrightButton">
                                     <img src="<?php echo base_url('assets/Icon/arrow-right-square.png'); ?>" alt="" class="ARicon">
                                 </a>
                             </div>
@@ -797,7 +792,7 @@
                                             <p>${paket.Lokasi}</p>
                                             <p>${paket.Deskripsi}</p>
                                         </header>
-                                        <button class="bookmarkButton" id="addWishlistButton${paket.ID_Paket}" onclick="addToWishlist('${paket.Nama_Paket}', 'addWishlistButton${paket.ID_Paket}')">
+                                        <button class="bookmarkButton" id="addWishlistButton<?php echo $key['ID_Paket']; ?>" onclick="addToWishlist('<?php echo $key['Nama_Paket']; ?>', 'addWishlistButton<?php echo $key['ID_Paket']; ?>')">
                                             <img src="<?php echo base_url('assets/Icon/bookmark.png'); ?>" alt="Bookmark" class="BMicon">
                                         </button>
                                     </div>
@@ -808,12 +803,11 @@
                                     <div class="layFooter">
                                         <footer class="textFooter">
                                             <div class="time">
-                                                <h5>${paket.Waktu_Tour}</h5>
-                                                <h5 class="dtxt">Days</h5>
+                                                <h5>${paket.Waktu_Tour} Days</h5>
                                             </div>
                                             <p>${paket.Kategori}</p>
                                         </footer>
-                                        <a href="<?php echo base_url('main/viewContent'); ?>" class="arrowrightButton">
+                                        <a href="<?php echo base_url('ContentCon/detail/' .$key['ID_Paket']); ?>" class="arrowrightButton">
                                             <img src="<?php echo base_url('assets/Icon/arrow-right-square.png'); ?>" alt="" class="ARicon">
                                         </a>
                                     </div>

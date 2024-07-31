@@ -89,6 +89,7 @@
     /*History*/
     .LayRecomended{
         display: grid;
+        grid-template-columns: 50% 50%;
         gap: 10px 10px;
     }
 
@@ -271,9 +272,9 @@
         justify-content: space-between;
     }
 
-    .row7{
+    .row5{
         display: flex;
-        justify-content: space-between;
+        justify-content: end;
         border-bottom: solid 1px;
     }
 
@@ -292,6 +293,16 @@
         .detail{
             padding-left: 10px;
             padding-right: 10px;
+        }
+    }
+    @media screen and (max-width: 1000px) {
+        .main{
+            justify-content: center;
+        }
+        .LayRecomended{
+            display: grid;
+            justify-content: center;
+            grid-template-columns: 100%;
         }
     }
 
@@ -314,14 +325,14 @@
             </div>
         </nav>
     </header>
-    <main class="container d-flex justify-content-center">
+    <main class="main container">
         <div class="LayRecomended">
         <?php foreach ($reservations as $reservation): ?>
             <div class="panel">
     <div class="wrapRecomended">
         <div class="wrapImg">
             <figure class="img">
-                <img src="assets/Image/ea545f3990f88524a9472220454ab63bedc0b6aa.jpg" alt="" class="imgR">
+                <img src="<?php echo base_url($reservation['gambar_1']); ?>" alt="" class="imgR">                        
             </figure>
         </div>
         <div class="layHeader">
@@ -329,8 +340,17 @@
                 <h3><?php echo $reservation['Nama_Paket']; ?></h3>
                 <h6>Deskripsi:</h6>
                 <p><?php echo $reservation['Deskripsi']; ?></p>
-                <p>Rp<?php echo $reservation['Harga']; ?></p>
             </header>
+        </div>
+        <div class="layPrice">
+            <h5 class="textPrice">Rp.<?php echo number_format($reservation['Harga'], 2, ',', '.'); ?></h5>
+            <p>Starting Price</p>
+        </div>
+        <div class="layFooter">
+            <footer class="textFooter">
+                <h5><?= $reservation['Tanggal_Reservasi']; ?></h5>
+                <p>Tanggal Update</p>
+            </footer>
         </div>
     </div>
     <div class="detail">
@@ -360,9 +380,9 @@
             <div class="tNama">Total Adult</div>
             <div class="Adult"><?php echo $reservation['total_adult']; ?></div>
         </div>
-        <div class="row4">
+        <div class="row5">
             <form action="<?php echo site_url('ReservationCon/delete/' . $reservation['ID_Reservasi']); ?>" method="post">
-                <button type="submit" class="btn btn-danger">Delete</button>
+                <button type="submit" class="btn btn-danger mb-2">Cancel</button>
             </form>
         </div>  
     </div>
